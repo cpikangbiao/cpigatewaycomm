@@ -7,7 +7,7 @@ import { JhiAlertService } from 'ng-jhipster';
 import { ICorrespondent } from 'app/shared/model/cpicommunication/correspondent.model';
 import { CorrespondentService } from './correspondent.service';
 import { IPort } from 'app/shared/model/cpicommunication/port.model';
-import { PortService } from 'app/entities/cpicommunication/port';
+import { PortService } from 'src/main/webapp/app/cpi/port/index';
 
 @Component({
     selector: 'jhi-correspondent-update',

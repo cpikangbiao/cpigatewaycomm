@@ -5,8 +5,8 @@ import { Observable, of } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { CpigatewaycommTestModule } from '../../../../test.module';
-import { PortDeleteDialogComponent } from 'app/entities/cpicommunication/port/port-delete-dialog.component';
-import { PortService } from 'app/entities/cpicommunication/port/port.service';
+import { PortDeleteDialogComponent } from 'app/cpi/port/port-delete-dialog.component';
+import { PortService } from 'app/cpi/port/port.service';
 
 describe('Component Tests', () => {
     describe('Port Management Delete Component', () => {

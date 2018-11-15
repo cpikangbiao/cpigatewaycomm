@@ -7,7 +7,7 @@ import { JhiAlertService } from 'ng-jhipster';
 import { ICorrespondentContact } from 'app/shared/model/cpicommunication/correspondent-contact.model';
 import { CorrespondentContactService } from './correspondent-contact.service';
 import { ICorrespondent } from 'app/shared/model/cpicommunication/correspondent.model';
-import { CorrespondentService } from 'app/entities/cpicommunication/correspondent';
+import { CorrespondentService } from 'app/cpi/correspondent';
 
 @Component({
     selector: 'jhi-correspondent-contact-update',

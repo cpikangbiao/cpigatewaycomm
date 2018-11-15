@@ -7,7 +7,7 @@ import { JhiAlertService } from 'ng-jhipster';
 import { IPort } from 'app/shared/model/cpicommunication/port.model';
 import { PortService } from './port.service';
 import { ICountry } from 'app/shared/model/cpicommunication/country.model';
-import { CountryService } from 'app/entities/cpicommunication/country';
+import { CountryService } from 'app/cpi/country';
 
 @Component({
     selector: 'jhi-port-update',

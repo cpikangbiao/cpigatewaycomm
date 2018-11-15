@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { CpigatewaycommTestModule } from '../../../../test.module';
-import { CountryDetailComponent } from 'app/entities/cpicommunication/country/country-detail.component';
+import { CountryDetailComponent } from 'app/cpi/country/country-detail.component';
 import { Country } from 'app/shared/model/cpicommunication/country.model';
 
 describe('Component Tests', () => {

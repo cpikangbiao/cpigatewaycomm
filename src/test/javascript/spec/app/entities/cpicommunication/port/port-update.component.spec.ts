@@ -4,8 +4,8 @@ import { HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { CpigatewaycommTestModule } from '../../../../test.module';
-import { PortUpdateComponent } from 'app/entities/cpicommunication/port/port-update.component';
-import { PortService } from 'app/entities/cpicommunication/port/port.service';
+import { PortUpdateComponent } from 'app/cpi/port/port-update.component';
+import { PortService } from 'app/cpi/port/port.service';
 import { Port } from 'app/shared/model/cpicommunication/port.model';
 
 describe('Component Tests', () => {

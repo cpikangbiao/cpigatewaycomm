@@ -5,8 +5,8 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Data } from '@angular/router';
 
 import { CpigatewaycommTestModule } from '../../../../test.module';
-import { PortComponent } from 'app/entities/cpicommunication/port/port.component';
-import { PortService } from 'app/entities/cpicommunication/port/port.service';
+import { PortComponent } from 'app/cpi/port/port.component';
+import { PortService } from 'app/cpi/port/port.service';
 import { Port } from 'app/shared/model/cpicommunication/port.model';
 
 describe('Component Tests', () => {

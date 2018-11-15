@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { CpigatewaycommSharedModule } from 'app/shared';
+import { CpigatewaycommSharedModule } from 'src/main/webapp/app/shared/index';
 import {
     CountryComponent,
     CountryDetailComponent,
@@ -10,7 +10,7 @@ import {
     CountryDeleteDialogComponent,
     countryRoute,
     countryPopupRoute
-} from './';
+} from './index';
 
 const ENTITY_STATES = [...countryRoute, ...countryPopupRoute];
 

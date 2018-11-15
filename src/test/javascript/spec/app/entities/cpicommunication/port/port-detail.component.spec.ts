@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { CpigatewaycommTestModule } from '../../../../test.module';
-import { PortDetailComponent } from 'app/entities/cpicommunication/port/port-detail.component';
+import { PortDetailComponent } from 'app/cpi/port/port-detail.component';
 import { Port } from 'app/shared/model/cpicommunication/port.model';
 
 describe('Component Tests', () => {

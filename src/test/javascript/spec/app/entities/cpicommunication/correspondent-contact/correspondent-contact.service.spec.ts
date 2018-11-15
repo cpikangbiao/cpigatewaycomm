@@ -1,7 +1,7 @@
 /* tslint:disable max-line-length */
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { CorrespondentContactService } from 'app/entities/cpicommunication/correspondent-contact/correspondent-contact.service';
+import { CorrespondentContactService } from 'app/cpi/correspondent-contact/correspondent-contact.service';
 import { CorrespondentContact } from 'app/shared/model/cpicommunication/correspondent-contact.model';
 import { SERVER_API_URL } from 'app/app.constants';
 

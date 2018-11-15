@@ -4,8 +4,8 @@ import { HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { CpigatewaycommTestModule } from '../../../../test.module';
-import { CorrespondentContactUpdateComponent } from 'app/entities/cpicommunication/correspondent-contact/correspondent-contact-update.component';
-import { CorrespondentContactService } from 'app/entities/cpicommunication/correspondent-contact/correspondent-contact.service';
+import { CorrespondentContactUpdateComponent } from 'app/cpi/correspondent-contact/correspondent-contact-update.component';
+import { CorrespondentContactService } from 'app/cpi/correspondent-contact/correspondent-contact.service';
 import { CorrespondentContact } from 'app/shared/model/cpicommunication/correspondent-contact.model';
 
 describe('Component Tests', () => {

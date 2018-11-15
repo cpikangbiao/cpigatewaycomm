@@ -4,19 +4,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { ICorrespondentContact } from 'app/shared/model/cpicommunication/correspondent-contact.model';
-import { Principal } from 'app/core';
+import { IPort } from 'app/shared/model/cpicommunication/port.model';
+import { Principal } from 'src/main/webapp/app/core/index';
 
-import { ITEMS_PER_PAGE } from 'app/shared';
-import { CorrespondentContactService } from './correspondent-contact.service';
+import { ITEMS_PER_PAGE } from 'src/main/webapp/app/shared/index';
+import { PortService } from './port.service';
 
 @Component({
-    selector: 'jhi-correspondent-contact',
-    templateUrl: './correspondent-contact.component.html'
+    selector: 'jhi-port',
+    templateUrl: './port.component.html'
 })
-export class CorrespondentContactComponent implements OnInit, OnDestroy {
+export class PortComponent implements OnInit, OnDestroy {
     currentAccount: any;
-    correspondentContacts: ICorrespondentContact[];
+    ports: IPort[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -31,7 +31,7 @@ export class CorrespondentContactComponent implements OnInit, OnDestroy {
     reverse: any;
 
     constructor(
-        private correspondentContactService: CorrespondentContactService,
+        private portService: PortService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
@@ -49,14 +49,14 @@ export class CorrespondentContactComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.correspondentContactService
+        this.portService
             .query({
                 page: this.page - 1,
                 size: this.itemsPerPage,
                 sort: this.sort()
             })
             .subscribe(
-                (res: HttpResponse<ICorrespondentContact[]>) => this.paginateCorrespondentContacts(res.body, res.headers),
+                (res: HttpResponse<IPort[]>) => this.paginatePorts(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
@@ -69,7 +69,7 @@ export class CorrespondentContactComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/correspondent-contact'], {
+        this.router.navigate(['/port'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -82,7 +82,7 @@ export class CorrespondentContactComponent implements OnInit, OnDestroy {
     clear() {
         this.page = 0;
         this.router.navigate([
-            '/correspondent-contact',
+            '/port',
             {
                 page: this.page,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
@@ -96,19 +96,19 @@ export class CorrespondentContactComponent implements OnInit, OnDestroy {
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
-        this.registerChangeInCorrespondentContacts();
+        this.registerChangeInPorts();
     }
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(index: number, item: ICorrespondentContact) {
+    trackId(index: number, item: IPort) {
         return item.id;
     }
 
-    registerChangeInCorrespondentContacts() {
-        this.eventSubscriber = this.eventManager.subscribe('correspondentContactListModification', response => this.loadAll());
+    registerChangeInPorts() {
+        this.eventSubscriber = this.eventManager.subscribe('portListModification', response => this.loadAll());
     }
 
     sort() {
@@ -119,11 +119,11 @@ export class CorrespondentContactComponent implements OnInit, OnDestroy {
         return result;
     }
 
-    private paginateCorrespondentContacts(data: ICorrespondentContact[], headers: HttpHeaders) {
+    private paginatePorts(data: IPort[], headers: HttpHeaders) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
-        this.correspondentContacts = data;
+        this.ports = data;
     }
 
     private onError(errorMessage: string) {

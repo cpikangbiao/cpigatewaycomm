@@ -5,8 +5,8 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Data } from '@angular/router';
 
 import { CpigatewaycommTestModule } from '../../../../test.module';
-import { CorrespondentContactComponent } from 'app/entities/cpicommunication/correspondent-contact/correspondent-contact.component';
-import { CorrespondentContactService } from 'app/entities/cpicommunication/correspondent-contact/correspondent-contact.service';
+import { CorrespondentContactComponent } from 'app/cpi/correspondent-contact/correspondent-contact.component';
+import { CorrespondentContactService } from 'app/cpi/correspondent-contact/correspondent-contact.service';
 import { CorrespondentContact } from 'app/shared/model/cpicommunication/correspondent-contact.model';
 
 describe('Component Tests', () => {

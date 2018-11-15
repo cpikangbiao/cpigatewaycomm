@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { CpigatewaycommTestModule } from '../../../../test.module';
-import { CorrespondentDetailComponent } from 'app/entities/cpicommunication/correspondent/correspondent-detail.component';
+import { CorrespondentDetailComponent } from 'app/cpi/correspondent/correspondent-detail.component';
 import { Correspondent } from 'app/shared/model/cpicommunication/correspondent.model';
 
 describe('Component Tests', () => {

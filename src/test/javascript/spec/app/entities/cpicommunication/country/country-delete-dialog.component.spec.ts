@@ -5,8 +5,8 @@ import { Observable, of } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { CpigatewaycommTestModule } from '../../../../test.module';
-import { CountryDeleteDialogComponent } from 'app/entities/cpicommunication/country/country-delete-dialog.component';
-import { CountryService } from 'app/entities/cpicommunication/country/country.service';
+import { CountryDeleteDialogComponent } from 'app/cpi/country/country-delete-dialog.component';
+import { CountryService } from 'app/cpi/country/country.service';
 
 describe('Component Tests', () => {
     describe('Country Management Delete Component', () => {

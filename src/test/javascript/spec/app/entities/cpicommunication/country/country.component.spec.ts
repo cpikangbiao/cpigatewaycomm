@@ -5,8 +5,8 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Data } from '@angular/router';
 
 import { CpigatewaycommTestModule } from '../../../../test.module';
-import { CountryComponent } from 'app/entities/cpicommunication/country/country.component';
-import { CountryService } from 'app/entities/cpicommunication/country/country.service';
+import { CountryComponent } from 'app/cpi/country/country.component';
+import { CountryService } from 'app/cpi/country/country.service';
 import { Country } from 'app/shared/model/cpicommunication/country.model';
 
 describe('Component Tests', () => {

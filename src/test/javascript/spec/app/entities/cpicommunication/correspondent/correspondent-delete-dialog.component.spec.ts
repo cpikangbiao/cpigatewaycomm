@@ -5,8 +5,8 @@ import { Observable, of } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { CpigatewaycommTestModule } from '../../../../test.module';
-import { CorrespondentDeleteDialogComponent } from 'app/entities/cpicommunication/correspondent/correspondent-delete-dialog.component';
-import { CorrespondentService } from 'app/entities/cpicommunication/correspondent/correspondent.service';
+import { CorrespondentDeleteDialogComponent } from 'app/cpi/correspondent/correspondent-delete-dialog.component';
+import { CorrespondentService } from 'app/cpi/correspondent/correspondent.service';
 
 describe('Component Tests', () => {
     describe('Correspondent Management Delete Component', () => {

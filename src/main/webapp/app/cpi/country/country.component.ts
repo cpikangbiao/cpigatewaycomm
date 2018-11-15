@@ -4,19 +4,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { ICorrespondent } from 'app/shared/model/cpicommunication/correspondent.model';
-import { Principal } from 'app/core';
+import { ICountry } from 'app/shared/model/cpicommunication/country.model';
+import { Principal } from 'src/main/webapp/app/core/index';
 
-import { ITEMS_PER_PAGE } from 'app/shared';
-import { CorrespondentService } from './correspondent.service';
+import { ITEMS_PER_PAGE } from 'src/main/webapp/app/shared/index';
+import { CountryService } from './country.service';
 
 @Component({
-    selector: 'jhi-correspondent',
-    templateUrl: './correspondent.component.html'
+    selector: 'jhi-country',
+    templateUrl: './country.component.html'
 })
-export class CorrespondentComponent implements OnInit, OnDestroy {
+export class CountryComponent implements OnInit, OnDestroy {
     currentAccount: any;
-    correspondents: ICorrespondent[];
+    countries: ICountry[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -31,7 +31,7 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
     reverse: any;
 
     constructor(
-        private correspondentService: CorrespondentService,
+        private countryService: CountryService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
@@ -49,14 +49,14 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.correspondentService
+        this.countryService
             .query({
                 page: this.page - 1,
                 size: this.itemsPerPage,
                 sort: this.sort()
             })
             .subscribe(
-                (res: HttpResponse<ICorrespondent[]>) => this.paginateCorrespondents(res.body, res.headers),
+                (res: HttpResponse<ICountry[]>) => this.paginateCountries(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
@@ -69,7 +69,7 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/correspondent'], {
+        this.router.navigate(['/country'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -82,7 +82,7 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
     clear() {
         this.page = 0;
         this.router.navigate([
-            '/correspondent',
+            '/country',
             {
                 page: this.page,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
@@ -96,19 +96,19 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
-        this.registerChangeInCorrespondents();
+        this.registerChangeInCountries();
     }
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(index: number, item: ICorrespondent) {
+    trackId(index: number, item: ICountry) {
         return item.id;
     }
 
-    registerChangeInCorrespondents() {
-        this.eventSubscriber = this.eventManager.subscribe('correspondentListModification', response => this.loadAll());
+    registerChangeInCountries() {
+        this.eventSubscriber = this.eventManager.subscribe('countryListModification', response => this.loadAll());
     }
 
     sort() {
@@ -119,11 +119,11 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
         return result;
     }
 
-    private paginateCorrespondents(data: ICorrespondent[], headers: HttpHeaders) {
+    private paginateCountries(data: ICountry[], headers: HttpHeaders) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
-        this.correspondents = data;
+        this.countries = data;
     }
 
     private onError(errorMessage: string) {

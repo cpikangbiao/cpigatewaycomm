@@ -1,7 +1,7 @@
 /* tslint:disable max-line-length */
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { CountryService } from 'app/entities/cpicommunication/country/country.service';
+import { CountryService } from 'app/cpi/country/country.service';
 import { Country } from 'app/shared/model/cpicommunication/country.model';
 import { SERVER_API_URL } from 'app/app.constants';
 

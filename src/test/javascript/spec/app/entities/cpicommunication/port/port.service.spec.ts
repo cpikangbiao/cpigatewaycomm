@@ -1,7 +1,7 @@
 /* tslint:disable max-line-length */
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { PortService } from 'app/entities/cpicommunication/port/port.service';
+import { PortService } from 'app/cpi/port/port.service';
 import { Port } from 'app/shared/model/cpicommunication/port.model';
 import { SERVER_API_URL } from 'app/app.constants';
 

@@ -15,6 +15,7 @@ import { CpigatewaycommAppRoutingModule } from './app-routing.module';
 import { CpigatewaycommHomeModule } from './home/home.module';
 import { CpigatewaycommAccountModule } from './account/account.module';
 import { CpigatewaycommEntityModule } from './entities/entity.module';
+import { CpigatewaycommprimengModule } from './primeng/primeng.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
@@ -28,6 +29,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         CpigatewaycommHomeModule,
         CpigatewaycommAccountModule,
         CpigatewaycommEntityModule
+        CpigatewaycommprimengModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],

@@ -1,0 +1,29 @@
+
+{
+    "cpigatewaycommApp": {
+        "cpicommunicationPort" : {
+            "home": {
+                "title": "Ports",
+                "createLabel": "创建新 Port",
+                "createOrEditLabel": "创建或编辑 Port"
+            },
+            "delete": {
+                "question": "你确定要删除 Port {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "Port"
+            },
+            "portCode": "Port Code",
+            "portName": "Port Name",
+            "portNameChinese": "Port Name Chinese",
+            "country": "Country"
+        }
+    },
+    "cpicommunicationApp": {
+        "cpicommunicationPort" : {
+            "created": "Port {{ param }} 创建成功",
+            "updated": "Port {{ param }} 更新成功",
+            "deleted": "Port {{ param }} 删除成功"
+        }
+    }
+}

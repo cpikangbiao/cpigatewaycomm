@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="port">
+            <h2><span jhiTranslate="cpigatewaycommApp.cpicommunicationPort.detail.title">Port</span> {{port.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationPort.portCode">Port Code</span></dt>
+                <dd>
+                    <span>{{port.portCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationPort.portName">Port Name</span></dt>
+                <dd>
+                    <span>{{port.portName}}</span>
+                </dd>
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationPort.portNameChinese">Port Name Chinese</span></dt>
+                <dd>
+                    <span>{{port.portNameChinese}}</span>
+                </dd>
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationPort.country">Country</span></dt>
+                <dd>
+                    <div *ngIf="port.countryId">
+                        <a [routerLink]="['/country', port.countryId, 'view']">{{port.countryCountryName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/port', port.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

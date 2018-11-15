@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-port-heading" jhiTranslate="cpigatewaycommApp.cpicommunicationPort.home.createOrEditLabel">Create or edit a Port</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!port.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="port.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cpigatewaycommApp.cpicommunicationPort.portCode" for="field_portCode">Port Code</label>
+                    <input type="text" class="form-control" name="portCode" id="field_portCode"
+                        [(ngModel)]="port.portCode" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cpigatewaycommApp.cpicommunicationPort.portName" for="field_portName">Port Name</label>
+                    <input type="text" class="form-control" name="portName" id="field_portName"
+                        [(ngModel)]="port.portName" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cpigatewaycommApp.cpicommunicationPort.portNameChinese" for="field_portNameChinese">Port Name Chinese</label>
+                    <input type="text" class="form-control" name="portNameChinese" id="field_portNameChinese"
+                        [(ngModel)]="port.portNameChinese" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cpigatewaycommApp.cpicommunicationPort.country" for="field_country">Country</label>
+                    <select class="form-control" id="field_country" name="country" [(ngModel)]="port.countryId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="countryOption.id" *ngFor="let countryOption of countries; trackBy: trackCountryById">{{countryOption.countryName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

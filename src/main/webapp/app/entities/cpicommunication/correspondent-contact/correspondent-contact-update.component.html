@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-correspondent-contact-heading" jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.home.createOrEditLabel">Create or edit a Correspondent Contact</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!correspondentContact.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="correspondentContact.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.correspondentContactName" for="field_correspondentContactName">Correspondent Contact Name</label>
+                    <input type="text" class="form-control" name="correspondentContactName" id="field_correspondentContactName"
+                        [(ngModel)]="correspondentContact.correspondentContactName" required/>
+                    <div [hidden]="!(editForm.controls.correspondentContactName?.dirty && editForm.controls.correspondentContactName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.correspondentContactName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.eMail" for="field_eMail">E Mail</label>
+                    <input type="text" class="form-control" name="eMail" id="field_eMail"
+                        [(ngModel)]="correspondentContact.eMail" required/>
+                    <div [hidden]="!(editForm.controls.eMail?.dirty && editForm.controls.eMail?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.eMail?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.telephoneOffice" for="field_telephoneOffice">Telephone Office</label>
+                    <input type="text" class="form-control" name="telephoneOffice" id="field_telephoneOffice"
+                        [(ngModel)]="correspondentContact.telephoneOffice" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.telephone" for="field_telephone">Telephone</label>
+                    <input type="text" class="form-control" name="telephone" id="field_telephone"
+                        [(ngModel)]="correspondentContact.telephone" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.webSite" for="field_webSite">Web Site</label>
+                    <input type="text" class="form-control" name="webSite" id="field_webSite"
+                        [(ngModel)]="correspondentContact.webSite" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.correspondent" for="field_correspondent">Correspondent</label>
+                    <select class="form-control" id="field_correspondent" name="correspondent" [(ngModel)]="correspondentContact.correspondentId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="correspondentOption.id" *ngFor="let correspondentOption of correspondents; trackBy: trackCorrespondentById">{{correspondentOption.correspondentName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

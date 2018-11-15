@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="correspondent">
+            <h2><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.detail.title">Correspondent</span> {{correspondent.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.correspondentName">Correspondent Name</span></dt>
+                <dd>
+                    <span>{{correspondent.correspondentName}}</span>
+                </dd>
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.faxNumber">Fax Number</span></dt>
+                <dd>
+                    <span>{{correspondent.faxNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.address">Address</span></dt>
+                <dd>
+                    <span>{{correspondent.address}}</span>
+                </dd>
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.telephoneOffice">Telephone Office</span></dt>
+                <dd>
+                    <span>{{correspondent.telephoneOffice}}</span>
+                </dd>
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.telephoneAlternate">Telephone Alternate</span></dt>
+                <dd>
+                    <span>{{correspondent.telephoneAlternate}}</span>
+                </dd>
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.webSite">Web Site</span></dt>
+                <dd>
+                    <span>{{correspondent.webSite}}</span>
+                </dd>
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.port">Port</span></dt>
+                <dd>
+                    <div *ngIf="correspondent.portId">
+                        <a [routerLink]="['/port', correspondent.portId, 'view']">{{correspondent.portPortName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/correspondent', correspondent.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+
+{
+    "cpigatewaycommApp": {
+        "cpicommunicationCorrespondent" : {
+            "home": {
+                "title": "Correspondents",
+                "createLabel": "Create a new Correspondent",
+                "createOrEditLabel": "Create or edit a Correspondent"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Correspondent {{ id }}?"
+            },
+            "detail": {
+                "title": "Correspondent"
+            },
+            "correspondentName": "Correspondent Name",
+            "faxNumber": "Fax Number",
+            "address": "Address",
+            "telephoneOffice": "Telephone Office",
+            "telephoneAlternate": "Telephone Alternate",
+            "webSite": "Web Site",
+            "port": "Port"
+        }
+    },
+    "cpicommunicationApp": {
+        "cpicommunicationCorrespondent" : {
+            "created": "A new Correspondent is created with identifier {{ param }}",
+            "updated": "A Correspondent is updated with identifier {{ param }}",
+            "deleted": "A Correspondent is deleted with identifier {{ param }}"
+        }
+    }
+}

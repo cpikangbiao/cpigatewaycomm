@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="correspondentContact">
+            <h2><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.detail.title">Correspondent Contact</span> {{correspondentContact.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.correspondentContactName">Correspondent Contact Name</span></dt>
+                <dd>
+                    <span>{{correspondentContact.correspondentContactName}}</span>
+                </dd>
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.eMail">E Mail</span></dt>
+                <dd>
+                    <span>{{correspondentContact.eMail}}</span>
+                </dd>
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.telephoneOffice">Telephone Office</span></dt>
+                <dd>
+                    <span>{{correspondentContact.telephoneOffice}}</span>
+                </dd>
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.telephone">Telephone</span></dt>
+                <dd>
+                    <span>{{correspondentContact.telephone}}</span>
+                </dd>
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.webSite">Web Site</span></dt>
+                <dd>
+                    <span>{{correspondentContact.webSite}}</span>
+                </dd>
+                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.correspondent">Correspondent</span></dt>
+                <dd>
+                    <div *ngIf="correspondentContact.correspondentId">
+                        <a [routerLink]="['/correspondent', correspondentContact.correspondentId, 'view']">{{correspondentContact.correspondentCorrespondentName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/correspondent-contact', correspondentContact.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

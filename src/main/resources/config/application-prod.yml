@@ -36,7 +36,7 @@ spring:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:mysql://10.21.1.130:3306/cpigatewaycomm?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
-        password:
+        password: 123456
         hikari:
             data-source-properties:
                 cachePrepStmts: true

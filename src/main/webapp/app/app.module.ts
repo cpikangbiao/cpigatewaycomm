@@ -15,7 +15,6 @@ import { CpigatewaycommAppRoutingModule } from './app-routing.module';
 import { CpigatewaycommHomeModule } from 'app/home';
 import { CpigatewaycommAccountModule } from './account/account.module';
 import { CpigatewaycommEntityModule } from 'app/cpi/cpi.module';
-import { CpigatewaycommprimengModule } from './primeng/primeng.module';
 import {
     JhiMainComponent,
     FooterComponent,
@@ -24,7 +23,7 @@ import {
     ErrorComponent,
     HeaderNavComponent,
     AsideNavComponent,
-    ScrollTopComponent,
+    ScrollTopComponent
 } from './layouts';
 
 @NgModule({
@@ -36,8 +35,7 @@ import {
         CpigatewaycommCoreModule,
         CpigatewaycommHomeModule,
         CpigatewaycommAccountModule,
-        CpigatewaycommEntityModule,
-        CpigatewaycommprimengModule,
+        CpigatewaycommEntityModule
     ],
     declarations: [
         JhiMainComponent,
@@ -47,7 +45,7 @@ import {
         FooterComponent,
         HeaderNavComponent,
         AsideNavComponent,
-        ScrollTopComponent,
+        ScrollTopComponent
     ],
     providers: [
         {

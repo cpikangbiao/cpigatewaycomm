@@ -1,0 +1,30 @@
+
+{
+    "cpigatewayApp": {
+        "country" : {
+            "home": {
+                "title": "Countries",
+                "createLabel": "Create a new Country",
+                "createOrEditLabel": "Create or edit a Country"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Country {{ id }}?"
+            },
+            "detail": {
+                "title": "Country"
+            },
+            "countryName": "Country Name",
+            "countryNameAbbr": "Country Name Abbr",
+            "countryNameChinese": "Country Name Chinese",
+            "dialCode": "Dial Code",
+            "ports": "Ports"
+        }
+    },
+    "cpicommonApp": {
+        "country" : {
+            "created": "A new Country is created with identifier {{ param }}",
+            "updated": "A Country is updated with identifier {{ param }}",
+            "deleted": "A Country is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,19 +1,15 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
-import { CpigatewaycommCountryModule as CpicommunicationCountryModule } from './cpicommunication/country/country.module';
-import { CpigatewaycommPortModule as CpicommunicationPortModule } from './cpicommunication/port/port.module';
-import { CpigatewaycommCorrespondentModule as CpicommunicationCorrespondentModule } from './cpicommunication/correspondent/correspondent.module';
-import { CpigatewaycommCorrespondentContactModule as CpicommunicationCorrespondentContactModule } from './cpicommunication/correspondent-contact/correspondent-contact.module';
-/* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
+import {CpigatewayCountryModule} from 'app/cpi/country/country.module';
+import {CpigatewayPortModule} from 'app/cpi/port/port.module';
+import {CpigatewayCorrespondentModule} from 'app/cpi/correspondent/correspondent.module';
+import {CpigatewayCorrespondentContactModule} from 'app/cpi/correspondent-contact/correspondent-contact.module';
 
 @NgModule({
-    // prettier-ignore
     imports: [
-        CpicommunicationCountryModule,
-        CpicommunicationPortModule,
-        CpicommunicationCorrespondentModule,
-        CpicommunicationCorrespondentContactModule,
-        /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
+        CpigatewayCountryModule,
+        CpigatewayPortModule,
+        CpigatewayCorrespondentModule,
+        CpigatewayCorrespondentContactModule,
     ],
     declarations: [],
     entryComponents: [],

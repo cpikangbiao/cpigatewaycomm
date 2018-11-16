@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { ICorrespondentContact } from 'app/shared/model/cpicommunication/correspondent-contact.model';
+import { CorrespondentContact } from './correspondent-contact.model';
+import { CorrespondentContactPopupService } from './correspondent-contact-popup.service';
 import { CorrespondentContactService } from './correspondent-contact.service';
 
 @Component({
@@ -12,20 +13,22 @@ import { CorrespondentContactService } from './correspondent-contact.service';
     templateUrl: './correspondent-contact-delete-dialog.component.html'
 })
 export class CorrespondentContactDeleteDialogComponent {
-    correspondentContact: ICorrespondentContact;
+
+    correspondentContact: CorrespondentContact;
 
     constructor(
         private correspondentContactService: CorrespondentContactService,
         public activeModal: NgbActiveModal,
         private eventManager: JhiEventManager
-    ) {}
+    ) {
+    }
 
     clear() {
         this.activeModal.dismiss('cancel');
     }
 
     confirmDelete(id: number) {
-        this.correspondentContactService.delete(id).subscribe(response => {
+        this.correspondentContactService.delete(id).subscribe(() => {
             this.eventManager.broadcast({
                 name: 'correspondentContactListModification',
                 content: 'Deleted an correspondentContact'
@@ -40,33 +43,22 @@ export class CorrespondentContactDeleteDialogComponent {
     template: ''
 })
 export class CorrespondentContactDeletePopupComponent implements OnInit, OnDestroy {
-    private ngbModalRef: NgbModalRef;
 
-    constructor(private activatedRoute: ActivatedRoute, private router: Router, private modalService: NgbModal) {}
+    routeSub: any;
+
+    constructor(
+        private route: ActivatedRoute,
+        private correspondentContactPopupService: CorrespondentContactPopupService
+    ) {}
 
     ngOnInit() {
-        this.activatedRoute.data.subscribe(({ correspondentContact }) => {
-            setTimeout(() => {
-                this.ngbModalRef = this.modalService.open(CorrespondentContactDeleteDialogComponent as Component, {
-                    size: 'lg',
-                    backdrop: 'static'
-                });
-                this.ngbModalRef.componentInstance.correspondentContact = correspondentContact;
-                this.ngbModalRef.result.then(
-                    result => {
-                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
-                        this.ngbModalRef = null;
-                    },
-                    reason => {
-                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
-                        this.ngbModalRef = null;
-                    }
-                );
-            }, 0);
+        this.routeSub = this.route.params.subscribe(params => {
+            this.correspondentContactPopupService
+                .open(CorrespondentContactDeleteDialogComponent as Component, params['id']);
         });
     }
 
     ngOnDestroy() {
-        this.ngbModalRef = null;
+        this.routeSub.unsubscribe();
     }
 }

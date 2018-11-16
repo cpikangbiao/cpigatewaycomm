@@ -1,16 +1,23 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
-import { CpigatewaycommSharedModule } from 'src/main/webapp/app/shared/index';
+import { CpigatewaycommSharedModule } from 'app/shared';
+import { countryRoute, countryPopupRoute, CountryResolvePagingParams } from './country.route';
 import {
+    CountryService,
+    CountryPopupService,
     CountryComponent,
     CountryDetailComponent,
-    CountryUpdateComponent,
     CountryDeletePopupComponent,
     CountryDeleteDialogComponent,
-    countryRoute,
-    countryPopupRoute
-} from './index';
+    CountrySearchComponent,
+    CountrySearchPopupComponent,
+    CountryEditComponent,
+    CountrySelectComponent,
+    CountrySelectPopupComponent,
+    CountrySelectPopupService
+} from './';
+
+import { PortListComponent } from '../port';
 
 const ENTITY_STATES = [...countryRoute, ...countryPopupRoute];
 
@@ -19,11 +26,27 @@ const ENTITY_STATES = [...countryRoute, ...countryPopupRoute];
     declarations: [
         CountryComponent,
         CountryDetailComponent,
-        CountryUpdateComponent,
         CountryDeleteDialogComponent,
-        CountryDeletePopupComponent
+        CountryDeletePopupComponent,
+        CountrySearchComponent,
+        CountrySearchPopupComponent,
+        PortListComponent,
+        CountryEditComponent,
+        CountrySelectComponent,
+        CountrySelectPopupComponent
     ],
-    entryComponents: [CountryComponent, CountryUpdateComponent, CountryDeleteDialogComponent, CountryDeletePopupComponent],
+    entryComponents: [
+        CountryComponent,
+        CountryDeleteDialogComponent,
+        CountryDeletePopupComponent,
+        CountrySearchComponent,
+        CountrySearchPopupComponent,
+        PortListComponent,
+        CountryEditComponent,
+        CountrySelectComponent,
+        CountrySelectPopupComponent
+    ],
+    providers: [CountryService, CountryPopupService, CountryResolvePagingParams, CountrySelectPopupService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class CpigatewaycommCountryModule {}
+export class CpigatewayCountryModule {}

@@ -1,0 +1,75 @@
+<div class="m-content">
+    <div class="m-portlet">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        <span id="myCountryLabel" jhiTranslate="cpigatewayApp.country.home.createOrEditLabel">Create or edit a Country</span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <jhi-alert></jhi-alert>
+        <div class="m-form m-form--fit">
+            <div class="m-portlet__body">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.country.countryName">Country Name</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="countryName" id="countryName"
+                                   [(ngModel)]="country.countryName" required/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.country.countryNameAbbr">Country Name Abbr</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="countryNameAbbr" id="countryNameAbbr"
+                                   [(ngModel)]="country.countryNameAbbr" required/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.country.countryNameChinese">Country Name Chinese</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="countryNameChinese" id="countryNameChinese"
+                                   [(ngModel)]="country.countryNameChinese"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.country.dialCode">Country Dial Code</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="dialCode" id="dialCode"
+                                   [(ngModel)]="country.dialCode"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit">
+                <div class="m-form__actions">
+                    <div class="row">
+                        <div class="col-lg-9 ml-lg-auto">
+                            <button type="button" class="btn btn-info" (click)="cancel()">
+                                <span class="fa fa-arrow-left"></span>
+                                <span>&nbsp;</span>
+                                <span jhiTranslate="entity.action.cancel">Cancel</span>
+                            </button>
+                            <span>&nbsp;</span>
+                            <button type="button" class="btn btn-primary" (click)="save()">
+                                <span class="fa fa-save"></span>
+                                <span>&nbsp;</span>
+                                <span jhiTranslate="entity.action.save">Save</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

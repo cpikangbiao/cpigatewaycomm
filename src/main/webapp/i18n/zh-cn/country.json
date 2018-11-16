@@ -1,0 +1,30 @@
+
+{
+    "cpigatewayApp": {
+        "country" : {
+            "home": {
+                "title": "国家",
+                "createLabel": "创建",
+                "createOrEditLabel": "创建/编辑"
+            },
+            "delete": {
+                "question": "你确定要删除ID为{{ id }}的国家吗？"
+            },
+            "detail": {
+                "title": "国家"
+            },
+            "countryName": "国家名称（英文）",
+            "countryNameAbbr": "国家名称简写（英文）",
+            "countryNameChinese": "国家名称（中文）",
+            "dialCode": "拨号前缀",
+            "ports": "港口"
+        }
+    },
+    "cpicommonApp": {
+        "country" : {
+            "created": "国家{{ param }}创建成功",
+            "updated": "国家{{ param }}更新成功",
+            "deleted": "国家{{ param }}删除成功"
+        }
+    }
+}

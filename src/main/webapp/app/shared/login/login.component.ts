@@ -1,14 +1,16 @@
-import { Component, AfterViewInit, Renderer, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, Renderer, ElementRef, ViewEncapsulation } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { LoginService } from 'app/core/login/login.service';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
+import {} from '@angular/core';
 
 @Component({
     selector: 'jhi-login-modal',
-    templateUrl: './login.component.html'
+    templateUrl: './login.component.html',
+    encapsulation: ViewEncapsulation.None,
 })
 export class JhiLoginModalComponent implements AfterViewInit {
     authenticationError: boolean;
@@ -30,7 +32,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        setTimeout(() => this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#username'), 'focus', []), 0);
+        this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#username'), 'focus', []);
     }
 
     cancel() {
@@ -83,5 +85,18 @@ export class JhiLoginModalComponent implements AfterViewInit {
     requestResetPassword() {
         this.activeModal.dismiss('to state requestReset');
         this.router.navigate(['/reset', 'request']);
+    }
+
+    usernameKeyup($event) {
+        if ($event.keyCode === 13) {
+            // document.getElementById('password').focus();
+            this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#password'), 'focus', []);
+        }
+    }
+
+    passwordKeyup($event) {
+        if ($event.keyCode === 13) {
+            this.login();
+        }
     }
 }

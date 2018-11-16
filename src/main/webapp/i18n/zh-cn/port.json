@@ -1,0 +1,30 @@
+
+{
+    "cpigatewayApp": {
+        "port" : {
+            "home": {
+                "title": "港口",
+                "createLabel": "创建新港口",
+                "createOrEditLabel": "创建或编辑港口"
+            },
+            "delete": {
+                "question": "你确定要删除港口{{ id }} 吗？"
+            },
+            "detail": {
+                "title": "港口"
+            },
+            "portCode": "港口编号",
+            "portName": "港口的名称",
+            "portNameChinese": "港口的中文名称",
+            "correspondents": "通代",
+            "country": "国家"
+        }
+    },
+    "cpicommonApp": {
+        "port" : {
+            "created": "港口 {{ param }} 创建成功",
+            "updated": "港口 {{ param }} 更新成功",
+            "deleted": "港口 {{ param }} 删除成功"
+        }
+    }
+}

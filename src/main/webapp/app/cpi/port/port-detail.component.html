@@ -1,41 +1,70 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="port">
-            <h2><span jhiTranslate="cpigatewaycommApp.cpicommunicationPort.detail.title">Port</span> {{port.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationPort.portCode">Port Code</span></dt>
-                <dd>
-                    <span>{{port.portCode}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationPort.portName">Port Name</span></dt>
-                <dd>
-                    <span>{{port.portName}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationPort.portNameChinese">Port Name Chinese</span></dt>
-                <dd>
-                    <span>{{port.portNameChinese}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationPort.country">Country</span></dt>
-                <dd>
-                    <div *ngIf="port.countryId">
-                        <a [routerLink]="['/country', port.countryId, 'view']">{{port.countryCountryName}}</a>
+<div class="m-content">
+    <div class="m-portlet" *ngIf="port">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        <span jhiTranslate="cpigatewayApp.port.detail.title">Port</span> {{port.id}}
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <jhi-alert></jhi-alert>
+        <div class="m-form m-form--fit m-form--label-align-right">
+            <div class="m-portlet__body">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.port.portCode">Port Code</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{port.portCode}}</span>
+                        </div>
                     </div>
-                </dd>
-            </dl>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/port', port.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.port.portName">Port Name</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{port.portName}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.port.portNameChinese">Port Name Chinese</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{port.portNameChinese}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.port.country">Country</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{port.countryCountryName}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit">
+                <div class="m-form__actions">
+                    <div class="row">
+                        <div class="col-lg-9 ml-lg-auto">
+                            <button type="submit" class="btn btn-info" (click)="previousState()">
+                                <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                            </button>
+                            <button type="button" class="btn btn-primary" [routerLink]="['/port/'+ port.id + '/edit']">
+                                <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

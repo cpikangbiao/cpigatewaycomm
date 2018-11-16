@@ -1,53 +1,120 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="correspondent">
-            <h2><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.detail.title">Correspondent</span> {{correspondent.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.correspondentName">Correspondent Name</span></dt>
-                <dd>
-                    <span>{{correspondent.correspondentName}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.faxNumber">Fax Number</span></dt>
-                <dd>
-                    <span>{{correspondent.faxNumber}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.address">Address</span></dt>
-                <dd>
-                    <span>{{correspondent.address}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.telephoneOffice">Telephone Office</span></dt>
-                <dd>
-                    <span>{{correspondent.telephoneOffice}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.telephoneAlternate">Telephone Alternate</span></dt>
-                <dd>
-                    <span>{{correspondent.telephoneAlternate}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.webSite">Web Site</span></dt>
-                <dd>
-                    <span>{{correspondent.webSite}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondent.port">Port</span></dt>
-                <dd>
-                    <div *ngIf="correspondent.portId">
-                        <a [routerLink]="['/port', correspondent.portId, 'view']">{{correspondent.portPortName}}</a>
+<div class="m-content">
+    <div class="m-portlet" *ngIf="correspondent">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        <span jhiTranslate="cpigatewayApp.correspondent.detail.title">Correspondent</span> {{correspondent.correspondentName}}
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <jhi-alert></jhi-alert>
+        <div class="m-form m-form--fit m-form--label-align-right">
+            <div class="m-portlet__body">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.correspondentName">Correspondent Name</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{correspondent.correspondentName}}</span>
+                        </div>
                     </div>
-                </dd>
-            </dl>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/correspondent', correspondent.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.faxNumber">Fax Number</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{correspondent.faxNumber}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.address">Address</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{correspondent.address}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.telephoneOffice">Telephone Office</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{correspondent.telephoneOffice}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.telephoneAlternate">Telephone Alternate</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{correspondent.telephoneAlternate}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.webSite">Web Site</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{correspondent.webSite}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.port">Port</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{correspondent.portPortName}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit">
+                <div class="m-form__actions">
+                    <div class="row">
+                        <div class="col-lg-9 ml-lg-auto">
+                            <button type="submit" class="btn btn-info" (click)="previousState()">
+                                <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                            </button>
+                            <span>&nbsp;</span>
+                            <button type="button" class="btn btn-primary"
+                                    [routerLink]="['/correspondent/'+ correspondent.id + '/edit']">
+                                <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__body">
+                <div class="m-accordion m-accordion--default" id="m_accordion_1" role="tablist">
+                    <div class="m-accordion__item">
+                        <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_2_head"
+                             data-toggle="collapse" href="#m_accordion_1_item_2_body" aria-expanded="false"
+                            (click)="correspondentContactListInit()">
+								<span class="m-accordion__item-icon">
+									<i class="fa flaticon-users"></i>
+								</span>
+                            <span class="m-accordion__item-title"
+                                  jhiTranslate="cpigatewayApp.correspondentContact.home.title">Correspondent Contacts</span>
+                            <span class="m-accordion__item-mode"></span>
+                        </div>
+                        <div class="m-accordion__item-body collapse" id="m_accordion_1_item_2_body">
+                            <div class="m-accordion__item-content">
+                                <jhi-correspondent-contact-list></jhi-correspondent-contact-list>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
-import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
-
-import { IPort } from 'app/shared/model/cpicommunication/port.model';
+import { IPort } from './port.model';
+import { PortPopupService } from './port-popup.service';
 import { PortService } from './port.service';
 
 @Component({
@@ -21,7 +20,7 @@ export class PortDeleteDialogComponent {
     }
 
     confirmDelete(id: number) {
-        this.portService.delete(id).subscribe(response => {
+        this.portService.delete(id).subscribe((response: any) => {
             this.eventManager.broadcast({
                 name: 'portListModification',
                 content: 'Deleted an port'
@@ -36,30 +35,17 @@ export class PortDeleteDialogComponent {
     template: ''
 })
 export class PortDeletePopupComponent implements OnInit, OnDestroy {
-    private ngbModalRef: NgbModalRef;
+    routeSub: any;
 
-    constructor(private activatedRoute: ActivatedRoute, private router: Router, private modalService: NgbModal) {}
+    constructor(private route: ActivatedRoute, private portPopupService: PortPopupService) {}
 
     ngOnInit() {
-        this.activatedRoute.data.subscribe(({ port }) => {
-            setTimeout(() => {
-                this.ngbModalRef = this.modalService.open(PortDeleteDialogComponent as Component, { size: 'lg', backdrop: 'static' });
-                this.ngbModalRef.componentInstance.port = port;
-                this.ngbModalRef.result.then(
-                    result => {
-                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
-                        this.ngbModalRef = null;
-                    },
-                    reason => {
-                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
-                        this.ngbModalRef = null;
-                    }
-                );
-            }, 0);
+        this.routeSub = this.route.params.subscribe((params: any) => {
+            this.portPopupService.open(PortDeleteDialogComponent as Component, params['id']);
         });
     }
 
     ngOnDestroy() {
-        this.ngbModalRef = null;
+        this.routeSub.unsubscribe();
     }
 }

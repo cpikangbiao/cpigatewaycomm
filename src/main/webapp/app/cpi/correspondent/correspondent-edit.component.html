@@ -1,0 +1,112 @@
+<div class="m-content">
+    <div class="m-portlet">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        <span id="myCorrespondentLabel"
+                              jhiTranslate="cpigatewayApp.correspondent.home.createOrEditLabel">Create or edit a Correspondent</span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <jhi-alert></jhi-alert>
+        <div class="m-form m-form--fit">
+            <div class="m-portlet__body">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.correspondentName">Correspondent Name</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="correspondentName"
+                                   id="correspondentName" required
+                                   [(ngModel)]="correspondent.correspondentName"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span
+                                jhiTranslate="cpigatewayApp.correspondent.faxNumber">Fax Number</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="faxNumber" id="faxNumber"
+                                   [(ngModel)]="correspondent.faxNumber"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.address">Address</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="address" id="address"
+                                   [(ngModel)]="correspondent.address"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.telephoneOffice">Telephone Office</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="telephoneOffice" id="telephoneOffice"
+                                   [(ngModel)]="correspondent.telephoneOffice"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.telephoneAlternate">Telephone Alternate</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="telephoneAlternate" id="telephoneAlternate"
+                                   [(ngModel)]="correspondent.telephoneAlternate"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.webSite">Web Site</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="webSite" id="webSite"
+                                   [(ngModel)]="correspondent.webSite"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.port">Port</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <span>&nbsp;</span>
+                            <span class="spanBlock m--margin-top-10">{{port.portName}}</span>
+                            <button type="button" class="btn btn-info float-right" replaceUrl="true" queryParamsHandling="merge"
+                                    [routerLink]="['/', { outlets: { popup: 'port-select'} }]">
+                                <span class="fa fa-plus"></span>
+                            </button>
+                            <button type="button" class="btn btn-default float-right" (click)="clearPort()">
+                                <span class="fa fa-remove"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit">
+                <div class="m-form__actions">
+                    <div class="row">
+                        <div class="col-lg-9 ml-lg-auto">
+                            <button type="button" class="btn btn-info" (click)="cancel()">
+                                <span class="fa fa-arrow-left"></span>
+                                <span>&nbsp;</span>
+                                <span jhiTranslate="entity.action.cancel">Cancel</span>
+                            </button>
+                            <span>&nbsp;</span>
+                            <button type="button" class="btn btn-primary" (click)="save()">
+                                <span class="fa fa-save"></span>
+                                <span>&nbsp;</span>
+                                <span jhiTranslate="entity.action.save">Save</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+
+{
+    "cpigatewayApp": {
+        "correspondent" : {
+            "home": {
+                "title": "通代",
+                "createLabel": "创建",
+                "createOrEditLabel": "创建/编辑"
+            },
+            "delete": {
+                "question": "你确定要删除ID为{{ id }}的通代吗？"
+            },
+            "detail": {
+                "title": "通代"
+            },
+            "correspondentCode": "通代编号",
+            "year": "年份",
+            "vesselName": "船名",
+            "clientRef": "案号",
+            "keyWord": "关键字",
+            "registerDate": "注册日期",
+            "caseDate": "案件日期",
+            "handlerUser": "处理人",
+            "remark": "备注",
+            "correspondentType": "通代类型",
+            "club": "协会",
+            "clubPerson": "协会成员",
+            "correspondentName": "通代名称",
+            "faxNumber": "传真号",
+            "address": "地址",
+            "telephoneOffice": "办公电话",
+            "telephoneAlternate": "备用电话",
+            "webSite": "网站",
+            "contacts": "联系人",
+            "port": "港口",
+            "statistics": {
+                "noParams": "请提供报表参数"
+            }
+        }
+    },
+    "cpicorrespondentApp": {
+        "correspondent" : {
+            "created": "通代{{ param }}创建成功",
+            "updated": "通代{{ param }}更新成功",
+            "deleted": "通代{{ param }}删除成功"
+        }
+    }
+}

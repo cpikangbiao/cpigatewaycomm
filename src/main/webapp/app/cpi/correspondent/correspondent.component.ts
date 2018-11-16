@@ -1,64 +1,84 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
-
-import { ICorrespondent } from 'app/shared/model/cpicommunication/correspondent.model';
-import { Principal } from 'src/main/webapp/app/core/index';
-
-import { ITEMS_PER_PAGE } from 'src/main/webapp/app/shared/index';
-import { CorrespondentService } from './correspondent.service';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {HttpResponse, HttpErrorResponse} from '@angular/common/http';
+import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
+import {Correspondent} from './correspondent.model';
+import {CorrespondentService} from './correspondent.service';
+import {ITEMS_PER_PAGE} from 'app/shared';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
     selector: 'jhi-correspondent',
     templateUrl: './correspondent.component.html'
 })
 export class CorrespondentComponent implements OnInit, OnDestroy {
-    currentAccount: any;
-    correspondents: ICorrespondent[];
-    error: any;
-    success: any;
-    eventSubscriber: Subscription;
-    routeData: any;
-    links: any;
-    totalItems: any;
-    queryCount: any;
+    defaultURL: string;
+    correspondent: Correspondent;
+    correspondents: Correspondent[];
     itemsPerPage: any;
     page: any;
-    predicate: any;
     previousPage: any;
     reverse: any;
+    predicate: any;
+    totalItems: any;
+    queryCount: any;
+    routeSub: Subscription;
+    searchCorrespondentSubscription: Subscription;
+    correspondentSubscription: Subscription;
 
-    constructor(
-        private correspondentService: CorrespondentService,
-        private parseLinks: JhiParseLinks,
-        private jhiAlertService: JhiAlertService,
-        private principal: Principal,
-        private activatedRoute: ActivatedRoute,
-        private router: Router,
-        private eventManager: JhiEventManager
-    ) {
+    constructor(private correspondentService: CorrespondentService,
+                private jhiAlertService: JhiAlertService,
+                private correspondentEventManager: JhiEventManager,
+                private route: ActivatedRoute,
+                private router: Router) {
+        this.correspondent = new Correspondent();
+        this.correspondents = [];
+        this.defaultURL = this.router.url;
+        this.defaultURL = this.defaultURL.split('?')[0];
+    }
+
+    ngOnInit() {
         this.itemsPerPage = ITEMS_PER_PAGE;
-        this.routeData = this.activatedRoute.data.subscribe(data => {
+        this.routeSub = this.route.data.subscribe(data => {
             this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
+            this.correspondent.correspondentName = data.pagingParams.correspondentName;
+        });
+        this.searchCorrespondent();
+        this.registerChangeInCorrespondents();
+    }
+
+    ngOnDestroy() {
+        this.routeSub.unsubscribe();
+        this.searchCorrespondentSubscription.unsubscribe();
+        this.correspondentEventManager.destroy(this.correspondentSubscription);
+    }
+
+    registerChangeInCorrespondents() {
+        this.correspondentSubscription = this.correspondentEventManager
+            .subscribe('correspondentListModification', () => this.searchCorrespondent());
+    }
+
+    trackId(index: number, item: Correspondent) {
+        return item.id;
+    }
+
+    modifyURL() {
+        this.router.navigate([this.defaultURL], {
+            queryParams:
+                {
+                    page: this.page,
+                    size: this.itemsPerPage,
+                    sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc'),
+                    'correspondentName': this.correspondent.correspondentName,
+                }
         });
     }
 
-    loadAll() {
-        this.correspondentService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<ICorrespondent[]>) => this.paginateCorrespondents(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+    transition() {
+        this.searchCorrespondent();
     }
 
     loadPage(page: number) {
@@ -68,47 +88,16 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
         }
     }
 
-    transition() {
-        this.router.navigate(['/correspondent'], {
-            queryParams: {
-                page: this.page,
-                size: this.itemsPerPage,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        });
-        this.loadAll();
-    }
-
-    clear() {
-        this.page = 0;
-        this.router.navigate([
-            '/correspondent',
-            {
-                page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        ]);
-        this.loadAll();
-    }
-
-    ngOnInit() {
-        this.loadAll();
-        this.principal.identity().then(account => {
-            this.currentAccount = account;
-        });
-        this.registerChangeInCorrespondents();
-    }
-
-    ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
-    }
-
-    trackId(index: number, item: ICorrespondent) {
-        return item.id;
-    }
-
-    registerChangeInCorrespondents() {
-        this.eventSubscriber = this.eventManager.subscribe('correspondentListModification', response => this.loadAll());
+    criteria() {
+        const result = {
+            page: this.page - 1,
+            size: this.itemsPerPage,
+            sort: this.sort()
+        };
+        if (this.correspondent.correspondentName && this.correspondent.correspondentName.length > 0) {
+            result['correspondentName.contains'] = this.correspondent.correspondentName;
+        }
+        return result;
     }
 
     sort() {
@@ -119,14 +108,43 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
         return result;
     }
 
-    private paginateCorrespondents(data: ICorrespondent[], headers: HttpHeaders) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
+    private onSuccess(data, headers) {
+        this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         this.correspondents = data;
     }
 
-    private onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
+    private onError(error) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+
+    searchCorrespondent() {
+        this.modifyURL();
+        this.searchCorrespondentSubscription = this.correspondentService.query(this.criteria())
+            .subscribe(
+                (res: HttpResponse<Correspondent[]>) => this.onSuccess(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res)
+            );
+    }
+
+    resetPage() {
+        this.page = 0;
+    }
+
+    clear() {
+        this.correspondent = new Correspondent();
+        this.page = 0;
+        this.predicate = 'id';
+        this.searchCorrespondent();
+    }
+
+    searchKeyup($event) {
+        if ($event.keyCode === 13) {
+            this.resetPage();
+            this.searchCorrespondent();
+        }
+        if ($event.keyCode === 27) {
+            this.clear();
+        }
     }
 }

@@ -1,39 +1,72 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="country">
-            <h2><span jhiTranslate="cpigatewaycommApp.cpicommunicationCountry.detail.title">Country</span> {{country.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCountry.countryName">Country Name</span></dt>
-                <dd>
-                    <span>{{country.countryName}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCountry.countryNameAbbr">Country Name Abbr</span></dt>
-                <dd>
-                    <span>{{country.countryNameAbbr}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCountry.countryNameChinese">Country Name Chinese</span></dt>
-                <dd>
-                    <span>{{country.countryNameChinese}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCountry.dialCode">Dial Code</span></dt>
-                <dd>
-                    <span>{{country.dialCode}}</span>
-                </dd>
-            </dl>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/country', country.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+<div class="m-content">
+    <div class="m-portlet" *ngIf="country">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        <span jhiTranslate="cpigatewayApp.country.detail.title">Country</span> {{country.countryName}}
+                    </h3>
+                </div>
+            </div>
         </div>
+        <jhi-alert></jhi-alert>
+        <div class="m-form m-form--fit m-form--label-align-right">
+            <div class="m-portlet__body">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.country.countryName">Country Name</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{country.countryName}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.country.countryNameAbbr">Country Name Abbr</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{country.countryNameAbbr}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.country.countryNameChinese">Country Name Chinese</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{country.countryNameChinese}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.country.dialCode">Dial Code</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{country.dialCode}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit">
+                <div class="m-form__actions">
+                    <div class="row">
+                        <div class="col-lg-9 ml-lg-auto">
+                            <button type="submit" class="btn btn-info" (click)="previousState()">
+                                <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                            </button>
+                            <span>&nbsp;</span>
+                            <button type="button" class="btn btn-primary" [routerLink]="['/country/'+ country.id + '/edit']">
+                                <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <jhi-port-list [countryId]="country.id"></jhi-port-list>
     </div>
 </div>

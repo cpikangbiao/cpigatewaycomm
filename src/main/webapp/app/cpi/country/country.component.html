@@ -1,68 +1,130 @@
-<div>
-    <h2 id="page-heading">
-        <span jhiTranslate="cpigatewaycommApp.cpicommunicationCountry.home.title">Countries</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-country" [routerLink]="['/country/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="cpigatewaycommApp.cpicommunicationCountry.home.createLabel">
-            Create new Country
-            </span>
-        </button>
-    </h2>
-    <jhi-alert></jhi-alert>
-    <br/>
-    <div class="table-responsive" *ngIf="countries">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="countryName"><span jhiTranslate="cpigatewaycommApp.cpicommunicationCountry.countryName">Country Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="countryNameAbbr"><span jhiTranslate="cpigatewaycommApp.cpicommunicationCountry.countryNameAbbr">Country Name Abbr</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="countryNameChinese"><span jhiTranslate="cpigatewaycommApp.cpicommunicationCountry.countryNameChinese">Country Name Chinese</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="dialCode"><span jhiTranslate="cpigatewaycommApp.cpicommunicationCountry.dialCode">Dial Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let country of countries ;trackBy: trackId">
-                <td><a [routerLink]="['/country', country.id, 'view' ]">{{country.id}}</a></td>
-                <td>{{country.countryName}}</td>
-                <td>{{country.countryNameAbbr}}</td>
-                <td>{{country.countryNameChinese}}</td>
-                <td>{{country.dialCode}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/country', country.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/country', country.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'country/'+ country.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div *ngIf="countries && countries.length">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+<div class="m-content">
+    <div class="m-portlet">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        <span jhiTranslate="cpigatewayApp.country.home.title">Country</span>
+                    </h3>
+                </div>
+            </div>
         </div>
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        <div class="m-portlet__body">
+            <div class="form-group m-form__group row" (keyup)="searchKeyup($event)">
+                <div class="col-lg-4 col-sm-12 row">
+                    <label class="col-form-label m--align-right col-sm-5"
+                           jhiTranslate="cpigatewayApp.country.countryName">Country Name</label>
+                    <input type="text" class="form-control col-sm-6" name="countryName" id="countryName"
+                           [(ngModel)]="country.countryName"/>
+                </div>
+                <div class="col-lg-4 col-sm-12 row">
+                    <label class="col-form-label m--align-right col-sm-5"
+                           jhiTranslate="cpigatewayApp.country.countryNameAbbr">Country Name Abbr</label>
+                    <input type="text" class="form-control col-sm-6" name="countryNameAbbr" id="countryNameAbbr"
+                           [(ngModel)]="country.countryNameAbbr"/>
+                </div>
+                <div class="col-lg-4 col-sm-12 row">
+                    <label class="col-form-label m--align-right col-sm-5"
+                           jhiTranslate="cpigatewayApp.country.dialCode">Dial Code</label>
+                    <input type="text" class="form-control col-sm-6" name="dialCode" id="dialCode"
+                           [(ngModel)]="country.dialCode"/>
+                </div>
+            </div>
+            <div class="form-group m-form__group row">
+                <div class="col-sm-12">
+                    <span class="col-auto">&nbsp;</span>
+                    <button class="btn btn-info float-right" (click)="resetPage();searchCountry();">
+                        <span class="fa fa-search"></span>
+                        <span>&nbsp;</span>
+                        <span jhiTranslate="entity.action.search">Searching</span>
+                    </button>
+                    <span class="float-right">&nbsp;</span>
+                    <button class="btn btn-default float-right" (click)="clear()">
+                        <span class="fa fa-ban"></span>
+                        <span>&nbsp;</span>
+                        <span jhiTranslate="entity.action.clear">Clear</span>
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="form-group m-form__group row">
+                <div class="col-sm-12">
+                    <button class="btn btn-primary" [routerLink]="['/country-new']">
+                        <span class="fa fa-plus"></span>
+                        <span>&nbsp;</span>
+                        <span jhiTranslate="cpigatewayApp.country.home.createLabel">
+                            Create new Currency
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <jhi-alert></jhi-alert>
+            <div class="form-group m-form__group row" *ngIf="countries">
+                <table class="table table-sm m-table m-table--head-bg-primary table-hover table-striped">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                        <th jhiSortBy="countryName" width="10%">
+                            <span jhiTranslate="cpigatewayApp.country.countryName">Country Name</span>
+                            <span class="fa fa-sort"></span>
+                        </th>
+                        <th jhiSortBy="countryNameChinese" width="10%">
+                            <span jhiTranslate="cpigatewayApp.country.countryNameChinese">Country Name Chinese</span>
+                            <span class="fa fa-sort"></span>
+                        </th>
+                        <th jhiSortBy="countryNameAbbr" width="10%" class="hiddenXS">
+                            <span jhiTranslate="cpigatewayApp.country.countryNameAbbr">Country Name Abbr</span>
+                            <span class="fa fa-sort"></span>
+                        </th>
+                        <th jhiSortBy="dialCode" width="10%" class="hiddenXS">
+                            <span jhiTranslate="cpigatewayApp.country.dialCode">Dial Code</span>
+                            <span class="fa fa-sort"></span>
+                        </th>
+                        <th width="5%"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let _country of countries ;trackBy: trackId">
+                        <td>{{_country.countryName}}</td>
+                        <td>{{_country.countryNameChinese}}</td>
+                        <td class="hiddenXS">{{_country.countryNameAbbr}}</td>
+                        <td class="hiddenXS">{{_country.dialCode}}</td>
+                        <td>
+                            <div class="btn-group dropleft">
+                                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-list-ul"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" [routerLink]="['/country', _country.id ]">
+                                        <span class="fa fa-eye"></span>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                    </a>
+                                    <a class="dropdown-item" [routerLink]="['/country/'+ _country.id + '/edit']">
+                                        <span class="fa fa-pencil"></span>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                    </a>
+                                    <a class="dropdown-item" replaceUrl="true" queryParamsHandling="merge"
+                                       [routerLink]="['/', { outlets: { popup: 'country/'+ _country.id + '/delete'} }]">
+                                        <span class="fa fa-remove"></span>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group m-form__group" *ngIf="countries && countries.length">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5"
+                                    [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage"
+                                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                                    (pageChange)="loadPage(page)"></ngb-pagination>
+                </div>
+            </div>
         </div>
     </div>
 </div>

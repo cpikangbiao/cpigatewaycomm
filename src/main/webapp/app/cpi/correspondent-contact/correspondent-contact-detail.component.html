@@ -1,49 +1,90 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="correspondentContact">
-            <h2><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.detail.title">Correspondent Contact</span> {{correspondentContact.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.correspondentContactName">Correspondent Contact Name</span></dt>
-                <dd>
-                    <span>{{correspondentContact.correspondentContactName}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.eMail">E Mail</span></dt>
-                <dd>
-                    <span>{{correspondentContact.eMail}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.telephoneOffice">Telephone Office</span></dt>
-                <dd>
-                    <span>{{correspondentContact.telephoneOffice}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.telephone">Telephone</span></dt>
-                <dd>
-                    <span>{{correspondentContact.telephone}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.webSite">Web Site</span></dt>
-                <dd>
-                    <span>{{correspondentContact.webSite}}</span>
-                </dd>
-                <dt><span jhiTranslate="cpigatewaycommApp.cpicommunicationCorrespondentContact.correspondent">Correspondent</span></dt>
-                <dd>
-                    <div *ngIf="correspondentContact.correspondentId">
-                        <a [routerLink]="['/correspondent', correspondentContact.correspondentId, 'view']">{{correspondentContact.correspondentCorrespondentName}}</a>
+<div class="m-content">
+    <div class="m-portlet" *ngIf="correspondentContact">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        <span jhiTranslate="cpigatewayApp.correspondentContact.detail.title">Correspondent Contact</span> {{correspondentContact.id}}
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <jhi-alert></jhi-alert>
+        <div class="m-form m-form--fit m-form--label-align-right">
+            <div class="m-portlet__body">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondentContact.correspondentContactName">Correspondent Contact Name</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{correspondentContact.correspondentContactName}}</span>
+                        </div>
                     </div>
-                </dd>
-            </dl>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/correspondent-contact', correspondentContact.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondentContact.telephoneOffice">Telephone Office</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{correspondentContact.telephoneOffice}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondentContact.telephone">Telephone</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{correspondentContact.telephone}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondentContact.eMail">E Mail</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{correspondentContact.eMail}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondentContact.webSite">Web Site</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{correspondentContact.webSite}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondentContact.correspondent">Correspondent</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>&nbsp;</span>
+                            <span>{{correspondentContact.correspondentId}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit">
+                <div class="m-form__actions">
+                    <div class="row">
+                        <div class="col-lg-9 ml-lg-auto">
+                            <button type="submit" class="btn btn-info" (click)="previousState()">
+                                <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                            </button>
+                            <span>&nbsp;</span>
+                            <button type="button" class="btn btn-primary"
+                                    [routerLink]="['/correspondent-contact/'+ correspondentContact.id + '/edit']">
+                                <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

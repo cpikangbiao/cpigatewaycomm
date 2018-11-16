@@ -8,3 +8,6 @@ export * from './navbar/active-menu.directive';
 export * from './profiles/page-ribbon.component';
 export * from './profiles/profile.service';
 export * from './profiles/profile-info.model';
+export * from './header-nav/header-nav.component';
+export * from './aside-nav/aside-nav.component';
+export * from './scroll-top/scroll-top.component';

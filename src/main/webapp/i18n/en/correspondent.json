@@ -1,0 +1,48 @@
+
+{
+    "cpigatewayApp": {
+        "correspondent" : {
+            "home": {
+                "title": "Correspondents",
+                "createLabel": "Create a new Correspondent",
+                "createOrEditLabel": "Create or edit a Correspondent"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Correspondent {{ id }}?"
+            },
+            "detail": {
+                "title": "Correspondent"
+            },
+            "correspondentCode": "Correspondent Code",
+            "year": "Year",
+            "vesselName": "Vessel Name",
+            "clientRef": "Client Ref",
+            "keyWord": "Key Word",
+            "registerDate": "Register Date",
+            "caseDate": "Case Date",
+            "handlerUser": "Handler User",
+            "remark": "Remark",
+            "correspondentType": "Correspondent Type",
+            "club": "Club",
+            "clubPerson": "Club Person",
+            "correspondentName": "Correspondent Name",
+            "faxNumber": "Fax Number",
+            "address": "Address",
+            "telephoneOffice": "Telephone Office",
+            "telephoneAlternate": "Telephone Alternate",
+            "webSite": "Web Site",
+            "contacts": "Contacts",
+            "port": "Port",
+            "statistics": {
+                "noParams": "Please provide report parameters"
+            }
+        }
+    },
+    "cpicorrespondentApp": {
+        "correspondent" : {
+            "created": "A new Correspondent is created with identifier {{ param }}",
+            "updated": "A Correspondent is updated with identifier {{ param }}",
+            "deleted": "A Correspondent is deleted with identifier {{ param }}"
+        }
+    }
+}

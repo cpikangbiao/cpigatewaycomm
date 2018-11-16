@@ -1,0 +1,31 @@
+
+{
+    "cpigatewayApp": {
+        "correspondentContact" : {
+            "home": {
+                "title": "Correspondent Contacts",
+                "createLabel": "Create a new Correspondent Contact",
+                "createOrEditLabel": "Create or edit a Correspondent Contact"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Correspondent Contact {{ id }}?"
+            },
+            "detail": {
+                "title": "Correspondent Contact"
+            },
+            "correspondentContactName": "Correspondent Contact Name",
+            "telephoneOffice": "Telephone Office",
+            "telephone": "Telephone",
+            "eMail": "E Mail",
+            "webSite": "Web Site",
+            "correspondent": "Correspondent"
+        }
+    },
+    "cpicommonApp": {
+        "correspondentContact" : {
+            "created": "A new Correspondent Contact is created with identifier {{ param }}",
+            "updated": "A Correspondent Contact is updated with identifier {{ param }}",
+            "deleted": "A Correspondent Contact is deleted with identifier {{ param }}"
+        }
+    }
+}

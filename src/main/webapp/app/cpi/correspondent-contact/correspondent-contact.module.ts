@@ -1,34 +1,46 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
-import { CpigatewaycommSharedModule } from 'src/main/webapp/app/shared/index';
+import { CpigatewaycommSharedModule } from 'app/shared';
 import {
+    correspondentContactRoute,
+    correspondentContactPopupRoute,
+    CorrespondentContactResolvePagingParams
+} from './correspondent-contact.route';
+import {
+    CorrespondentContactService,
+    CorrespondentContactPopupService,
     CorrespondentContactComponent,
     CorrespondentContactDetailComponent,
-    CorrespondentContactUpdateComponent,
     CorrespondentContactDeletePopupComponent,
     CorrespondentContactDeleteDialogComponent,
-    correspondentContactRoute,
-    correspondentContactPopupRoute
+    CorrespondentContactEditComponent,
+    CorrespondentContactListComponent
 } from './index';
 
-const ENTITY_STATES = [...correspondentContactRoute, ...correspondentContactPopupRoute];
+const ENTITY_STATES = [
+    ...correspondentContactRoute,
+    ...correspondentContactPopupRoute,
+];
 
 @NgModule({
-    imports: [CpigatewaycommSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [
+        CpigatewaycommSharedModule,
+        RouterModule.forChild(ENTITY_STATES)
+    ],
     declarations: [
         CorrespondentContactComponent,
         CorrespondentContactDetailComponent,
-        CorrespondentContactUpdateComponent,
         CorrespondentContactDeleteDialogComponent,
-        CorrespondentContactDeletePopupComponent
+        CorrespondentContactDeletePopupComponent,
+        CorrespondentContactEditComponent,
+        CorrespondentContactListComponent
     ],
-    entryComponents: [
-        CorrespondentContactComponent,
-        CorrespondentContactUpdateComponent,
-        CorrespondentContactDeleteDialogComponent,
-        CorrespondentContactDeletePopupComponent
+    providers: [
+        CorrespondentContactService,
+        CorrespondentContactPopupService,
+        CorrespondentContactResolvePagingParams,
     ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    exports: [CorrespondentContactListComponent]
 })
-export class CpigatewaycommCorrespondentContactModule {}
+export class CpigatewayCorrespondentContactModule {}

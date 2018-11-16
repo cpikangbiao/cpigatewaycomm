@@ -122,6 +122,13 @@
                 "database": "数据库",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
+            "comm": {
+                "main": "Communication",
+                "country": "Country",
+                "port": "Port",
+                "correspondent": "Correspondent",
+                "correspondentContact": "Corrspondent Contact"
+            },
             "language": "语言"
         },
         "form": {
@@ -187,7 +194,18 @@
             "edit": "编辑",
             "open": "Open",
             "save": "保存",
-            "view": "查看"
+            "view": "查看",
+            "addANewLine": "新增一行",
+            "deleteALine": "删除一行",
+            "clear": "清空",
+            "search": "搜索",
+            "submit": "提交",
+            "submitted": "已提交",
+            "refresh": "刷新",
+            "previous": "上一步",
+            "next": "下一步",
+            "finished": "完成",
+            "more": "更多"
         },
         "detail": {
             "field": "字段",

@@ -1,43 +1,57 @@
-<div class="modal-header">
-    <h4 class="modal-title" jhiTranslate="login.title">Sign in</h4>
-    <button aria-label="Close" data-dismiss="modal" class="close" type="button" (click)="activeModal.dismiss('closed')"><span aria-hidden="true">x</span>
-    </button>
-</div>
-<div class="modal-body">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="alert alert-danger" *ngIf="authenticationError" jhiTranslate="login.messages.error.authentication">
-                <strong>Failed to sign in!</strong> Please check your credentials and try again.
+<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-grid--tablet-and-mobile m-grid--hor-tablet-and-mobile m-login m-login--1 m-login--signin" id="m_login" appunwraptag="" style="margin: 0;min-height: 100%;">
+    <div class="m-grid__item m-grid__item--order-tablet-and-mobile-2 m-login__aside">
+        <div class="m-stack m-stack--hor m-stack--desktop">
+            <div class="m-stack__item m-stack__item--fluid">
+                <div class="m-login__wrapper">
+                    <div class="m-login__logo">
+                        <a href="#">
+                            <img src="/content/images/logo-jhipster.png">
+                        </a>
+                    </div>
+                    <div class="m-login__signin">
+                        <div class="m--align-center">
+                            <h3 class="modal-title" jhiTranslate="login.title">Welcome To Claim CBS</h3>
+                        </div>
+                        <div class="m-login__form m-form">
+                            <div class="form-group m-form__group">
+                                <div class="alert alert-danger" *ngIf="authenticationError" jhiTranslate="login.messages.error.authentication">
+                                    <strong>Failed to sign in!</strong> Please check your credentials and try again.
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group">
+                                <input type="text" class="form-control m-input" name="username" id="username" placeholder="{{'global.form.username.placeholder' | translate}}" [(ngModel)]="username" autocomplete="off" (keyup)="usernameKeyup($event)">
+                            </div>
+                            <div class="form-group m-form__group">
+                                <input type="password" class="form-control m-input m-login__form-input--last" name="password" id="password" placeholder="{{'login.form.password.placeholder' | translate}}" [(ngModel)]="password" (keyup)="passwordKeyup($event)">
+                            </div>
+                            <div class="row m-login__form-sub">
+                                <div class="col m--align-left m-login__form-left">
+                                    <!--<label class="m-checkbox  m-checkbox&#45;&#45;light">-->
+                                    <!--<input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" [(ngModel)]="rememberMe" checked>-->
+                                    <!--<span class="form-check-input" jhiTranslate="login.form.rememberme">Remember me</span>-->
+                                    <!--</label>-->
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="m-login__form-action">
+                                <button type="button"  (click)="login()" id="m_login_signin_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+                                    <span jhiTranslate="login.form.button">Sign in</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-8">
-            <form class="form" role="form" (ngSubmit)="login()">
-                <div class="form-group">
-                    <label class="username-label" for="username" jhiTranslate="global.form.username">Login</label>
-                    <input type="text" class="form-control" name="username" id="username" placeholder="{{'global.form.username.placeholder' | translate}}"
-                    [(ngModel)]="username">
-                </div>
-                <div class="form-group">
-                    <label for="password" jhiTranslate="login.form.password">Password</label>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
-                           [(ngModel)]="password">
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label" for="rememberMe">
-                        <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" [(ngModel)]="rememberMe" checked>
-                        <span jhiTranslate="login.form.rememberme">Remember me</span>
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary" jhiTranslate="login.form.button">Sign in</button>
-            </form>
-            <p></p>
-            <div class="alert alert-warning">
-                <a class="alert-link" (click)="requestResetPassword()" jhiTranslate="login.password.forgot">Did you forget your password?</a>
-            </div>
-            <div class="alert alert-warning">
-                <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>
-                <a class="alert-link" (click)="register()" jhiTranslate="global.messages.info.register.link">Register a new account</a>
-            </div>
+    </div>
+    <div class="m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content" style="background-image: url(content/images/login-bg-1.jpg)">
+        <div class="m-grid__item m-grid__item--middle">
+            <h3 class="m-login__welcome">
+                China Shipowners Mutual Assurance Association
+            </h3>
+            <p class="m-login__msg">
+                Copyright © by Kang Biao,MSN:kang_biao@hotmail.com, 2018
+            </p>
         </div>
     </div>
 </div>

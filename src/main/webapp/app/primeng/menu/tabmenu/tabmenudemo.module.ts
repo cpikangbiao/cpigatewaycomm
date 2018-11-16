@@ -1,8 +1,8 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CommonModule} from '@angular/common';
-import { CpigatewaycommSharedModule } from '../../../shared';
+import {CpigatewaycommSharedModule} from '../../../shared';
 import {GrowlModule} from 'primeng/primeng';
 import {TabMenuModule} from 'primeng/components/tabmenu/tabmenu';
 import {ButtonModule} from 'primeng/components/button/button';
@@ -13,9 +13,8 @@ import {
     tabmenuDemoRoute
 } from './';
 
-import { OverviewComponent } from './pages/overview.component';
-import { DownloadsComponent } from './pages/downloads.component';
-
+import {OverviewComponent} from './pages/overview.component';
+import {DownloadsComponent} from './pages/downloads.component';
 
 const primeng_STATES = [
     tabmenuDemoRoute
@@ -30,7 +29,7 @@ const primeng_STATES = [
         GrowlModule,
         ButtonModule,
         WizardModule,
-        RouterModule.forRoot(primeng_STATES, { useHash: true })
+        RouterModule.forRoot(primeng_STATES, {useHash: true})
     ],
     declarations: [
         TabMenuDemoComponent,
@@ -39,4 +38,5 @@ const primeng_STATES = [
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class CpigatewaycommTabMenuDemoModule {}
+export class CpigatewaycommTabMenuDemoModule {
+}

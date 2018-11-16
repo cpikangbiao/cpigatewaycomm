@@ -229,3 +229,121 @@ ui bootstrap tweaks
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+.login-window {
+    background: rgba(255, 255, 255, 1);
+}
+
+.login-window > div,
+.login-window > div > div,
+.login-window > div > div > jhi-login-modal,
+.login-window > div > div > jhi-login-modal > div {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.select-arrow-hide {
+    -ms-appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+}
+
+.spanBlock {
+    display: block;
+    float: left;
+}
+
+.pCalendar {
+    width: 100%;
+    height: 100%;
+}
+
+.pCalendar input {
+    width: 100%;
+    height: 36px;
+}
+
+table {
+    table-layout: fixed !important;
+}
+
+table thead tr th {
+    horiz-align: center !important;
+    vertical-align: middle !important;
+}
+
+table tbody tr td {
+    horiz-align: center !important;
+    vertical-align: middle !important;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.singleLine {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.preHeightMD {
+    min-height: 50px;
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.buttonMD {
+    width: 36px;
+    height: 36px;
+    margin: -10px;
+}
+
+.inputHeightMD {
+    height: 36px;
+}
+
+input {
+    height: 36px;
+}
+
+.noMargin {
+    margin: 0px !important;
+}
+
+.m-timeline-3-time-fit .m-timeline-3__item .m-timeline-3__item-time {
+    width: 8rem !important;
+    font-size: 0.92rem !important;
+}
+
+.m-timeline-3-time-fit .m-timeline-3__item:before {
+    left: 10rem !important;
+}
+
+.m-timeline-3-time-fit .m-timeline-3__item .m-timeline-3__item-desc {
+    padding-left: 12rem !important;
+}
+
+.m-timeline-2-fit:before {
+    left: 12rem !important;
+}
+.m-timeline-2-fit .m-timeline-2__items .m-timeline-2__item .m-timeline-2__item-cricle {
+    left: 11.2rem !important;
+}
+.m-timeline-2-fit .m-timeline-2__items .m-timeline-2__item .m-timeline-2__item-text {
+    padding-left: 11.4rem !important;
+}
+
+.newLine {
+    clear: both;
+}

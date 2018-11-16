@@ -1,28 +1,31 @@
 import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
-import { UserRouteAccessService } from 'src/main/webapp/app/core/index';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Port } from 'app/shared/model/cpicommunication/port.model';
-import { PortService } from './port.service';
-import { PortComponent } from './port.component';
-import { PortDetailComponent } from './port-detail.component';
-import { PortUpdateComponent } from './port-update.component';
-import { PortDeletePopupComponent } from './port-delete-dialog.component';
-import { IPort } from 'app/shared/model/cpicommunication/port.model';
+import { JhiPaginationUtil } from 'ng-jhipster';
+import { UserRouteAccessService } from 'app/core';
+import { PortComponent, PortDetailComponent, PortEditComponent, PortDeletePopupComponent, PortSelectPopupComponent } from './';
 
-@Injectable({ providedIn: 'root' })
-export class PortResolve implements Resolve<IPort> {
-    constructor(private service: PortService) {}
+@Injectable()
+export class PortResolvePagingParams implements Resolve<any> {
+    constructor(private paginationUtil: JhiPaginationUtil) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const id = route.params['id'] ? route.params['id'] : null;
-        if (id) {
-            return this.service.find(id).pipe(map((port: HttpResponse<Port>) => port.body));
-        }
-        return of(new Port());
+        const _page = route.queryParams['page'] ? route.queryParams['page'] : '1';
+        const _sort = route.queryParams['sort'] ? route.queryParams['sort'] : 'id,asc';
+        const _portCode = route.queryParams['portCode'] ? route.queryParams['portCode'] : null;
+        const _portName = route.queryParams['portName'] ? route.queryParams['portName'] : null;
+        const _portNameChinese = route.queryParams['portNameChinese'] ? route.queryParams['portNameChinese'] : null;
+        const _countryCountryName = route.queryParams['countryCountryName'] ? route.queryParams['countryCountryName'] : null;
+        const _countryId = route.queryParams['countryId'] ? route.queryParams['countryId'] : null;
+        return {
+            page: this.paginationUtil.parsePage(_page),
+            predicate: this.paginationUtil.parsePredicate(_sort),
+            ascending: this.paginationUtil.parseAscending(_sort),
+            portCode: _portCode,
+            portName: _portName,
+            portNameChinese: _portNameChinese,
+            countryCountryName: _countryCountryName,
+            countryId: _countryId
+        };
     }
 }
 
@@ -31,48 +34,38 @@ export const portRoute: Routes = [
         path: 'port',
         component: PortComponent,
         resolve: {
-            pagingParams: JhiResolvePagingParams
+            pagingParams: PortResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
-            defaultSort: 'id,asc',
-            pageTitle: 'cpigatewaycommApp.cpicommunicationPort.home.title'
+            authorities: ['ROLE_COMMON'],
+            pageTitle: 'cpigatewayApp.port.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'port/:id/view',
+        path: 'port/:id',
         component: PortDetailComponent,
-        resolve: {
-            port: PortResolve
-        },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cpigatewaycommApp.cpicommunicationPort.home.title'
+            authorities: ['ROLE_COMMON'],
+            pageTitle: 'cpigatewayApp.port.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'port/new',
-        component: PortUpdateComponent,
-        resolve: {
-            port: PortResolve
-        },
+        path: 'port-new',
+        component: PortEditComponent,
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cpigatewaycommApp.cpicommunicationPort.home.title'
+            authorities: ['ROLE_COMMON'],
+            pageTitle: 'cpigatewayApp.port.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
     {
         path: 'port/:id/edit',
-        component: PortUpdateComponent,
-        resolve: {
-            port: PortResolve
-        },
+        component: PortEditComponent,
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cpigatewaycommApp.cpicommunicationPort.home.title'
+            authorities: ['ROLE_COMMON'],
+            pageTitle: 'cpigatewayApp.port.home.title'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -82,12 +75,22 @@ export const portPopupRoute: Routes = [
     {
         path: 'port/:id/delete',
         component: PortDeletePopupComponent,
+        data: {
+            authorities: ['ROLE_COMMON'],
+            pageTitle: 'cpigatewayApp.port.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'port-select',
+        component: PortSelectPopupComponent,
         resolve: {
-            port: PortResolve
+            selectPortPagingParams: PortResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cpigatewaycommApp.cpicommunicationPort.home.title'
+            authorities: ['ROLE_COMMON'],
+            pageTitle: 'cpigatewayApp.port.home.title'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

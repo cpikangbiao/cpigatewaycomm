@@ -1,34 +1,51 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
-import { CpigatewaycommSharedModule } from 'src/main/webapp/app/shared/index';
+import { CpigatewaycommSharedModule } from 'app/shared';
 import {
+    correspondentRoute,
+    correspondentPopupRoute,
+    CorrespondentResolvePagingParams
+} from './correspondent.route';
+import {
+    CorrespondentService,
+    CorrespondentPopupService,
     CorrespondentComponent,
     CorrespondentDetailComponent,
-    CorrespondentUpdateComponent,
     CorrespondentDeletePopupComponent,
     CorrespondentDeleteDialogComponent,
-    correspondentRoute,
-    correspondentPopupRoute
+    CorrespondentSelectComponent,
+    CorrespondentSelectPopupComponent,
+    CorrespondentSelectPopupService,
+    CorrespondentEditComponent
 } from './index';
+import { CpigatewayCorrespondentContactModule } from '../correspondent-contact/correspondent-contact.module';
 
-const ENTITY_STATES = [...correspondentRoute, ...correspondentPopupRoute];
+const ENTITY_STATES = [
+    ...correspondentRoute,
+    ...correspondentPopupRoute,
+];
 
 @NgModule({
-    imports: [CpigatewaycommSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [
+        CpigatewaycommSharedModule,
+        RouterModule.forChild(ENTITY_STATES),
+        CpigatewayCorrespondentContactModule
+    ],
     declarations: [
         CorrespondentComponent,
         CorrespondentDetailComponent,
-        CorrespondentUpdateComponent,
         CorrespondentDeleteDialogComponent,
-        CorrespondentDeletePopupComponent
+        CorrespondentDeletePopupComponent,
+        CorrespondentSelectComponent,
+        CorrespondentSelectPopupComponent,
+        CorrespondentEditComponent
     ],
-    entryComponents: [
-        CorrespondentComponent,
-        CorrespondentUpdateComponent,
-        CorrespondentDeleteDialogComponent,
-        CorrespondentDeletePopupComponent
+    providers: [
+        CorrespondentService,
+        CorrespondentPopupService,
+        CorrespondentResolvePagingParams,
+        CorrespondentSelectPopupService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class CpigatewaycommCorrespondentModule {}
+export class CpigatewayCorrespondentModule {}

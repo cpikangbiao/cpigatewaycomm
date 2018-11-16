@@ -1,64 +1,84 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
-
-import { ICorrespondentContact } from 'app/shared/model/cpicommunication/correspondent-contact.model';
-import { Principal } from 'src/main/webapp/app/core/index';
-
-import { ITEMS_PER_PAGE } from 'src/main/webapp/app/shared/index';
-import { CorrespondentContactService } from './correspondent-contact.service';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {HttpResponse, HttpErrorResponse} from '@angular/common/http';
+import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
+import {CorrespondentContact} from './correspondent-contact.model';
+import {CorrespondentContactService} from './correspondent-contact.service';
+import {ITEMS_PER_PAGE} from 'app/shared';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
     selector: 'jhi-correspondent-contact',
     templateUrl: './correspondent-contact.component.html'
 })
 export class CorrespondentContactComponent implements OnInit, OnDestroy {
-    currentAccount: any;
-    correspondentContacts: ICorrespondentContact[];
-    error: any;
-    success: any;
-    eventSubscriber: Subscription;
-    routeData: any;
-    links: any;
-    totalItems: any;
-    queryCount: any;
+    defaultURL: string;
+    correspondentContact: CorrespondentContact;
+    correspondentContacts: CorrespondentContact[];
     itemsPerPage: any;
     page: any;
-    predicate: any;
     previousPage: any;
     reverse: any;
+    predicate: any;
+    totalItems: any;
+    queryCount: any;
+    routeSub: Subscription;
+    searchCorrespondentContactSubscription: Subscription;
+    correspondentContactSubscription: Subscription;
 
-    constructor(
-        private correspondentContactService: CorrespondentContactService,
-        private parseLinks: JhiParseLinks,
-        private jhiAlertService: JhiAlertService,
-        private principal: Principal,
-        private activatedRoute: ActivatedRoute,
-        private router: Router,
-        private eventManager: JhiEventManager
-    ) {
+    constructor(private correspondentContactService: CorrespondentContactService,
+                private jhiAlertService: JhiAlertService,
+                private correspondentContactEventManager: JhiEventManager,
+                private route: ActivatedRoute,
+                private router: Router) {
+        this.correspondentContact = new CorrespondentContact();
+        this.correspondentContacts = [];
+        this.defaultURL = this.router.url;
+        this.defaultURL = this.defaultURL.split('?')[0];
+    }
+
+    ngOnInit() {
         this.itemsPerPage = ITEMS_PER_PAGE;
-        this.routeData = this.activatedRoute.data.subscribe(data => {
+        this.routeSub = this.route.data.subscribe(data => {
             this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
+            this.correspondentContact.correspondentContactName = data.pagingParams.correspondentContactName;
+        });
+        this.searchCorrespondentContact();
+        this.registerChangeInCorrespondentContacts();
+    }
+
+    ngOnDestroy() {
+        this.routeSub.unsubscribe();
+        this.searchCorrespondentContactSubscription.unsubscribe();
+        this.correspondentContactEventManager.destroy(this.correspondentContactSubscription);
+    }
+
+    registerChangeInCorrespondentContacts() {
+        this.correspondentContactSubscription = this.correspondentContactEventManager
+            .subscribe('correspondentContactListModification', () => this.searchCorrespondentContact());
+    }
+
+    trackId(index: number, item: CorrespondentContact) {
+        return item.id;
+    }
+
+    modifyURL() {
+        this.router.navigate([this.defaultURL], {
+            queryParams:
+                {
+                    page: this.page,
+                    size: this.itemsPerPage,
+                    sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc'),
+                    'correspondentContactName': this.correspondentContact.correspondentContactName
+                }
         });
     }
 
-    loadAll() {
-        this.correspondentContactService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<ICorrespondentContact[]>) => this.paginateCorrespondentContacts(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+    transition() {
+        this.searchCorrespondentContact();
     }
 
     loadPage(page: number) {
@@ -68,47 +88,16 @@ export class CorrespondentContactComponent implements OnInit, OnDestroy {
         }
     }
 
-    transition() {
-        this.router.navigate(['/correspondent-contact'], {
-            queryParams: {
-                page: this.page,
-                size: this.itemsPerPage,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        });
-        this.loadAll();
-    }
-
-    clear() {
-        this.page = 0;
-        this.router.navigate([
-            '/correspondent-contact',
-            {
-                page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        ]);
-        this.loadAll();
-    }
-
-    ngOnInit() {
-        this.loadAll();
-        this.principal.identity().then(account => {
-            this.currentAccount = account;
-        });
-        this.registerChangeInCorrespondentContacts();
-    }
-
-    ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
-    }
-
-    trackId(index: number, item: ICorrespondentContact) {
-        return item.id;
-    }
-
-    registerChangeInCorrespondentContacts() {
-        this.eventSubscriber = this.eventManager.subscribe('correspondentContactListModification', response => this.loadAll());
+    criteria() {
+        const result = {
+            page: this.page - 1,
+            size: this.itemsPerPage,
+            sort: this.sort()
+        };
+        if (this.correspondentContact.correspondentContactName && this.correspondentContact.correspondentContactName.length > 0) {
+            result['correspondentContactName.contains'] = this.correspondentContact.correspondentContactName;
+        }
+        return result;
     }
 
     sort() {
@@ -119,14 +108,43 @@ export class CorrespondentContactComponent implements OnInit, OnDestroy {
         return result;
     }
 
-    private paginateCorrespondentContacts(data: ICorrespondentContact[], headers: HttpHeaders) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
+    private onSuccess(data, headers) {
+        this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         this.correspondentContacts = data;
     }
 
-    private onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
+    private onError(error) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+
+    searchCorrespondentContact() {
+        this.modifyURL();
+        this.searchCorrespondentContactSubscription = this.correspondentContactService.query(this.criteria())
+            .subscribe(
+                (res: HttpResponse<CorrespondentContact[]>) => this.onSuccess(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res)
+            );
+    }
+
+    resetPage() {
+        this.page = 0;
+    }
+
+    clear() {
+        this.correspondentContact = new CorrespondentContact();
+        this.page = 0;
+        this.predicate = 'id';
+        this.searchCorrespondentContact();
+    }
+
+    searchKeyup($event) {
+        if ($event.keyCode === 13) {
+            this.resetPage();
+            this.searchCorrespondentContact();
+        }
+        if ($event.keyCode === 27) {
+            this.clear();
+        }
     }
 }

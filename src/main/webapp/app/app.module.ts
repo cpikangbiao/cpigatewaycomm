@@ -12,12 +12,20 @@ import { NotificationInterceptor } from './blocks/interceptor/notification.inter
 import { CpigatewaycommSharedModule } from 'app/shared';
 import { CpigatewaycommCoreModule } from 'app/core';
 import { CpigatewaycommAppRoutingModule } from './app-routing.module';
-import { CpigatewaycommHomeModule } from './home/home.module';
+import { CpigatewaycommHomeModule } from 'app/home';
 import { CpigatewaycommAccountModule } from './account/account.module';
-import { CpigatewaycommEntityModule } from './entities/entity.module';
+import { CpigatewaycommEntityModule } from 'app/cpi/cpi.module';
 import { CpigatewaycommprimengModule } from './primeng/primeng.module';
-// jhipster-needle-angular-add-module-import JHipster will add new module here
-import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
+import {
+    JhiMainComponent,
+    FooterComponent,
+    PageRibbonComponent,
+    ActiveMenuDirective,
+    ErrorComponent,
+    HeaderNavComponent,
+    AsideNavComponent,
+    ScrollTopComponent,
+} from './layouts';
 
 @NgModule({
     imports: [
@@ -28,11 +36,19 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         CpigatewaycommCoreModule,
         CpigatewaycommHomeModule,
         CpigatewaycommAccountModule,
-        CpigatewaycommEntityModule
+        CpigatewaycommEntityModule,
         CpigatewaycommprimengModule,
-        // jhipster-needle-angular-add-module JHipster will add new module here
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+    declarations: [
+        JhiMainComponent,
+        ErrorComponent,
+        PageRibbonComponent,
+        ActiveMenuDirective,
+        FooterComponent,
+        HeaderNavComponent,
+        AsideNavComponent,
+        ScrollTopComponent,
+    ],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

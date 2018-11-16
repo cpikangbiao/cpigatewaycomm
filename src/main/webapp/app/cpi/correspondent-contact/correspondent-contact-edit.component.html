@@ -1,0 +1,103 @@
+<div class="m-content">
+    <div class="m-portlet">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        <span id="myCorrespondentContactLabel"
+                              jhiTranslate="cpigatewayApp.correspondentContact.home.createOrEditLabel">Create or edit a Correspondent Contact</span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <jhi-alert></jhi-alert>
+        <div class="m-form m-form--fit">
+            <div class="m-portlet__body">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondentContact.correspondentContactName">Correspondent Contact Name</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="correspondentContactName"
+                                   id="correspondentContactName" required
+                                   [(ngModel)]="correspondentContact.correspondentContactName"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span
+                                jhiTranslate="cpigatewayApp.correspondentContact.telephoneOffice">Telephone Office</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="telephoneOffice" id="telephoneOffice"
+                                   [(ngModel)]="correspondentContact.telephoneOffice"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondentContact.telephone">Telephone</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="telephone" id="telephone"
+                                   [(ngModel)]="correspondentContact.telephone"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondentContact.eMail">E Mail</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="eMail" id="eMail"
+                                   [(ngModel)]="correspondentContact.eMail"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondentContact.webSite">Web Site</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="webSite" id="webSite"
+                                   [(ngModel)]="correspondentContact.webSite"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondentContact.correspondent">Correspondent</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <span>&nbsp;</span>
+                            <span class="spanBlock m--margin-top-10">{{correspondent.correspondentName}}</span>
+                            <button type="button" class="btn btn-info float-right" replaceUrl="true" queryParamsHandling="merge"
+                                    [routerLink]="['/', { outlets: { popup: 'correspondent-select'} }]">
+                                <span class="fa fa-plus"></span>
+                            </button>
+                            <button type="button" class="btn btn-default float-right" (click)="clearCorrespondent()">
+                                <span class="fa fa-remove"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit">
+                <div class="m-form__actions">
+                    <div class="row">
+                        <div class="col-lg-9 ml-lg-auto">
+                            <button type="button" class="btn btn-info" (click)="cancel()">
+                                <span class="fa fa-arrow-left"></span>
+                                <span>&nbsp;</span>
+                                <span jhiTranslate="entity.action.cancel">Cancel</span>
+                            </button>
+                            <span>&nbsp;</span>
+                            <button type="button" class="btn btn-primary" (click)="save()">
+                                <span class="fa fa-save"></span>
+                                <span>&nbsp;</span>
+                                <span jhiTranslate="entity.action.save">Save</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

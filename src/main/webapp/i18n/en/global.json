@@ -122,6 +122,13 @@
                 "database": "Database",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
+            "comm": {
+                "main": "Communication",
+                "country": "Country",
+                "port": "Port",
+                "correspondent": "Correspondent",
+                "correspondentContact": "Corrspondent Contact"
+            },
             "language": "Language"
         },
         "form": {
@@ -189,7 +196,18 @@
             "edit": "Edit",
             "open": "Open",
             "save": "Save",
-            "view": "View"
+            "view": "View",
+            "addANewLine": "Add A New Line",
+            "deleteALine": "Delete a line",
+            "clear": "Clear",
+            "search": "Search",
+            "submit": "Submit",
+            "submitted": "Submitted",
+            "refresh": "Refresh",
+            "previous": "Previous",
+            "next": "Next",
+            "finished": "Finished",
+            "more": "More"
         },
         "detail": {
             "field": "Field",

@@ -1,28 +1,37 @@
 import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
-import { UserRouteAccessService } from 'src/main/webapp/app/core/index';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Country } from 'app/shared/model/cpicommunication/country.model';
-import { CountryService } from './country.service';
-import { CountryComponent } from './country.component';
-import { CountryDetailComponent } from './country-detail.component';
-import { CountryUpdateComponent } from './country-update.component';
-import { CountryDeletePopupComponent } from './country-delete-dialog.component';
-import { ICountry } from 'app/shared/model/cpicommunication/country.model';
+import { JhiPaginationUtil } from 'ng-jhipster';
+import { UserRouteAccessService } from 'app/core';
+import { PortResolvePagingParams } from '../port/port.route';
+import {
+    CountryComponent,
+    CountryDetailComponent,
+    CountryEditComponent,
+    CountryDeletePopupComponent,
+    CountrySearchPopupComponent,
+    CountrySelectPopupComponent
+} from './';
 
-@Injectable({ providedIn: 'root' })
-export class CountryResolve implements Resolve<ICountry> {
-    constructor(private service: CountryService) {}
+@Injectable()
+export class CountryResolvePagingParams implements Resolve<any> {
+    constructor(private paginationUtil: JhiPaginationUtil) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const id = route.params['id'] ? route.params['id'] : null;
-        if (id) {
-            return this.service.find(id).pipe(map((country: HttpResponse<Country>) => country.body));
-        }
-        return of(new Country());
+        const _page = route.queryParams['page'] ? route.queryParams['page'] : '1';
+        const _sort = route.queryParams['sort'] ? route.queryParams['sort'] : 'id,asc';
+        const _countryName = route.queryParams['countryName'] ? route.queryParams['countryName'] : null;
+        const _countryNameChinese = route.queryParams['countryNameChinese'] ? route.queryParams['countryNameChinese'] : null;
+        const _countryNameAbbr = route.queryParams['countryNameAbbr'] ? route.queryParams['countryNameAbbr'] : null;
+        const _dialCode = route.queryParams['dialCode'] ? route.queryParams['dialCode'] : null;
+        return {
+            page: this.paginationUtil.parsePage(_page),
+            predicate: this.paginationUtil.parsePredicate(_sort),
+            ascending: this.paginationUtil.parseAscending(_sort),
+            countryName: _countryName,
+            countryNameChinese: _countryNameChinese,
+            countryNameAbbr: _countryNameAbbr,
+            dialCode: _dialCode
+        };
     }
 }
 
@@ -31,48 +40,48 @@ export const countryRoute: Routes = [
         path: 'country',
         component: CountryComponent,
         resolve: {
-            pagingParams: JhiResolvePagingParams
+            pagingParams: CountryResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
-            defaultSort: 'id,asc',
-            pageTitle: 'cpigatewaycommApp.cpicommunicationCountry.home.title'
+            authorities: ['ROLE_COMMON'],
+            pageTitle: 'cpigatewayApp.country.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'country/:id/view',
+        path: 'country/:id',
         component: CountryDetailComponent,
         resolve: {
-            country: CountryResolve
+            portListPagingParams: PortResolvePagingParams
         },
+
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cpigatewaycommApp.cpicommunicationCountry.home.title'
+            authorities: ['ROLE_COMMON'],
+            pageTitle: 'cpigatewayApp.country.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'country/new',
-        component: CountryUpdateComponent,
+        path: 'country-new',
+        component: CountryEditComponent,
         resolve: {
-            country: CountryResolve
+            selectCountryPagingParams: CountryResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cpigatewaycommApp.cpicommunicationCountry.home.title'
+            authorities: ['ROLE_COMMON'],
+            pageTitle: 'cpigatewayApp.country.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
     {
         path: 'country/:id/edit',
-        component: CountryUpdateComponent,
+        component: CountryEditComponent,
         resolve: {
-            country: CountryResolve
+            selectCountryPagingParams: CountryResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cpigatewaycommApp.cpicommunicationCountry.home.title'
+            authorities: ['ROLE_COMMON'],
+            pageTitle: 'cpigatewayApp.country.home.title'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -82,12 +91,35 @@ export const countryPopupRoute: Routes = [
     {
         path: 'country/:id/delete',
         component: CountryDeletePopupComponent,
+        data: {
+            authorities: ['ROLE_COMMON'],
+            pageTitle: 'cpigatewayApp.country.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'country-search',
+        component: CountrySearchPopupComponent,
         resolve: {
-            country: CountryResolve
+            pagingParams: CountryResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'cpigatewaycommApp.cpicommunicationCountry.home.title'
+            authorities: ['ROLE_COMMON'],
+            pageTitle: 'cpigatewayApp.country.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'country-select',
+        component: CountrySelectPopupComponent,
+        resolve: {
+            selectCountryPagingParams: CountryResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_COMMON'],
+            pageTitle: 'cpigatewayApp.country.home.title'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

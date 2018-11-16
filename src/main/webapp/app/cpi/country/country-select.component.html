@@ -1,0 +1,86 @@
+<div class="m-content">
+    <div class="m-portlet">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        <span jhiTranslate="cpigatewayApp.country.home.title">Country</span>
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true"
+                        (click)="activeModal.dismiss('closed')">
+                    <span>X</span>
+                </button>
+            </div>
+        </div>
+        <div class="m-portlet__body">
+            <div class="form-group m-form__group row" (keyup)="searchKeyup($event)">
+                <div class="col-lg-6 col-sm-12 row">
+                    <label class="col-form-label m--align-right col-sm-5"
+                           jhiTranslate="cpigatewayApp.country.countryName">Country Name</label>
+                    <input type="text" class="form-control col-sm-6" name="countryName" id="countryName"
+                           [(ngModel)]="country.countryName"/>
+                </div>
+            </div>
+            <div class="form-group m-form__group row">
+                <div class="col-sm-12">
+                    <span class="col-auto">&nbsp;</span>
+                    <button class="btn btn-info float-right" (click)="resetPage();searchCountry();">
+                        <span class="fa fa-search"></span>
+                        <span>&nbsp;</span>
+                        <span jhiTranslate="entity.action.search">Searching</span>
+                    </button>
+                    <span class="float-right">&nbsp;</span>
+                    <button class="btn btn-default float-right" (click)="clear()">
+                        <span class="fa fa-ban"></span>
+                        <span>&nbsp;</span>
+                        <span jhiTranslate="entity.action.clear">Clear</span>
+                    </button>
+                </div>
+            </div>
+            <jhi-alert></jhi-alert>
+            <div class="form-group m-form__group row" *ngIf="countries">
+                <table class="table table-sm m-table m-table--head-bg-primary table-hover table-striped">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                        <th jhiSortBy="countryName" width="10%">
+                            <span jhiTranslate="cpigatewayApp.country.countryName">Country Name</span>
+                            <span class="fa fa-sort"></span>
+                        </th>
+                        <th jhiSortBy="countryNameAbbr" width="10%">
+                            <span jhiTranslate="cpigatewayApp.country.countryNameAbbr">Country Name Abbr</span>
+                            <span class="fa fa-sort"></span>
+                        </th>
+                        <th jhiSortBy="countryNameChinese" width="10%" class="hiddenXS">
+                            <span jhiTranslate="cpigatewayApp.country.countryNameChinese">Country Name Chinese</span>
+                            <span class="fa fa-sort"></span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let _country of countries ;trackBy: trackId" (click)="selectCountry(_country)">
+                        <td>{{_country.countryName}}</td>
+                        <td>{{_country.countryNameAbbr}}</td>
+                        <td class="hiddenXS">{{_country.countryNameChinese}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group m-form__group" *ngIf="countries && countries.length">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5"
+                                    [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage"
+                                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                                    (pageChange)="loadPage(page)"></ngb-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

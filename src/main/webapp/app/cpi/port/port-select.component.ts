@@ -13,7 +13,6 @@ import { Subscription } from 'rxjs/Subscription';
     templateUrl: './port-select.component.html'
 })
 export class PortSelectComponent implements OnInit, OnDestroy {
-    selectPortPagingParams: any;
     port: any;
     ports: any;
     itemsPerPage: any;

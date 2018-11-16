@@ -76,9 +76,9 @@
   dependencies:
     tslib "^1.9.0"
 
-"@angular/core@6.1.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-6.1.0.tgz#d591a97c42cb5efd1ece0f1542cb30c7894d3661"
+"@angular/core@^7.0.4":
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-7.0.4.tgz#98340a1bdb53f0bbecfcfc9831a7a22a1540d79b"
   dependencies:
     tslib "^1.9.0"
 
@@ -7247,6 +7247,10 @@ pluralize@7.0.0:
 pn@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/pn/-/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
+
+popper.js@^1.14.5:
+  version "1.14.5"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.5.tgz#98abcce7c7c34c4ee47fcbc6b3da8af2c0a127bc"
 
 portfinder@^1.0.9:
   version "1.0.19"

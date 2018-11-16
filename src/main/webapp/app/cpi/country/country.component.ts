@@ -57,9 +57,15 @@ export class CountryComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.routeSub.unsubscribe();
-        this.searchCountrySubscription.unsubscribe();
-        this.countryEventManager.destroy(this.countrySubscription);
+        if (this.routeSub) {
+            this.routeSub.unsubscribe();
+        }
+        if (this.searchCountrySubscription) {
+            this.searchCountrySubscription.unsubscribe();
+        }
+        if (this.countrySubscription) {
+            this.countryEventManager.destroy(this.countrySubscription);
+        }
     }
 
     registerChangeInCountries() {

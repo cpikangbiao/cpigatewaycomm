@@ -1,11 +1,11 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {HttpResponse, HttpErrorResponse} from '@angular/common/http';
-import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
-import {CorrespondentContact} from './correspondent-contact.model';
-import {CorrespondentContactService} from './correspondent-contact.service';
-import {ITEMS_PER_PAGE} from 'app/shared';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
+import { CorrespondentContact } from './correspondent-contact.model';
+import { CorrespondentContactService } from './correspondent-contact.service';
+import { ITEMS_PER_PAGE } from 'app/shared';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'jhi-correspondent-contact',
@@ -26,11 +26,13 @@ export class CorrespondentContactComponent implements OnInit, OnDestroy {
     searchCorrespondentContactSubscription: Subscription;
     correspondentContactSubscription: Subscription;
 
-    constructor(private correspondentContactService: CorrespondentContactService,
-                private jhiAlertService: JhiAlertService,
-                private correspondentContactEventManager: JhiEventManager,
-                private route: ActivatedRoute,
-                private router: Router) {
+    constructor(
+        private correspondentContactService: CorrespondentContactService,
+        private jhiAlertService: JhiAlertService,
+        private correspondentContactEventManager: JhiEventManager,
+        private route: ActivatedRoute,
+        private router: Router
+    ) {
         this.correspondentContact = new CorrespondentContact();
         this.correspondentContacts = [];
         this.defaultURL = this.router.url;
@@ -51,14 +53,22 @@ export class CorrespondentContactComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.routeSub.unsubscribe();
-        this.searchCorrespondentContactSubscription.unsubscribe();
-        this.correspondentContactEventManager.destroy(this.correspondentContactSubscription);
+        if (this.routeSub) {
+            this.routeSub.unsubscribe();
+        }
+        if (this.searchCorrespondentContactSubscription) {
+            this.searchCorrespondentContactSubscription.unsubscribe();
+        }
+        if (this.correspondentContactEventManager) {
+            this.correspondentContactEventManager.destroy(this.correspondentContactSubscription);
+        }
     }
 
     registerChangeInCorrespondentContacts() {
-        this.correspondentContactSubscription = this.correspondentContactEventManager
-            .subscribe('correspondentContactListModification', () => this.searchCorrespondentContact());
+        this.correspondentContactSubscription = this.correspondentContactEventManager.subscribe(
+            'correspondentContactListModification',
+            () => this.searchCorrespondentContact()
+        );
     }
 
     trackId(index: number, item: CorrespondentContact) {
@@ -67,13 +77,12 @@ export class CorrespondentContactComponent implements OnInit, OnDestroy {
 
     modifyURL() {
         this.router.navigate([this.defaultURL], {
-            queryParams:
-                {
-                    page: this.page,
-                    size: this.itemsPerPage,
-                    sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc'),
-                    'correspondentContactName': this.correspondentContact.correspondentContactName
-                }
+            queryParams: {
+                page: this.page,
+                size: this.itemsPerPage,
+                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc'),
+                correspondentContactName: this.correspondentContact.correspondentContactName
+            }
         });
     }
 
@@ -120,7 +129,8 @@ export class CorrespondentContactComponent implements OnInit, OnDestroy {
 
     searchCorrespondentContact() {
         this.modifyURL();
-        this.searchCorrespondentContactSubscription = this.correspondentContactService.query(this.criteria())
+        this.searchCorrespondentContactSubscription = this.correspondentContactService
+            .query(this.criteria())
             .subscribe(
                 (res: HttpResponse<CorrespondentContact[]>) => this.onSuccess(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res)

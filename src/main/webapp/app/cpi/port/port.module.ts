@@ -13,8 +13,9 @@ import {
     PortSelectComponent,
     PortSelectPopupComponent,
     PortSelectPopupService,
-    PortEditComponent
-} from './index';
+    PortEditComponent,
+    PortListComponent
+} from './';
 
 const ENTITY_STATES = [...portRoute, ...portPopupRoute];
 
@@ -27,17 +28,21 @@ const ENTITY_STATES = [...portRoute, ...portPopupRoute];
         PortDeletePopupComponent,
         PortSelectComponent,
         PortSelectPopupComponent,
-        PortEditComponent
+        PortEditComponent,
+        PortListComponent
     ],
     entryComponents: [
         PortComponent,
+        PortDetailComponent,
         PortDeleteDialogComponent,
         PortDeletePopupComponent,
         PortSelectComponent,
         PortSelectPopupComponent,
-        PortEditComponent
+        PortEditComponent,
+        PortListComponent
     ],
     providers: [PortService, PortPopupService, PortResolvePagingParams, PortSelectPopupService],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    exports: [PortListComponent]
 })
 export class CpigatewayPortModule {}

@@ -1,11 +1,11 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {HttpResponse, HttpErrorResponse} from '@angular/common/http';
-import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
-import {Correspondent} from './correspondent.model';
-import {CorrespondentService} from './correspondent.service';
-import {ITEMS_PER_PAGE} from 'app/shared';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
+import { Correspondent } from './correspondent.model';
+import { CorrespondentService } from './correspondent.service';
+import { ITEMS_PER_PAGE } from 'app/shared';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'jhi-correspondent',
@@ -26,11 +26,13 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
     searchCorrespondentSubscription: Subscription;
     correspondentSubscription: Subscription;
 
-    constructor(private correspondentService: CorrespondentService,
-                private jhiAlertService: JhiAlertService,
-                private correspondentEventManager: JhiEventManager,
-                private route: ActivatedRoute,
-                private router: Router) {
+    constructor(
+        private correspondentService: CorrespondentService,
+        private jhiAlertService: JhiAlertService,
+        private correspondentEventManager: JhiEventManager,
+        private route: ActivatedRoute,
+        private router: Router
+    ) {
         this.correspondent = new Correspondent();
         this.correspondents = [];
         this.defaultURL = this.router.url;
@@ -51,14 +53,21 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.routeSub.unsubscribe();
-        this.searchCorrespondentSubscription.unsubscribe();
-        this.correspondentEventManager.destroy(this.correspondentSubscription);
+        if (this.routeSub) {
+            this.routeSub.unsubscribe();
+        }
+        if (this.searchCorrespondentSubscription) {
+            this.searchCorrespondentSubscription.unsubscribe();
+        }
+        if (this.correspondentEventManager) {
+            this.correspondentEventManager.destroy(this.correspondentSubscription);
+        }
     }
 
     registerChangeInCorrespondents() {
-        this.correspondentSubscription = this.correspondentEventManager
-            .subscribe('correspondentListModification', () => this.searchCorrespondent());
+        this.correspondentSubscription = this.correspondentEventManager.subscribe('correspondentListModification', () =>
+            this.searchCorrespondent()
+        );
     }
 
     trackId(index: number, item: Correspondent) {
@@ -67,13 +76,12 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
 
     modifyURL() {
         this.router.navigate([this.defaultURL], {
-            queryParams:
-                {
-                    page: this.page,
-                    size: this.itemsPerPage,
-                    sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc'),
-                    'correspondentName': this.correspondent.correspondentName,
-                }
+            queryParams: {
+                page: this.page,
+                size: this.itemsPerPage,
+                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc'),
+                correspondentName: this.correspondent.correspondentName
+            }
         });
     }
 
@@ -120,7 +128,8 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
 
     searchCorrespondent() {
         this.modifyURL();
-        this.searchCorrespondentSubscription = this.correspondentService.query(this.criteria())
+        this.searchCorrespondentSubscription = this.correspondentService
+            .query(this.criteria())
             .subscribe(
                 (res: HttpResponse<Correspondent[]>) => this.onSuccess(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res)

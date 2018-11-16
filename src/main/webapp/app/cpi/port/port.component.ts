@@ -56,9 +56,15 @@ export class PortComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.routeSub.unsubscribe();
-        this.searchPortSubscription.unsubscribe();
-        this.portEventManager.destroy(this.portSubscription);
+        if (this.routeSub) {
+            this.routeSub.unsubscribe();
+        }
+        if (this.searchPortSubscription) {
+            this.searchPortSubscription.unsubscribe();
+        }
+        if (this.portSubscription) {
+            this.portEventManager.destroy(this.portSubscription);
+        }
     }
 
     registerChangeInPorts() {

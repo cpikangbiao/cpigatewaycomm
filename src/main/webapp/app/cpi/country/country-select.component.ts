@@ -4,8 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Country, ICountry } from './country.model';
 import { CountryService } from './country.service';
-import { ITEMS_PER_PAGE_SMALL } from 'app/shared';
-import { ActivatedRoute } from '@angular/router';
+import { ITEMS_PER_PAGE_LIST } from 'app/shared';
 import { CountrySelectPopupService } from './country-select.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -34,20 +33,21 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
     ) {
         this.country = new Country();
         this.countries = [];
+        this.itemsPerPage = ITEMS_PER_PAGE_LIST;
+        this.page = 1;
+        this.previousPage = 1;
+        this.reverse = 'asc';
+        this.predicate = 'id';
     }
 
     ngOnInit() {
-        this.itemsPerPage = ITEMS_PER_PAGE_SMALL;
-        this.page = this.selectCountryPagingParams.page;
-        this.previousPage = this.selectCountryPagingParams.page;
-        this.reverse = this.selectCountryPagingParams.ascending;
-        this.predicate = this.selectCountryPagingParams.predicate;
-        this.country.countryName = this.selectCountryPagingParams.countryName;
         this.searchCountry();
     }
 
     ngOnDestroy() {
-        this.searchCountrySubscription.unsubscribe();
+        if (this.searchCountrySubscription) {
+            this.searchCountrySubscription.unsubscribe();
+        }
     }
 
     trackId(index: number, item: ICountry) {
@@ -138,18 +138,12 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
     selector: 'jhi-country-select-popup',
     template: ''
 })
-export class CountrySelectPopupComponent implements OnInit, OnDestroy {
+export class CountrySelectPopupComponent implements OnInit {
     routeSub: Subscription;
 
-    constructor(private route: ActivatedRoute, private countrySelectPopupService: CountrySelectPopupService) {}
+    constructor(private countrySelectPopupService: CountrySelectPopupService) {}
 
     ngOnInit() {
-        this.routeSub = this.route.data.subscribe((data: any) => {
-            this.countrySelectPopupService.open(data.selectCountryPagingParams);
-        });
-    }
-
-    ngOnDestroy() {
-        this.routeSub.unsubscribe();
+        this.countrySelectPopupService.open();
     }
 }

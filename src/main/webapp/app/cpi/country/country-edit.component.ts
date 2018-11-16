@@ -6,7 +6,6 @@ import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 import { Country, ICountry } from './country.model';
 import { CountryService } from './country.service';
 import { Subscription } from 'rxjs/Subscription';
-import { Location } from '@angular/common';
 
 @Component({
     selector: 'jhi-country-edit',
@@ -17,7 +16,6 @@ export class CountryEditComponent implements OnInit, OnDestroy {
     routeSub: Subscription;
 
     constructor(
-        private location: Location,
         private route: ActivatedRoute,
         private countryService: CountryService,
         private eventManager: JhiEventManager,
@@ -40,7 +38,9 @@ export class CountryEditComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.routeSub.unsubscribe();
+        if (this.routeSub) {
+            this.routeSub.unsubscribe();
+        }
     }
 
     save() {
@@ -60,7 +60,7 @@ export class CountryEditComponent implements OnInit, OnDestroy {
             name: 'countryListModification',
             content: res.body
         });
-        this.location.back();
+        window.history.back();
     }
 
     private onError(error) {
@@ -68,6 +68,6 @@ export class CountryEditComponent implements OnInit, OnDestroy {
     }
 
     cancel() {
-        this.location.back();
+        window.history.back();
     }
 }

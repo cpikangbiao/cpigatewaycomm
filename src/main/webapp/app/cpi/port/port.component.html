@@ -66,11 +66,11 @@
                             <span jhiTranslate="cpigatewayApp.port.portName">Port Name</span>
                             <span class="fa fa-sort"></span>
                         </th>
-                        <th jhiSortBy="portNameChinese" width="10%" class="hiddenXS">
+                        <th jhiSortBy="portNameChinese" width="10%">
                             <span jhiTranslate="cpigatewayApp.port.portNameChinese">Port Name Chinese</span>
                             <span class="fa fa-sort"></span>
                         </th>
-                        <th jhiSortBy="countryCountryName" width="10%" class="hiddenXS">
+                        <th jhiSortBy="countryCountryName" width="10%">
                             <span jhiTranslate="cpigatewayApp.port.country">Country</span>
                             <span class="fa fa-sort"></span>
                         </th>
@@ -81,8 +81,8 @@
                     <tr *ngFor="let _port of ports ;trackBy: trackId">
                         <td>{{_port.portCode}}</td>
                         <td>{{_port.portName}}</td>
-                        <td class="hiddenXS">{{_port.portNameChinese}}</td>
-                        <td class="hiddenXS">
+                        <td>{{_port.portNameChinese}}</td>
+                        <td>
                             <div *ngIf="_port.countryId">
                                 <a [routerLink]="['/country', _port.countryId]">{{_port.countryCountryName}}</a>
                             </div>

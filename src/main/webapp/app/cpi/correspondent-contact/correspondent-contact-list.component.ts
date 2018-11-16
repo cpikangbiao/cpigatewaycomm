@@ -1,9 +1,9 @@
-import {Component, OnInit, OnDestroy, Input} from '@angular/core';
-import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
-import {CorrespondentContact} from './correspondent-contact.model';
-import {CorrespondentContactService} from './correspondent-contact.service';
-import {ITEMS_PER_PAGE_LIST} from 'app/shared';
-import {Subscription} from 'rxjs/Subscription';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
+import { CorrespondentContact } from './correspondent-contact.model';
+import { CorrespondentContactService } from './correspondent-contact.service';
+import { ITEMS_PER_PAGE_LIST } from 'app/shared';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'jhi-correspondent-contact-list',
@@ -45,23 +45,35 @@ export class CorrespondentContactListComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.routeSub.unsubscribe();
-        this.searchCorrespondentContactSubscription.unsubscribe();
-        this.correspondentContactEventManager.destroy(this.correspondentContactSubscription);
+        if (this.routeSub) {
+            this.routeSub.unsubscribe();
+        }
+        if (this.searchCorrespondentContactSubscription) {
+            this.searchCorrespondentContactSubscription.unsubscribe();
+        }
+        if (this.correspondentContactSubscription) {
+            this.correspondentContactEventManager.destroy(this.correspondentContactSubscription);
+        }
     }
 
     registerChangeInCorrespondentContact() {
-        this.correspondentContactSubscription = this.correspondentContactEventManager
-            .subscribe('correspondentContactListModification', correspondentContact => this.searchCorrespondentContact());
+        this.correspondentContactSubscription = this.correspondentContactEventManager.subscribe(
+            'correspondentContactListModification',
+            correspondentContact => this.searchCorrespondentContact()
+        );
     }
 
     correspondentContactListInit() {
-        this.correspondentContactInitSubscription = this.correspondentContactInitEventManager
-            .subscribe('correspondentContactListInit', correspondent => {
+        this.correspondentContactInitSubscription = this.correspondentContactInitEventManager.subscribe(
+            'correspondentContactListInit',
+            correspondent => {
                 this.correspondentId = correspondent.content.id;
                 this.searchCorrespondentContact();
-                this.correspondentContactInitEventManager.destroy(this.correspondentContactInitSubscription);
-            });
+                if (this.correspondentContactInitSubscription) {
+                    this.correspondentContactInitEventManager.destroy(this.correspondentContactInitSubscription);
+                }
+            }
+        );
     }
 
     transition() {
@@ -104,7 +116,8 @@ export class CorrespondentContactListComponent implements OnInit, OnDestroy {
     }
 
     searchCorrespondentContact() {
-        this.searchCorrespondentContactSubscription = this.correspondentContactService.query(this.criteria())
+        this.searchCorrespondentContactSubscription = this.correspondentContactService
+            .query(this.criteria())
             .subscribe(correspondentContacts => this.onSuccess(correspondentContacts.body, correspondentContacts.headers));
     }
 }

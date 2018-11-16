@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { CorrespondentContact } from './correspondent-contact.model';
 import { CorrespondentContactService } from './correspondent-contact.service';
 import { Correspondent, CorrespondentService } from '../correspondent';
-import {ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'jhi-correspondent-contact-edit',
@@ -33,31 +33,32 @@ export class CorrespondentContactEditComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.routeSubscription.unsubscribe();
-        this.selectCorrespondentEventManager.destroy(this.selectCorrespondentSubscription);
+        if (this.routeSubscription) {
+            this.routeSubscription.unsubscribe();
+        }
+        if (this.selectCorrespondentSubscription) {
+            this.selectCorrespondentEventManager.destroy(this.selectCorrespondentSubscription);
+        }
     }
 
     ngOnInit() {
         this.routeSubscription = this.route.params.subscribe(params => {
-            if ( params['id'] ) {
-                this.correspondentContactService.find(params['id']).subscribe(
-                    correspondentContact => {
-                        this.correspondentContact = correspondentContact.body;
-                        if (this.correspondentContact && this.correspondentContact.correspondentId) {
-                            this.correspondentService.find(this.correspondentContact.correspondentId)
-                                .subscribe(correspondent => {
-                                    this.correspondent = correspondent.body;
-                                });
-                        }
-                    });
+            if (params['id']) {
+                this.correspondentContactService.find(params['id']).subscribe(correspondentContact => {
+                    this.correspondentContact = correspondentContact.body;
+                    if (this.correspondentContact && this.correspondentContact.correspondentId) {
+                        this.correspondentService.find(this.correspondentContact.correspondentId).subscribe(correspondent => {
+                            this.correspondent = correspondent.body;
+                        });
+                    }
+                });
             }
             if (params['correspondentId']) {
-                this.correspondentService.find(params['correspondentId'])
-                    .subscribe(correspondent => {
-                        this.correspondent = correspondent.body;
-                        this.correspondentContact.correspondentId = this.correspondent.id;
-                        this.correspondentContact.correspondentContactName = this.correspondent.correspondentName;
-                    });
+                this.correspondentService.find(params['correspondentId']).subscribe(correspondent => {
+                    this.correspondent = correspondent.body;
+                    this.correspondentContact.correspondentId = this.correspondent.id;
+                    this.correspondentContact.correspondentContactName = this.correspondent.correspondentName;
+                });
             }
         });
         this.registerChangeInCorrespondent();
@@ -81,11 +82,9 @@ export class CorrespondentContactEditComponent implements OnInit, OnDestroy {
 
     save() {
         if (this.correspondentContact.id !== undefined) {
-            this.subscribeToSaveResponse(
-                this.correspondentContactService.update(this.correspondentContact));
+            this.subscribeToSaveResponse(this.correspondentContactService.update(this.correspondentContact));
         } else {
-            this.subscribeToSaveResponse(
-                this.correspondentContactService.create(this.correspondentContact));
+            this.subscribeToSaveResponse(this.correspondentContactService.create(this.correspondentContact));
         }
     }
 

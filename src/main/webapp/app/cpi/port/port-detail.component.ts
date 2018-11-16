@@ -11,7 +11,7 @@ import { PortService } from './port.service';
     templateUrl: './port-detail.component.html'
 })
 export class PortDetailComponent implements OnInit, OnDestroy {
-    port: IPort;
+    port: any;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
@@ -25,8 +25,8 @@ export class PortDetailComponent implements OnInit, OnDestroy {
     }
 
     load(id) {
-        this.portService.find(id).subscribe((portResponse: HttpResponse<IPort>) => {
-            this.port = portResponse.body;
+        this.portService.find(id).subscribe(port => {
+            this.port = port.body;
         });
     }
     previousState() {
@@ -34,8 +34,12 @@ export class PortDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.subscription.unsubscribe();
-        this.eventManager.destroy(this.eventSubscriber);
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+        if (this.eventSubscriber) {
+            this.eventManager.destroy(this.eventSubscriber);
+        }
     }
 
     registerChangeInPorts() {

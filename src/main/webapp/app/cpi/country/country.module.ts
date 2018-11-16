@@ -16,13 +16,12 @@ import {
     CountrySelectPopupComponent,
     CountrySelectPopupService
 } from './';
-
-import { PortListComponent } from '../port';
+import { CpigatewayPortModule } from '../port/port.module';
 
 const ENTITY_STATES = [...countryRoute, ...countryPopupRoute];
 
 @NgModule({
-    imports: [CpigatewaycommSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [CpigatewaycommSharedModule, RouterModule.forChild(ENTITY_STATES), CpigatewayPortModule],
     declarations: [
         CountryComponent,
         CountryDetailComponent,
@@ -30,18 +29,17 @@ const ENTITY_STATES = [...countryRoute, ...countryPopupRoute];
         CountryDeletePopupComponent,
         CountrySearchComponent,
         CountrySearchPopupComponent,
-        PortListComponent,
         CountryEditComponent,
         CountrySelectComponent,
         CountrySelectPopupComponent
     ],
     entryComponents: [
         CountryComponent,
+        CountryDetailComponent,
         CountryDeleteDialogComponent,
         CountryDeletePopupComponent,
         CountrySearchComponent,
         CountrySearchPopupComponent,
-        PortListComponent,
         CountryEditComponent,
         CountrySelectComponent,
         CountrySelectPopupComponent

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { JhiPaginationUtil } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
-import { PortResolvePagingParams } from '../port/port.route';
 import {
     CountryComponent,
     CountryDetailComponent,
@@ -51,10 +50,6 @@ export const countryRoute: Routes = [
     {
         path: 'country/:id',
         component: CountryDetailComponent,
-        resolve: {
-            portListPagingParams: PortResolvePagingParams
-        },
-
         data: {
             authorities: ['ROLE_COMMON'],
             pageTitle: 'cpigatewayApp.country.home.title'

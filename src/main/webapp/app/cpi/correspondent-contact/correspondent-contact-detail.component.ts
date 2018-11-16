@@ -12,7 +12,6 @@ import { CorrespondentContactService } from './correspondent-contact.service';
     templateUrl: './correspondent-contact-detail.component.html'
 })
 export class CorrespondentContactDetailComponent implements OnInit, OnDestroy {
-
     correspondentContact: CorrespondentContact;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
@@ -21,8 +20,7 @@ export class CorrespondentContactDetailComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager,
         private correspondentContactService: CorrespondentContactService,
         private route: ActivatedRoute
-    ) {
-    }
+    ) {}
 
     ngOnInit() {
         this.subscription = this.route.params.subscribe(params => {
@@ -32,24 +30,26 @@ export class CorrespondentContactDetailComponent implements OnInit, OnDestroy {
     }
 
     load(id) {
-        this.correspondentContactService.find(id)
-            .subscribe(correspondentContact => {
-                this.correspondentContact = correspondentContact.body;
-            });
+        this.correspondentContactService.find(id).subscribe(correspondentContact => {
+            this.correspondentContact = correspondentContact.body;
+        });
     }
     previousState() {
         window.history.back();
     }
 
     ngOnDestroy() {
-        this.subscription.unsubscribe();
-        this.eventManager.destroy(this.eventSubscriber);
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+        if (this.eventManager) {
+            this.eventManager.destroy(this.eventSubscriber);
+        }
     }
 
     registerChangeInCorrespondentContacts() {
-        this.eventSubscriber = this.eventManager.subscribe(
-            'correspondentContactListModification',
-            response => this.load(this.correspondentContact.id)
+        this.eventSubscriber = this.eventManager.subscribe('correspondentContactListModification', response =>
+            this.load(this.correspondentContact.id)
         );
     }
 }

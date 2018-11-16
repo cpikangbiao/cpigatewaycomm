@@ -12,17 +12,11 @@ import { CorrespondentService } from './correspondent.service';
     templateUrl: './correspondent-detail.component.html'
 })
 export class CorrespondentDetailComponent implements OnInit, OnDestroy {
-
     correspondent: Correspondent;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
-    constructor(
-        private eventManager: JhiEventManager,
-        private correspondentService: CorrespondentService,
-        private route: ActivatedRoute
-    ) {
-    }
+    constructor(private eventManager: JhiEventManager, private correspondentService: CorrespondentService, private route: ActivatedRoute) {}
 
     ngOnInit() {
         this.subscription = this.route.params.subscribe(params => {
@@ -32,25 +26,25 @@ export class CorrespondentDetailComponent implements OnInit, OnDestroy {
     }
 
     load(id) {
-        this.correspondentService.find(id)
-            .subscribe(correspondent => {
-                this.correspondent = correspondent.body;
-            });
+        this.correspondentService.find(id).subscribe(correspondent => {
+            this.correspondent = correspondent.body;
+        });
     }
     previousState() {
         window.history.back();
     }
 
     ngOnDestroy() {
-        this.subscription.unsubscribe();
-        this.eventManager.destroy(this.eventSubscriber);
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+        if (this.eventSubscriber) {
+            this.eventManager.destroy(this.eventSubscriber);
+        }
     }
 
     registerChangeInCorrespondents() {
-        this.eventSubscriber = this.eventManager.subscribe(
-            'correspondentListModification',
-            response => this.load(this.correspondent.id)
-        );
+        this.eventSubscriber = this.eventManager.subscribe('correspondentListModification', response => this.load(this.correspondent.id));
     }
 
     correspondentContactListInit() {

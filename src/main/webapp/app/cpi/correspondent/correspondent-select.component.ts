@@ -1,13 +1,13 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {HttpResponse, HttpErrorResponse} from '@angular/common/http';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {JhiEventManager, JhiAlertService} from 'ng-jhipster';
-import {Correspondent} from './correspondent.model';
-import {CorrespondentService} from './correspondent.service';
-import {ITEMS_PER_PAGE_SMALL} from 'app/shared';
-import {ActivatedRoute} from '@angular/router';
-import {CorrespondentSelectPopupService} from './correspondent-select.service';
-import {Subscription} from 'rxjs/Subscription';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import { Correspondent } from './correspondent.model';
+import { CorrespondentService } from './correspondent.service';
+import { ITEMS_PER_PAGE_SMALL } from 'app/shared';
+import { ActivatedRoute } from '@angular/router';
+import { CorrespondentSelectPopupService } from './correspondent-select.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'jhi-correspondent-select',
@@ -25,16 +25,17 @@ export class CorrespondentSelectComponent implements OnInit, OnDestroy {
     totalItems: any;
     queryCount: any;
 
-    constructor(public activeModal: NgbActiveModal,
-                private eventManager: JhiEventManager,
-                private correspondentService: CorrespondentService,
-                private jhiAlertService: JhiAlertService) {
+    constructor(
+        public activeModal: NgbActiveModal,
+        private eventManager: JhiEventManager,
+        private correspondentService: CorrespondentService,
+        private jhiAlertService: JhiAlertService
+    ) {
         this.correspondent = new Correspondent();
         this.correspondents = [];
     }
 
-    ngOnDestroy() {
-    }
+    ngOnDestroy() {}
 
     ngOnInit() {
         this.itemsPerPage = ITEMS_PER_PAGE_SMALL;
@@ -96,10 +97,12 @@ export class CorrespondentSelectComponent implements OnInit, OnDestroy {
     }
 
     searchCorrespondent() {
-        this.correspondentService.query(this.criteria()).subscribe(
-            (res: HttpResponse<Correspondent[]>) => this.onSuccess(res.body, res.headers),
-            (res: HttpErrorResponse) => this.onError(res)
-        );
+        this.correspondentService
+            .query(this.criteria())
+            .subscribe(
+                (res: HttpResponse<Correspondent[]>) => this.onSuccess(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res)
+            );
     }
 
     resetPage() {
@@ -137,12 +140,9 @@ export class CorrespondentSelectComponent implements OnInit, OnDestroy {
     template: ''
 })
 export class CorrespondentSelectPopupComponent implements OnInit, OnDestroy {
-
     routeSub: Subscription;
 
-    constructor(private route: ActivatedRoute,
-                private correspondentSelectPopupService: CorrespondentSelectPopupService) {
-    }
+    constructor(private route: ActivatedRoute, private correspondentSelectPopupService: CorrespondentSelectPopupService) {}
 
     ngOnInit() {
         this.routeSub = this.route.data.subscribe(data => {
@@ -151,6 +151,8 @@ export class CorrespondentSelectPopupComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.routeSub.unsubscribe();
+        if (this.routeSub) {
+            this.routeSub.unsubscribe();
+        }
     }
 }

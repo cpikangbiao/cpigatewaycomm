@@ -61,6 +61,15 @@ export const portRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
+        path: 'port-new/:countryId',
+        component: PortEditComponent,
+        data: {
+            authorities: ['ROLE_COMMON'],
+            pageTitle: 'cpigatewayApp.port.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
         path: 'port/:id/edit',
         component: PortEditComponent,
         data: {
@@ -85,9 +94,6 @@ export const portPopupRoute: Routes = [
     {
         path: 'port-select',
         component: PortSelectPopupComponent,
-        resolve: {
-            selectPortPagingParams: PortResolvePagingParams
-        },
         data: {
             authorities: ['ROLE_COMMON'],
             pageTitle: 'cpigatewayApp.port.home.title'

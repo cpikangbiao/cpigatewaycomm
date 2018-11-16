@@ -10,7 +10,6 @@
             </div>
         </div>
         <jhi-alert></jhi-alert>
-        <div class="m-form m-form--fit m-form--label-align-right">
             <div class="m-portlet__body">
                 <div class="form-group m-form__group row">
                     <div class="col-lg-6 col-sm-12 row">
@@ -66,7 +65,27 @@
                     </div>
                 </div>
             </div>
+        <div class="m-portlet__body">
+            <div class="m-accordion m-accordion--default" id="m_accordion_1" role="tablist">
+                <div class="m-accordion__item">
+                    <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_1_head"
+                         data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false"
+                         (click)="portListInit()">
+                        <span class="m-accordion__item-icon">
+                            <i class="fa  flaticon-placeholder"></i>
+                        </span>
+                        <span class="m-accordion__item-title" jhiTranslate="cpigatewayApp.port.home.title">
+                            Ports
+                        </span>
+                        <span class="m-accordion__item-mode"></span>
+                    </div>
+                    <div class="m-accordion__item-body collapse" id="m_accordion_1_item_1_body">
+                        <div class="m-accordion__item-content">
+                            <jhi-port-list></jhi-port-list>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <jhi-port-list [countryId]="country.id"></jhi-port-list>
     </div>
 </div>

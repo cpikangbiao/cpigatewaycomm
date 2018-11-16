@@ -17,16 +17,10 @@ import {
     CorrespondentContactListComponent
 } from './index';
 
-const ENTITY_STATES = [
-    ...correspondentContactRoute,
-    ...correspondentContactPopupRoute,
-];
+const ENTITY_STATES = [...correspondentContactRoute, ...correspondentContactPopupRoute];
 
 @NgModule({
-    imports: [
-        CpigatewaycommSharedModule,
-        RouterModule.forChild(ENTITY_STATES)
-    ],
+    imports: [CpigatewaycommSharedModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         CorrespondentContactComponent,
         CorrespondentContactDetailComponent,
@@ -35,11 +29,15 @@ const ENTITY_STATES = [
         CorrespondentContactEditComponent,
         CorrespondentContactListComponent
     ],
-    providers: [
-        CorrespondentContactService,
-        CorrespondentContactPopupService,
-        CorrespondentContactResolvePagingParams,
+    entryComponents: [
+        CorrespondentContactComponent,
+        CorrespondentContactDetailComponent,
+        CorrespondentContactDeleteDialogComponent,
+        CorrespondentContactDeletePopupComponent,
+        CorrespondentContactEditComponent,
+        CorrespondentContactListComponent
     ],
+    providers: [CorrespondentContactService, CorrespondentContactPopupService, CorrespondentContactResolvePagingParams],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [CorrespondentContactListComponent]
 })

@@ -4,7 +4,8 @@
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
-                        <span jhiTranslate="cpigatewayApp.port.detail.title">Port</span> {{port.id}}
+                        <span jhiTranslate="cpigatewayApp.port.detail.title">Port</span>
+                        <span>{{port.portName}}&nbsp;</span>
                     </h3>
                 </div>
             </div>
@@ -18,8 +19,7 @@
                             <span jhiTranslate="cpigatewayApp.port.portCode">Port Code</span>
                         </label>
                         <div class="alert m-alert--default col-sm-6">
-                            <span>&nbsp;</span>
-                            <span>{{port.portCode}}</span>
+                            <span>{{port.portCode}}&nbsp;</span>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-12 row">
@@ -27,8 +27,7 @@
                             <span jhiTranslate="cpigatewayApp.port.portName">Port Name</span>
                         </label>
                         <div class="alert m-alert--default col-sm-6">
-                            <span>&nbsp;</span>
-                            <span>{{port.portName}}</span>
+                            <span>{{port.portName}}&nbsp;</span>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-12 row">
@@ -36,8 +35,7 @@
                             <span jhiTranslate="cpigatewayApp.port.portNameChinese">Port Name Chinese</span>
                         </label>
                         <div class="alert m-alert--default col-sm-6">
-                            <span>&nbsp;</span>
-                            <span>{{port.portNameChinese}}</span>
+                            <span>{{port.portNameChinese}}&nbsp;</span>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-12 row">
@@ -45,8 +43,9 @@
                             <span jhiTranslate="cpigatewayApp.port.country">Country</span>
                         </label>
                         <div class="alert m-alert--default col-sm-6">
-                            <span>&nbsp;</span>
-                            <span>{{port.countryCountryName}}</span>
+                            <a [routerLink]="['/country', port.countryId]" *ngIf="port.countryId">
+                                <span>{{port.countryCountryName}}&nbsp;</span>
+                            </a>
                         </div>
                     </div>
                 </div>

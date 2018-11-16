@@ -35,11 +35,22 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.subscription.unsubscribe();
-        this.eventManager.destroy(this.eventSubscriber);
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+        if (this.eventSubscriber) {
+            this.eventManager.destroy(this.eventSubscriber);
+        }
     }
 
     registerChangeInCountries() {
         this.eventSubscriber = this.eventManager.subscribe('countryListModification', (response: any) => this.load(this.country.id));
+    }
+
+    portListInit() {
+        this.eventManager.broadcast({
+            name: 'portListInit',
+            content: this.country
+        });
     }
 }

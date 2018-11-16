@@ -4,8 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { IPort, Port } from './port.model';
 import { PortService } from './port.service';
-import { ITEMS_PER_PAGE_SMALL } from 'app/shared';
-import { ActivatedRoute } from '@angular/router';
+import { ITEMS_PER_PAGE_LIST } from 'app/shared';
 import { PortSelectPopupService } from './port-select.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -15,8 +14,8 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class PortSelectComponent implements OnInit, OnDestroy {
     selectPortPagingParams: any;
-    port: IPort;
-    ports: IPort[];
+    port: any;
+    ports: any;
     itemsPerPage: any;
     page: any;
     previousPage: any;
@@ -34,27 +33,21 @@ export class PortSelectComponent implements OnInit, OnDestroy {
     ) {
         this.port = new Port();
         this.ports = [];
+        this.itemsPerPage = ITEMS_PER_PAGE_LIST;
+        this.page = 1;
+        this.previousPage = 1;
+        this.reverse = 'asc';
+        this.predicate = 'id';
     }
 
     ngOnInit() {
-        this.itemsPerPage = ITEMS_PER_PAGE_SMALL;
-        this.page = this.selectPortPagingParams.page;
-        this.previousPage = this.selectPortPagingParams.page;
-        this.reverse = this.selectPortPagingParams.ascending;
-        this.predicate = this.selectPortPagingParams.predicate;
-        this.port.portCode = this.selectPortPagingParams.portCode;
-        this.port.portName = this.selectPortPagingParams.portName;
-        this.port.portNameChinese = this.selectPortPagingParams.portNameChinese;
-        this.port.countryCountryName = this.selectPortPagingParams.countryCountryName;
         this.searchPort();
     }
 
     ngOnDestroy() {
-        this.searchPortSubscription.unsubscribe();
-    }
-
-    trackId(index: number, item: IPort) {
-        return item.id;
+        if (this.searchPortSubscription) {
+            this.searchPortSubscription.unsubscribe();
+        }
     }
 
     transition() {
@@ -150,18 +143,9 @@ export class PortSelectComponent implements OnInit, OnDestroy {
     selector: 'jhi-port-select-popup',
     template: ''
 })
-export class PortSelectPopupComponent implements OnInit, OnDestroy {
-    routeSub: Subscription;
-
-    constructor(private route: ActivatedRoute, private portSelectPopupService: PortSelectPopupService) {}
-
+export class PortSelectPopupComponent implements OnInit {
+    constructor(private portSelectPopupService: PortSelectPopupService) {}
     ngOnInit() {
-        this.routeSub = this.route.data.subscribe((data: any) => {
-            this.portSelectPopupService.open(data.selectPortPagingParams);
-        });
-    }
-
-    ngOnDestroy() {
-        this.routeSub.unsubscribe();
+        this.portSelectPopupService.open();
     }
 }

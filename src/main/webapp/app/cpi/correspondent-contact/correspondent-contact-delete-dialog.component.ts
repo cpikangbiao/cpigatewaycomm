@@ -13,15 +13,13 @@ import { CorrespondentContactService } from './correspondent-contact.service';
     templateUrl: './correspondent-contact-delete-dialog.component.html'
 })
 export class CorrespondentContactDeleteDialogComponent {
-
     correspondentContact: CorrespondentContact;
 
     constructor(
         private correspondentContactService: CorrespondentContactService,
         public activeModal: NgbActiveModal,
         private eventManager: JhiEventManager
-    ) {
-    }
+    ) {}
 
     clear() {
         this.activeModal.dismiss('cancel');
@@ -43,22 +41,19 @@ export class CorrespondentContactDeleteDialogComponent {
     template: ''
 })
 export class CorrespondentContactDeletePopupComponent implements OnInit, OnDestroy {
-
     routeSub: any;
 
-    constructor(
-        private route: ActivatedRoute,
-        private correspondentContactPopupService: CorrespondentContactPopupService
-    ) {}
+    constructor(private route: ActivatedRoute, private correspondentContactPopupService: CorrespondentContactPopupService) {}
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe(params => {
-            this.correspondentContactPopupService
-                .open(CorrespondentContactDeleteDialogComponent as Component, params['id']);
+            this.correspondentContactPopupService.open(CorrespondentContactDeleteDialogComponent as Component, params['id']);
         });
     }
 
     ngOnDestroy() {
-        this.routeSub.unsubscribe();
+        if (this.routeSub) {
+            this.routeSub.unsubscribe();
+        }
     }
 }

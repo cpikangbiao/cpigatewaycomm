@@ -11,14 +11,13 @@ export class CountrySelectPopupService {
         this.ngbModalRef = null;
     }
 
-    open(selectCountryPagingParams: any): Promise<NgbModalRef> {
+    open(): Promise<NgbModalRef> {
         return new Promise<NgbModalRef>((resolve, reject) => {
             const isOpen = this.ngbModalRef !== null;
             if (isOpen) {
                 resolve(this.ngbModalRef);
             }
             this.ngbModalRef = this.modalService.open(CountrySelectComponent, { size: 'lg', backdrop: 'static' });
-            this.ngbModalRef.componentInstance.selectCountryPagingParams = selectCountryPagingParams;
             this.ngbModalRef.result.then(
                 (result: any) => {
                     this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });

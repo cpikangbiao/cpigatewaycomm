@@ -43,6 +43,12 @@ export class CorrespondentContactEditComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.routeSubscription = this.route.params.subscribe(params => {
+            if (params['correspondentId']) {
+                this.correspondentService.find(params['correspondentId']).subscribe(correspondent => {
+                    this.correspondent = correspondent.body;
+                    this.correspondentContact.correspondentId = this.correspondent.id;
+                });
+            }
             if (params['id']) {
                 this.correspondentContactService.find(params['id']).subscribe(correspondentContact => {
                     this.correspondentContact = correspondentContact.body;
@@ -51,13 +57,6 @@ export class CorrespondentContactEditComponent implements OnInit, OnDestroy {
                             this.correspondent = correspondent.body;
                         });
                     }
-                });
-            }
-            if (params['correspondentId']) {
-                this.correspondentService.find(params['correspondentId']).subscribe(correspondent => {
-                    this.correspondent = correspondent.body;
-                    this.correspondentContact.correspondentId = this.correspondent.id;
-                    this.correspondentContact.correspondentContactName = this.correspondent.correspondentName;
                 });
             }
         });

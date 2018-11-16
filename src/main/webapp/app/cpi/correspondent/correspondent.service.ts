@@ -75,4 +75,12 @@ export class CorrespondentService {
         const copy: Correspondent = Object.assign({}, correspondent);
         return copy;
     }
+
+    createCorrespondentBookPDF() {
+        window.open(`${this.resourceUrl}/book/pdf`, '_blank');
+    }
+
+    createCorrespondentBookExcel() {
+        window.open(`${this.resourceUrl}/book/excel`, '_blank');
+    }
 }

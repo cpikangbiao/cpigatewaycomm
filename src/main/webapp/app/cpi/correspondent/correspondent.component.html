@@ -45,6 +45,22 @@
                             Create new Correspondent
                         </span>
                     </button>
+                    <span>&nbsp;</span>
+                    <button class="btn btn-success" (click)="createCorrespondentBookPDF()">
+                        <span class="fa fa-download"></span>
+                        <span>&nbsp;</span>
+                        <span jhiTranslate="entity.action.downloadPDF">
+                            Download PDF
+                        </span>
+                    </button>
+                    <span>&nbsp;</span>
+                    <button class="btn btn-success" (click)="createCorrespondentBookExcel()">
+                        <span class="fa fa-download"></span>
+                        <span>&nbsp;</span>
+                        <span jhiTranslate="entity.action.downloadExcel">
+                            Download Excel
+                        </span>
+                    </button>
                 </div>
             </div>
             <jhi-alert></jhi-alert>

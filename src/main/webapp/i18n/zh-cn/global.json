@@ -205,7 +205,9 @@
             "previous": "上一步",
             "next": "下一步",
             "finished": "完成",
-            "more": "更多"
+            "more": "更多",
+            "downloadPDF": "下载 PDF",
+            "downloadExcel": "下载 Excel"
         },
         "detail": {
             "field": "字段",

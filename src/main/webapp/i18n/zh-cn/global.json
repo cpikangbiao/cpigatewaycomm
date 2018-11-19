@@ -207,7 +207,8 @@
             "finished": "完成",
             "more": "更多",
             "downloadPDF": "下载 PDF",
-            "downloadExcel": "下载 Excel"
+            "downloadExcel": "下载 Excel",
+            "downloadWord": "下载 Word"
         },
         "detail": {
             "field": "字段",

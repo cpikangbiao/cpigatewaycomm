@@ -1,6 +1,6 @@
 {
     "login": {
-        "title": "登录",
+        "title": "通讯代理",
         "form": {
             "password": "密码",
             "password.placeholder": "您的密码",

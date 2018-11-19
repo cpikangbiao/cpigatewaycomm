@@ -37,7 +37,7 @@ export const portRoute: Routes = [
             pagingParams: PortResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.port.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -46,7 +46,7 @@ export const portRoute: Routes = [
         path: 'port/:id',
         component: PortDetailComponent,
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.port.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -55,7 +55,7 @@ export const portRoute: Routes = [
         path: 'port-new',
         component: PortEditComponent,
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.port.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -64,7 +64,7 @@ export const portRoute: Routes = [
         path: 'port-new/:countryId',
         component: PortEditComponent,
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.port.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -73,7 +73,7 @@ export const portRoute: Routes = [
         path: 'port/:id/edit',
         component: PortEditComponent,
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.port.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -85,7 +85,7 @@ export const portPopupRoute: Routes = [
         path: 'port/:id/delete',
         component: PortDeletePopupComponent,
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.port.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -95,7 +95,7 @@ export const portPopupRoute: Routes = [
         path: 'port-select',
         component: PortSelectPopupComponent,
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.port.home.title'
         },
         canActivate: [UserRouteAccessService],

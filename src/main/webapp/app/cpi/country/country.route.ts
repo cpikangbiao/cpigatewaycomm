@@ -42,7 +42,7 @@ export const countryRoute: Routes = [
             pagingParams: CountryResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.country.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -51,7 +51,7 @@ export const countryRoute: Routes = [
         path: 'country/:id',
         component: CountryDetailComponent,
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.country.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -63,7 +63,7 @@ export const countryRoute: Routes = [
             selectCountryPagingParams: CountryResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.country.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -75,7 +75,7 @@ export const countryRoute: Routes = [
             selectCountryPagingParams: CountryResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.country.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -87,7 +87,7 @@ export const countryPopupRoute: Routes = [
         path: 'country/:id/delete',
         component: CountryDeletePopupComponent,
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.country.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -100,7 +100,7 @@ export const countryPopupRoute: Routes = [
             pagingParams: CountryResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.country.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -113,7 +113,7 @@ export const countryPopupRoute: Routes = [
             selectCountryPagingParams: CountryResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.country.home.title'
         },
         canActivate: [UserRouteAccessService],

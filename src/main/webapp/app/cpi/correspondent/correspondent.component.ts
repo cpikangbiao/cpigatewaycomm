@@ -164,4 +164,8 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
     createCorrespondentBookExcel() {
         this.correspondentService.createCorrespondentBookExcel();
     }
+
+    createCorrespondentBookWord() {
+        this.correspondentService.createCorrespondentBookWord();
+    }
 }

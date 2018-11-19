@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes} from '@angular/router';
-import {JhiPaginationUtil} from 'ng-jhipster';
-import {UserRouteAccessService} from 'app/core';
+import { Injectable } from '@angular/core';
+import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
+import { JhiPaginationUtil } from 'ng-jhipster';
+import { UserRouteAccessService } from 'app/core';
 import {
     CorrespondentComponent,
     CorrespondentDetailComponent,
@@ -12,9 +12,7 @@ import {
 
 @Injectable()
 export class CorrespondentResolvePagingParams implements Resolve<any> {
-
-    constructor(private paginationUtil: JhiPaginationUtil) {
-    }
+    constructor(private paginationUtil: JhiPaginationUtil) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const page = route.queryParams['page'] ? route.queryParams['page'] : '1';
@@ -31,14 +29,14 @@ export class CorrespondentResolvePagingParams implements Resolve<any> {
             page: this.paginationUtil.parsePage(page),
             predicate: this.paginationUtil.parsePredicate(sort),
             ascending: this.paginationUtil.parseAscending(sort),
-            'correspondentName': correspondentName,
-            'faxNumber': faxNumber,
-            'address': address,
-            'telephoneOffice': telephoneOffice,
-            'telephoneAlternate': telephoneAlternate,
-            'webSite': webSite,
-            'portPortName': portPortName,
-            'portId': portId
+            correspondentName: correspondentName,
+            faxNumber: faxNumber,
+            address: address,
+            telephoneOffice: telephoneOffice,
+            telephoneAlternate: telephoneAlternate,
+            webSite: webSite,
+            portPortName: portPortName,
+            portId: portId
         };
     }
 }
@@ -48,18 +46,19 @@ export const correspondentRoute: Routes = [
         path: 'correspondent',
         component: CorrespondentComponent,
         resolve: {
-            'pagingParams': CorrespondentResolvePagingParams
+            pagingParams: CorrespondentResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.correspondent.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }, {
+    },
+    {
         path: 'correspondent/:id',
         component: CorrespondentDetailComponent,
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.correspondent.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -68,7 +67,7 @@ export const correspondentRoute: Routes = [
         path: 'correspondent-new',
         component: CorrespondentEditComponent,
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.correspondent.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -77,7 +76,7 @@ export const correspondentRoute: Routes = [
         path: 'correspondent/:id/edit',
         component: CorrespondentEditComponent,
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.correspondent.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -89,7 +88,7 @@ export const correspondentPopupRoute: Routes = [
         path: 'correspondent/:id/delete',
         component: CorrespondentDeletePopupComponent,
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.correspondent.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -99,10 +98,10 @@ export const correspondentPopupRoute: Routes = [
         path: 'correspondent-select',
         component: CorrespondentSelectPopupComponent,
         resolve: {
-            'selectCorrespondentPagingParams': CorrespondentResolvePagingParams
+            selectCorrespondentPagingParams: CorrespondentResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_COMMON'],
+            authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.correspondent.home.title'
         },
         canActivate: [UserRouteAccessService],

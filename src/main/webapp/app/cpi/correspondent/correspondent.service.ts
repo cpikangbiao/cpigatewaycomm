@@ -83,4 +83,8 @@ export class CorrespondentService {
     createCorrespondentBookExcel() {
         window.open(`${this.resourceUrl}/book/excel`, '_blank');
     }
+
+    createCorrespondentBookWord() {
+        window.open(`${this.resourceUrl}/book/word`, '_blank');
+    }
 }

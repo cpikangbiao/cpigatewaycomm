@@ -209,7 +209,8 @@
             "finished": "Finished",
             "more": "More",
             "downloadPDF": "Download PDF",
-            "downloadExcel": "Download Excel"
+            "downloadExcel": "Download Excel",
+            "downloadWord": "Download Word"
         },
         "detail": {
             "field": "Field",

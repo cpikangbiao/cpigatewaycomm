@@ -16,24 +16,24 @@ export class CorrespondentContactResolvePagingParams implements Resolve<any> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const page = route.queryParams['page'] ? route.queryParams['page'] : '1';
         const sort = route.queryParams['sort'] ? route.queryParams['sort'] : 'id,asc';
-        const correspondentContactName = route.queryParams['correspondentContactName']
+        const _correspondentContactName = route.queryParams['correspondentContactName']
             ? route.queryParams['correspondentContactName']
             : null;
-        const telephoneOffice = route.queryParams['telephoneOffice'] ? route.queryParams['telephoneOffice'] : null;
-        const telephone = route.queryParams['telephone'] ? route.queryParams['telephone'] : null;
-        const eMail = route.queryParams['eMail'] ? route.queryParams['eMail'] : null;
-        const webSite = route.queryParams['webSite'] ? route.queryParams['webSite'] : null;
-        const correspondentId = route.queryParams['correspondentId'] ? route.queryParams['correspondentId'] : null;
+        const _telephoneOffice = route.queryParams['telephoneOffice'] ? route.queryParams['telephoneOffice'] : null;
+        const _telephone = route.queryParams['telephone'] ? route.queryParams['telephone'] : null;
+        const _eMail = route.queryParams['eMail'] ? route.queryParams['eMail'] : null;
+        const _webSite = route.queryParams['webSite'] ? route.queryParams['webSite'] : null;
+        const _correspondentId = route.queryParams['correspondentId'] ? route.queryParams['correspondentId'] : null;
         return {
             page: this.paginationUtil.parsePage(page),
             predicate: this.paginationUtil.parsePredicate(sort),
             ascending: this.paginationUtil.parseAscending(sort),
-            correspondentContactName: correspondentContactName,
-            telephoneOffice: telephoneOffice,
-            telephone: telephone,
-            eMail: eMail,
-            webSite: webSite,
-            correspondentId: correspondentId
+            correspondentContactName: _correspondentContactName,
+            telephoneOffice: _telephoneOffice,
+            telephone: _telephone,
+            eMail: _eMail,
+            webSite: _webSite,
+            correspondentId: _correspondentId
         };
     }
 }

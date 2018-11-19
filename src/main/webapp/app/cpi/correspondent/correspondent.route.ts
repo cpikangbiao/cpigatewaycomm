@@ -17,26 +17,26 @@ export class CorrespondentResolvePagingParams implements Resolve<any> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const page = route.queryParams['page'] ? route.queryParams['page'] : '1';
         const sort = route.queryParams['sort'] ? route.queryParams['sort'] : 'id,asc';
-        const correspondentName = route.queryParams['correspondentName'] ? route.queryParams['correspondentName'] : null;
-        const faxNumber = route.queryParams['faxNumber'] ? route.queryParams['faxNumber'] : null;
-        const address = route.queryParams['address'] ? route.queryParams['address'] : null;
-        const telephoneOffice = route.queryParams['telephoneOffice'] ? route.queryParams['telephoneOffice'] : null;
-        const telephoneAlternate = route.queryParams['telephoneAlternate'] ? route.queryParams['telephoneAlternate'] : null;
-        const webSite = route.queryParams['webSite'] ? route.queryParams['webSite'] : null;
-        const portPortName = route.queryParams['portPortName'] ? route.queryParams['portPortName'] : null;
-        const portId = route.queryParams['portId'] ? route.queryParams['portId'] : null;
+        const _correspondentName = route.queryParams['correspondentName'] ? route.queryParams['correspondentName'] : null;
+        const _faxNumber = route.queryParams['faxNumber'] ? route.queryParams['faxNumber'] : null;
+        const _address = route.queryParams['address'] ? route.queryParams['address'] : null;
+        const _telephoneOffice = route.queryParams['telephoneOffice'] ? route.queryParams['telephoneOffice'] : null;
+        const _telephoneAlternate = route.queryParams['telephoneAlternate'] ? route.queryParams['telephoneAlternate'] : null;
+        const _webSite = route.queryParams['webSite'] ? route.queryParams['webSite'] : null;
+        const _portPortName = route.queryParams['portPortName'] ? route.queryParams['portPortName'] : null;
+        const _portId = route.queryParams['portId'] ? route.queryParams['portId'] : null;
         return {
             page: this.paginationUtil.parsePage(page),
             predicate: this.paginationUtil.parsePredicate(sort),
             ascending: this.paginationUtil.parseAscending(sort),
-            correspondentName: correspondentName,
-            faxNumber: faxNumber,
-            address: address,
-            telephoneOffice: telephoneOffice,
-            telephoneAlternate: telephoneAlternate,
-            webSite: webSite,
-            portPortName: portPortName,
-            portId: portId
+            correspondentName: _correspondentName,
+            faxNumber: _faxNumber,
+            address: _address,
+            telephoneOffice: _telephoneOffice,
+            telephoneAlternate: _telephoneAlternate,
+            webSite: _webSite,
+            portPortName: _portPortName,
+            portId: _portId
         };
     }
 }

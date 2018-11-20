@@ -18,25 +18,15 @@ export class CorrespondentResolvePagingParams implements Resolve<any> {
         const page = route.queryParams['page'] ? route.queryParams['page'] : '1';
         const sort = route.queryParams['sort'] ? route.queryParams['sort'] : 'id,asc';
         const _correspondentName = route.queryParams['correspondentName'] ? route.queryParams['correspondentName'] : null;
-        const _faxNumber = route.queryParams['faxNumber'] ? route.queryParams['faxNumber'] : null;
-        const _address = route.queryParams['address'] ? route.queryParams['address'] : null;
-        const _telephoneOffice = route.queryParams['telephoneOffice'] ? route.queryParams['telephoneOffice'] : null;
-        const _telephoneAlternate = route.queryParams['telephoneAlternate'] ? route.queryParams['telephoneAlternate'] : null;
-        const _webSite = route.queryParams['webSite'] ? route.queryParams['webSite'] : null;
-        const _portPortName = route.queryParams['portPortName'] ? route.queryParams['portPortName'] : null;
-        const _portId = route.queryParams['portId'] ? route.queryParams['portId'] : null;
+        const _portName = route.queryParams['portName'] ? route.queryParams['portName'] : null;
+        const _countryName = route.queryParams['countryName'] ? route.queryParams['countryName'] : null;
         return {
             page: this.paginationUtil.parsePage(page),
             predicate: this.paginationUtil.parsePredicate(sort),
             ascending: this.paginationUtil.parseAscending(sort),
             correspondentName: _correspondentName,
-            faxNumber: _faxNumber,
-            address: _address,
-            telephoneOffice: _telephoneOffice,
-            telephoneAlternate: _telephoneAlternate,
-            webSite: _webSite,
-            portPortName: _portPortName,
-            portId: _portId
+            portName: _portName,
+            countryName: _countryName
         };
     }
 }

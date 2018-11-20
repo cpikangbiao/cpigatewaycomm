@@ -4,7 +4,8 @@
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
-                        <span jhiTranslate="cpigatewayApp.correspondent.detail.title">Correspondent</span> {{correspondent.correspondentName}}
+                        <span jhiTranslate="cpigatewayApp.correspondent.detail.title">Correspondent</span>
+                        <span>{{correspondent.correspondentName}}&nbsp;</span>
                     </h3>
                 </div>
             </div>
@@ -13,58 +14,12 @@
         <div class="m-form m-form--fit m-form--label-align-right">
             <div class="m-portlet__body">
                 <div class="form-group m-form__group row">
-                    <div class="col-lg-6 col-sm-12 row">
-                        <label class="col-form-label col-sm-5">
+                    <div class="col-sm-12 row">
+                        <label class="col-form-label col-sm-3">
                             <span jhiTranslate="cpigatewayApp.correspondent.correspondentName">Correspondent Name</span>
                         </label>
-                        <div class="alert m-alert--default col-sm-6">
-                            <span>&nbsp;</span>
-                            <span>{{correspondent.correspondentName}}</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-12 row">
-                        <label class="col-form-label col-sm-5">
-                            <span jhiTranslate="cpigatewayApp.correspondent.faxNumber">Fax Number</span>
-                        </label>
-                        <div class="alert m-alert--default col-sm-6">
-                            <span>&nbsp;</span>
-                            <span>{{correspondent.faxNumber}}</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-12 row">
-                        <label class="col-form-label col-sm-5">
-                            <span jhiTranslate="cpigatewayApp.correspondent.address">Address</span>
-                        </label>
-                        <div class="alert m-alert--default col-sm-6">
-                            <span>&nbsp;</span>
-                            <span>{{correspondent.address}}</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-12 row">
-                        <label class="col-form-label col-sm-5">
-                            <span jhiTranslate="cpigatewayApp.correspondent.telephoneOffice">Telephone Office</span>
-                        </label>
-                        <div class="alert m-alert--default col-sm-6">
-                            <span>&nbsp;</span>
-                            <span>{{correspondent.telephoneOffice}}</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-12 row">
-                        <label class="col-form-label col-sm-5">
-                            <span jhiTranslate="cpigatewayApp.correspondent.telephoneAlternate">Telephone Alternate</span>
-                        </label>
-                        <div class="alert m-alert--default col-sm-6">
-                            <span>&nbsp;</span>
-                            <span>{{correspondent.telephoneAlternate}}</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-12 row">
-                        <label class="col-form-label col-sm-5">
-                            <span jhiTranslate="cpigatewayApp.correspondent.webSite">Web Site</span>
-                        </label>
-                        <div class="alert m-alert--default col-sm-6">
-                            <span>&nbsp;</span>
-                            <span>{{correspondent.webSite}}</span>
+                        <div class="alert m-alert--default col-sm-7">
+                            <span>{{correspondent.correspondentName}}&nbsp;</span>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-12 row">
@@ -72,8 +27,51 @@
                             <span jhiTranslate="cpigatewayApp.correspondent.port">Port</span>
                         </label>
                         <div class="alert m-alert--default col-sm-6">
-                            <span>&nbsp;</span>
-                            <span>{{correspondent.portPortName}}</span>
+                            <a *ngIf="correspondent.portId" [routerLink]="['/port', correspondent.portId ]">
+                                <span>{{correspondent.portPortName}}&nbsp;</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.webSite">Web Site</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <a *ngIf="correspondent.webSite" target="_blank" href="{{correspondent.webSite}}">
+                                <span>{{correspondent.webSite}}&nbsp;</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.faxNumber">Fax Number</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>{{correspondent.faxNumber}}&nbsp;</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.telephoneOffice">Telephone Office</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>{{correspondent.telephoneOffice}}&nbsp;</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.telephoneAlternate">Telephone Alternate</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <span>{{correspondent.telephoneAlternate}}&nbsp;</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 row">
+                        <label class="col-form-label col-sm-12">
+                            <span jhiTranslate="cpigatewayApp.correspondent.address">Address</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-12">
+                            <pre class="preHeightMD">{{correspondent.address}}&nbsp;</pre>
                         </div>
                     </div>
                 </div>

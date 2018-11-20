@@ -57,7 +57,7 @@
                             <span jhiTranslate="cpigatewayApp.correspondent.webSite">Web Site</span>
                             <span class="fa fa-sort"></span>
                         </th>
-                        <th jhiSortBy="portPortName" width="10%" class="hiddenXS">
+                        <th jhiSortBy="portPortName" width="10%">
                             <span jhiTranslate="cpigatewayApp.correspondent.port">Port</span>
                             <span class="fa fa-sort"></span>
                         </th>
@@ -68,7 +68,7 @@
                         (click)="selectCorrespondent(_correspondent)">
                         <td>{{_correspondent.correspondentName}}</td>
                         <td>{{_correspondent.webSite}}</td>
-                        <td class="hiddenXS">{{_correspondent.portPortName}}</td>
+                        <td>{{_correspondent.portPortName}}</td>
                     </tr>
                     </tbody>
                 </table>

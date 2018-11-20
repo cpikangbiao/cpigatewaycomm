@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { SERVER_API_URL } from 'app/app.constants';
-import { Port } from './port.model';
-import { createRequestOption } from 'app/shared';
+import { IPort, Port } from './port.model';
+import { createRequestOption, ITEMS_PER_PAGE_MAX, optionMax } from 'app/shared';
 import { map } from 'rxjs/operators';
 
-export type EntityResponseType = HttpResponse<Port>;
+export type EntityResponseType = HttpResponse<IPort>;
 
 @Injectable()
 export class PortService {
@@ -14,38 +14,55 @@ export class PortService {
 
     constructor(private http: HttpClient) {}
 
-    create(port: Port): Observable<EntityResponseType> {
+    create(port: IPort): Observable<EntityResponseType> {
         const copy = this.convert(port);
         return this.http
-            .post<Port>(this.resourceUrl, copy, { observe: 'response' })
+            .post<IPort>(this.resourceUrl, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertResponse(res)));
     }
 
-    update(port: Port): Observable<EntityResponseType> {
+    update(port: IPort): Observable<EntityResponseType> {
         const copy = this.convert(port);
         return this.http
-            .put<Port>(this.resourceUrl, copy, { observe: 'response' })
+            .put<IPort>(this.resourceUrl, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertResponse(res)));
     }
 
     find(id: number): Observable<EntityResponseType> {
         return this.http
-            .get<Port>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+            .get<IPort>(`${this.resourceUrl}/${id}`, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertResponse(res)));
     }
 
-    query(req?: any): Observable<HttpResponse<Port[]>> {
+    query(req?: any): Observable<HttpResponse<IPort[]>> {
         const options = createRequestOption(req);
         return this.http
-            .get<Port[]>(this.resourceUrl, { params: options, observe: 'response' })
-            .pipe(map((res: HttpResponse<Port[]>) => this.convertArrayResponse(res)));
+            .get<IPort[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .pipe(map((res: HttpResponse<IPort[]>) => this.convertArrayResponse(res)));
     }
 
-    queryByCountry(countryId?: number, req?: any): Observable<HttpResponse<Port[]>> {
+    queryIdByCodeOrName(portCode?: string, portName?: string, countryIds?: number[]): Observable<HttpResponse<number[]>> {
+        const _params = {};
+        if (portCode && portCode.length > 0) {
+            _params['portCode.contains'] = portCode;
+        }
+        if (portName && portName.length > 0) {
+            _params['portName.contains'] = portName;
+        }
+        if (countryIds && countryIds.length > 0) {
+            _params['countryId.in'] = countryIds;
+        }
+        const options = optionMax(_params);
+        return this.http
+            .get<IPort[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .pipe(map((res: HttpResponse<IPort[]>) => this.convertIdArrayFromServer(res)));
+    }
+
+    queryByCountry(countryId?: number, req?: any): Observable<HttpResponse<IPort[]>> {
         const options = createRequestOption(req);
         return this.http
-            .get<Port[]>(`${this.resourceUrl}/country/${countryId}`, { params: options, observe: 'response' })
-            .pipe(map((res: HttpResponse<Port[]>) => this.convertArrayResponse(res)));
+            .get<IPort[]>(`${this.resourceUrl}/country/${countryId}`, { params: options, observe: 'response' })
+            .pipe(map((res: HttpResponse<IPort[]>) => this.convertArrayResponse(res)));
     }
 
     delete(id: number): Observable<HttpResponse<any>> {
@@ -53,13 +70,13 @@ export class PortService {
     }
 
     private convertResponse(res: EntityResponseType): EntityResponseType {
-        const body: Port = this.convertItemFromServer(res.body);
+        const body: IPort = this.convertItemFromServer(res.body);
         return res.clone({ body });
     }
 
-    private convertArrayResponse(res: HttpResponse<Port[]>): HttpResponse<Port[]> {
-        const jsonResponse: Port[] = res.body;
-        const body: Port[] = [];
+    private convertArrayResponse(res: HttpResponse<IPort[]>): HttpResponse<IPort[]> {
+        const jsonResponse: IPort[] = res.body;
+        const body: IPort[] = [];
         for (let i = 0; i < jsonResponse.length; i++) {
             body.push(this.convertItemFromServer(jsonResponse[i]));
         }
@@ -69,16 +86,25 @@ export class PortService {
     /**
      * Convert a returned JSON object to Port.
      */
-    private convertItemFromServer(port: Port): Port {
-        const copy: Port = Object.assign({}, port);
+    private convertItemFromServer(port: IPort): IPort {
+        const copy: IPort = Object.assign({}, port);
         return copy;
     }
 
     /**
      * Convert a Port to a JSON which can be sent to the server.
      */
-    private convert(port: Port): Port {
-        const copy: Port = Object.assign({}, port);
+    private convert(port: IPort): IPort {
+        const copy: IPort = Object.assign({}, port);
         return copy;
+    }
+
+    private convertIdArrayFromServer(res: HttpResponse<IPort[]>): HttpResponse<number[]> {
+        const jsonResponse: IPort[] = res.body;
+        const body: number[] = [];
+        jsonResponse.forEach(port => {
+            body.push(port.id);
+        });
+        return res.clone({ body });
     }
 }

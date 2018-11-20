@@ -35,7 +35,8 @@
             "port": "港口",
             "statistics": {
                 "noParams": "请提供报表参数"
-            }
+            },
+            "country": "国家"
         }
     },
     "cpicorrespondentApp": {

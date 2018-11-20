@@ -10,61 +10,61 @@
             </div>
         </div>
         <jhi-alert></jhi-alert>
-            <div class="m-portlet__body">
-                <div class="form-group m-form__group row">
-                    <div class="col-lg-6 col-sm-12 row">
-                        <label class="col-form-label col-sm-5">
-                            <span jhiTranslate="cpigatewayApp.country.countryName">Country Name</span>
-                        </label>
-                        <div class="alert m-alert--default col-sm-6">
-                            <span>&nbsp;</span>
-                            <span>{{country.countryName}}</span>
-                        </div>
+        <div class="m-portlet__body">
+            <div class="form-group m-form__group row">
+                <div class="col-lg-6 col-sm-12 row">
+                    <label class="col-form-label col-sm-5">
+                        <span jhiTranslate="cpigatewayApp.country.countryName">Country Name</span>
+                    </label>
+                    <div class="alert m-alert--default col-sm-6">
+                        <span>&nbsp;</span>
+                        <span>{{country.countryName}}</span>
                     </div>
-                    <div class="col-lg-6 col-sm-12 row">
-                        <label class="col-form-label col-sm-5">
-                            <span jhiTranslate="cpigatewayApp.country.countryNameAbbr">Country Name Abbr</span>
-                        </label>
-                        <div class="alert m-alert--default col-sm-6">
-                            <span>&nbsp;</span>
-                            <span>{{country.countryNameAbbr}}</span>
-                        </div>
+                </div>
+                <div class="col-lg-6 col-sm-12 row">
+                    <label class="col-form-label col-sm-5">
+                        <span jhiTranslate="cpigatewayApp.country.countryNameAbbr">Country Name Abbr</span>
+                    </label>
+                    <div class="alert m-alert--default col-sm-6">
+                        <span>&nbsp;</span>
+                        <span>{{country.countryNameAbbr}}</span>
                     </div>
-                    <div class="col-lg-6 col-sm-12 row">
-                        <label class="col-form-label col-sm-5">
-                            <span jhiTranslate="cpigatewayApp.country.countryNameChinese">Country Name Chinese</span>
-                        </label>
-                        <div class="alert m-alert--default col-sm-6">
-                            <span>&nbsp;</span>
-                            <span>{{country.countryNameChinese}}</span>
-                        </div>
+                </div>
+                <div class="col-lg-6 col-sm-12 row">
+                    <label class="col-form-label col-sm-5">
+                        <span jhiTranslate="cpigatewayApp.country.countryNameChinese">Country Name Chinese</span>
+                    </label>
+                    <div class="alert m-alert--default col-sm-6">
+                        <span>&nbsp;</span>
+                        <span>{{country.countryNameChinese}}</span>
                     </div>
-                    <div class="col-lg-6 col-sm-12 row">
-                        <label class="col-form-label col-sm-5">
-                            <span jhiTranslate="cpigatewayApp.country.dialCode">Dial Code</span>
-                        </label>
-                        <div class="alert m-alert--default col-sm-6">
-                            <span>&nbsp;</span>
-                            <span>{{country.dialCode}}</span>
-                        </div>
+                </div>
+                <div class="col-lg-6 col-sm-12 row">
+                    <label class="col-form-label col-sm-5">
+                        <span jhiTranslate="cpigatewayApp.country.dialCode">Dial Code</span>
+                    </label>
+                    <div class="alert m-alert--default col-sm-6">
+                        <span>&nbsp;</span>
+                        <span>{{country.dialCode}}</span>
                     </div>
                 </div>
             </div>
-            <div class="m-portlet__foot m-portlet__foot--fit">
-                <div class="m-form__actions">
-                    <div class="row">
-                        <div class="col-lg-9 ml-lg-auto">
-                            <button type="submit" class="btn btn-info" (click)="previousState()">
-                                <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-                            </button>
-                            <span>&nbsp;</span>
-                            <button type="button" class="btn btn-primary" [routerLink]="['/country/'+ country.id + '/edit']">
-                                <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-                            </button>
-                        </div>
+        </div>
+        <div class="m-portlet__foot m-portlet__foot--fit">
+            <div class="m-form__actions">
+                <div class="row">
+                    <div class="col-lg-9 ml-lg-auto">
+                        <button type="submit" class="btn btn-info" (click)="previousState()">
+                            <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                        </button>
+                        <span>&nbsp;</span>
+                        <button type="button" class="btn btn-primary" [routerLink]="['/country/'+ country.id + '/edit']">
+                            <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                        </button>
                     </div>
                 </div>
             </div>
+        </div>
         <div class="m-portlet__body">
             <div class="m-accordion m-accordion--default" id="m_accordion_1" role="tablist">
                 <div class="m-accordion__item">

@@ -9,20 +9,31 @@
                 </div>
             </div>
         </div>
-        <div class="m-portlet__body">
-            <div class="form-group m-form__group row" (keyup)="searchKeyup($event)">
+        <div class="m-portlet__body" (keyup)="searchKeyup($event)">
+            <div class="form-group m-form__group row">
                 <div class="col-lg-4 col-sm-12 row">
                     <label class="col-form-label m--align-right col-sm-5" jhiTranslate="cpigatewayApp.correspondent.correspondentName">
                         Correspondent Name
                     </label>
-                    <input type="text" class="form-control col-sm-6" name="correspondentName" id="correspondentName"
-                           [(ngModel)]="correspondent.correspondentName"/>
+                    <input class="form-control col-sm-6" name="correspondentName" [(ngModel)]="correspondentName"/>
+                </div>
+                <div class="col-lg-4 col-sm-12 row">
+                    <label class="col-form-label m--align-right col-sm-5" jhiTranslate="cpigatewayApp.correspondent.port">
+                        Port
+                    </label>
+                    <input class="form-control col-sm-6" name="portName" [(ngModel)]="portName"/>
+                </div>
+                <div class="col-lg-4 col-sm-12 row">
+                    <label class="col-form-label m--align-right col-sm-5" jhiTranslate="cpigatewayApp.correspondent.country">
+                        Country
+                    </label>
+                    <input class="form-control col-sm-6" name="countryName" [(ngModel)]="countryName"/>
                 </div>
             </div>
             <div class="form-group m-form__group row">
                 <div class="col-sm-12">
                     <span class="col-auto">&nbsp;</span>
-                    <button class="btn btn-info float-right" (click)="resetPage();searchCorrespondent();">
+                    <button class="btn btn-info float-right" (click)="resetPage();search();">
                         <span class="fa fa-search"></span>
                         <span>&nbsp;</span>
                         <span jhiTranslate="entity.action.search">Searching</span>
@@ -80,46 +91,53 @@
                             <span jhiTranslate="cpigatewayApp.correspondent.correspondentName">Correspondent Name</span>
                             <span class="fa fa-sort"></span>
                         </th>
-                        <th jhiSortBy="faxNumber" width="10%">
-                            <span jhiTranslate="cpigatewayApp.correspondent.faxNumber">Fax Number</span>
+                        <th jhiSortBy="portPortName" width="10%">
+                            <span jhiTranslate="cpigatewayApp.correspondent.port">Port</span>
                             <span class="fa fa-sort"></span>
                         </th>
-                        <th jhiSortBy="address" width="20%">
-                            <span jhiTranslate="cpigatewayApp.correspondent.address">Address</span>
-                            <span class="fa fa-sort"></span>
+                        <th width="10%">
+                            <span jhiTranslate="cpigatewayApp.correspondent.country">Country</span>
                         </th>
                         <th jhiSortBy="telephoneOffice" width="10%">
                             <span jhiTranslate="cpigatewayApp.correspondent.telephoneOffice">Telephone Office</span>
-                            <span class="fa fa-sort"></span>
-                        </th>
-                        <th jhiSortBy="telephoneAlternate" width="10%">
-                            <span
-                                jhiTranslate="cpigatewayApp.correspondent.telephoneAlternate">Telephone Alternate</span>
                             <span class="fa fa-sort"></span>
                         </th>
                         <th jhiSortBy="webSite" width="10%">
                             <span jhiTranslate="cpigatewayApp.correspondent.webSite">Web Site</span>
                             <span class="fa fa-sort"></span>
                         </th>
-                        <th jhiSortBy="portPortName" width="10%">
-                            <span jhiTranslate="cpigatewayApp.correspondent.port">Port</span>
+                        <th jhiSortBy="address" width="20%">
+                            <span jhiTranslate="cpigatewayApp.correspondent.address">Address</span>
                             <span class="fa fa-sort"></span>
                         </th>
                         <th width="5%"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let _correspondent of correspondents ;trackBy: trackId">
-                        <td>{{_correspondent.correspondentName}}</td>
-                        <td>{{_correspondent.faxNumber}}</td>
-                        <td>{{_correspondent.address}}</td>
-                        <td>{{_correspondent.telephoneOffice}}</td>
-                        <td>{{_correspondent.telephoneAlternate}}</td>
-                        <td>{{_correspondent.webSite}}</td>
-                        <td>
-                            <div *ngIf="_correspondent.portId">
-                                <a [routerLink]="['/port', _correspondent.portId  ]">{{_correspondent.portPortName}}</a>
-                            </div>
+                    <tr *ngFor="let _correspondent of correspondents">
+                        <td class="singleLine" title="{{_correspondent.correspondentName}}">
+                            {{_correspondent.correspondentName}}
+                        </td>
+                        <td class="singleLine" title="{{_correspondent.portPortName}}">
+                            <a *ngIf="_correspondent.portId" [routerLink]="['/port', _correspondent.portId  ]">
+                                {{_correspondent.portPortName}}
+                            </a>
+                        </td>
+                        <td class="singleLine" title="{{_correspondent.countryCountryName}}">
+                            <a *ngIf="_correspondent.countryId" [routerLink]="['/port', _correspondent.countryId ]">
+                                {{_correspondent.countryCountryName}}
+                            </a>
+                        </td>
+                        <td class="singleLine" title="{{_correspondent.telephoneOffice}}">
+                            {{_correspondent.telephoneOffice}}
+                        </td>
+                        <td class="singleLine" title="{{_correspondent.webSite}}">
+                            <a *ngIf="_correspondent.webSite" target="_blank" href="{{_correspondent.webSite}}">
+                                {{_correspondent.webSite}}
+                            </a>
+                        </td>
+                        <td class="singleLine" title="{{_correspondent.address}}">
+                            {{_correspondent.address}}
                         </td>
                         <td>
                             <div class="btn-group dropleft">

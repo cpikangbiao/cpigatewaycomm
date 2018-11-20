@@ -35,7 +35,8 @@
             "port": "Port",
             "statistics": {
                 "noParams": "Please provide report parameters"
-            }
+            },
+            "country": "Country"
         }
     },
     "cpicorrespondentApp": {

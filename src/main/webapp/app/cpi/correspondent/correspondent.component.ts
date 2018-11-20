@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
-import { Correspondent } from './correspondent.model';
-import { CorrespondentService } from './correspondent.service';
-import { ITEMS_PER_PAGE } from 'app/shared';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { JhiEventManager } from 'ng-jhipster';
+import { ITEMS_PER_PAGE } from 'app/shared';
+import { CorrespondentService } from './';
+import { PortService } from '../port';
+import { CountryService } from '../country';
 
 @Component({
     selector: 'jhi-correspondent',
@@ -13,8 +13,10 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class CorrespondentComponent implements OnInit, OnDestroy {
     defaultURL: string;
-    correspondent: Correspondent;
-    correspondents: Correspondent[];
+    correspondentName: string;
+    portName: string;
+    countryName: string;
+    correspondents: any;
     itemsPerPage: any;
     page: any;
     previousPage: any;
@@ -23,32 +25,37 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
     totalItems: any;
     queryCount: any;
     routeSub: Subscription;
-    searchCorrespondentSubscription: Subscription;
+    searchSubscription: Subscription;
     correspondentSubscription: Subscription;
 
     constructor(
+        private countryService: CountryService,
+        private portService: PortService,
         private correspondentService: CorrespondentService,
-        private jhiAlertService: JhiAlertService,
         private correspondentEventManager: JhiEventManager,
         private route: ActivatedRoute,
         private router: Router
     ) {
-        this.correspondent = new Correspondent();
+        this.correspondentName = null;
+        this.portName = null;
+        this.countryName = null;
         this.correspondents = [];
         this.defaultURL = this.router.url;
         this.defaultURL = this.defaultURL.split('?')[0];
-    }
-
-    ngOnInit() {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeSub = this.route.data.subscribe(data => {
             this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
-            this.correspondent.correspondentName = data.pagingParams.correspondentName;
+            this.correspondentName = data.pagingParams.correspondentName;
+            this.portName = data.pagingParams.portName;
+            this.countryName = data.pagingParams.countryName;
         });
-        this.searchCorrespondent();
+    }
+
+    ngOnInit() {
+        this.search();
         this.registerChangeInCorrespondents();
     }
 
@@ -56,22 +63,16 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
         if (this.routeSub) {
             this.routeSub.unsubscribe();
         }
-        if (this.searchCorrespondentSubscription) {
-            this.searchCorrespondentSubscription.unsubscribe();
+        if (this.searchSubscription) {
+            this.searchSubscription.unsubscribe();
         }
-        if (this.correspondentEventManager) {
+        if (this.correspondentSubscription) {
             this.correspondentEventManager.destroy(this.correspondentSubscription);
         }
     }
 
     registerChangeInCorrespondents() {
-        this.correspondentSubscription = this.correspondentEventManager.subscribe('correspondentListModification', () =>
-            this.searchCorrespondent()
-        );
-    }
-
-    trackId(index: number, item: Correspondent) {
-        return item.id;
+        this.correspondentSubscription = this.correspondentEventManager.subscribe('correspondentListModification', () => this.search());
     }
 
     modifyURL() {
@@ -80,13 +81,15 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
                 page: this.page,
                 size: this.itemsPerPage,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc'),
-                correspondentName: this.correspondent.correspondentName
+                correspondentName: this.correspondentName,
+                portName: this.portName,
+                countryName: this.countryName
             }
         });
     }
 
     transition() {
-        this.searchCorrespondent();
+        this.search();
     }
 
     loadPage(page: number) {
@@ -94,18 +97,6 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
             this.previousPage = page;
             this.transition();
         }
-    }
-
-    criteria() {
-        const result = {
-            page: this.page - 1,
-            size: this.itemsPerPage,
-            sort: this.sort()
-        };
-        if (this.correspondent.correspondentName && this.correspondent.correspondentName.length > 0) {
-            result['correspondentName.contains'] = this.correspondent.correspondentName;
-        }
-        return result;
     }
 
     sort() {
@@ -116,24 +107,71 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
         return result;
     }
 
+    search() {
+        this.modifyURL();
+        this.searchCountry();
+    }
+
+    searchCountry() {
+        if (this.countryName && this.countryName.length > 0) {
+            this.countryService.queryIdByName(this.countryName).subscribe(countryIds => {
+                if (countryIds.body && countryIds.body.length > 0) {
+                    this.searchPort(countryIds.body);
+                } else {
+                    this.correspondents = [];
+                }
+            });
+        } else {
+            this.searchPort();
+        }
+    }
+
+    searchPort(countryIds?: number[]) {
+        if ((countryIds && countryIds.length > 0) || (this.portName && this.portName.length > 0)) {
+            this.portService.queryIdByCodeOrName(null, this.portName, countryIds).subscribe(portIds => {
+                if (portIds.body && portIds.body.length > 0) {
+                    this.searchCorrespondent(portIds.body);
+                } else {
+                    this.correspondents = [];
+                }
+            });
+        } else {
+            this.searchCorrespondent();
+        }
+    }
+
+    searchCorrespondent(portIds?: number[]) {
+        const params = this.criteria();
+        if (portIds && portIds.length > 0) {
+            params['portId.in'] = portIds;
+        }
+        this.correspondentService.query(params).subscribe(correspondents => this.onSuccess(correspondents.body, correspondents.headers));
+    }
+
+    criteria() {
+        const result = {
+            page: this.page - 1,
+            size: this.itemsPerPage,
+            sort: this.sort()
+        };
+        if (this.correspondentName && this.correspondentName.length > 0) {
+            result['correspondentName.contains'] = this.correspondentName;
+        }
+        return result;
+    }
+
     private onSuccess(data, headers) {
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         this.correspondents = data;
-    }
-
-    private onError(error) {
-        this.jhiAlertService.error(error.message, null, null);
-    }
-
-    searchCorrespondent() {
-        this.modifyURL();
-        this.searchCorrespondentSubscription = this.correspondentService
-            .query(this.criteria())
-            .subscribe(
-                (res: HttpResponse<Correspondent[]>) => this.onSuccess(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res)
-            );
+        this.correspondents.forEach(correspondent => {
+            if (correspondent.portId) {
+                this.portService.find(correspondent.portId).subscribe(port => {
+                    correspondent.countryId = port.body.countryId;
+                    correspondent.countryCountryName = port.body.countryCountryName;
+                });
+            }
+        });
     }
 
     resetPage() {
@@ -141,16 +179,18 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
     }
 
     clear() {
-        this.correspondent = new Correspondent();
+        this.correspondentName = null;
+        this.portName = null;
+        this.countryName = null;
         this.page = 0;
         this.predicate = 'id';
-        this.searchCorrespondent();
+        this.search();
     }
 
     searchKeyup($event) {
         if ($event.keyCode === 13) {
             this.resetPage();
-            this.searchCorrespondent();
+            this.search();
         }
         if ($event.keyCode === 27) {
             this.clear();

@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { SERVER_API_URL } from 'app/app.constants';
 import { ICountry } from './country.model';
-import { createRequestOption } from 'app/shared';
+import { createRequestOption, optionMax } from 'app/shared';
 import { map } from 'rxjs/operators';
 
 export type EntityResponseType = HttpResponse<ICountry>;
@@ -39,6 +39,17 @@ export class CountryService {
         return this.http
             .get<ICountry[]>(this.resourceUrl, { params: options, observe: 'response' })
             .pipe(map((res: HttpResponse<ICountry[]>) => this.convertArrayResponse(res)));
+    }
+
+    queryIdByName(countryName?: string): Observable<HttpResponse<number[]>> {
+        const _params = {};
+        if (countryName && countryName.length > 0) {
+            _params['countryName.contains'] = countryName;
+        }
+        const options = optionMax(_params);
+        return this.http
+            .get<ICountry[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .pipe(map((res: HttpResponse<ICountry[]>) => this.convertIdArrayFromServer(res)));
     }
 
     delete(id: number): Observable<HttpResponse<any>> {
@@ -84,5 +95,14 @@ export class CountryService {
     private convert(country: ICountry): ICountry {
         const copy: ICountry = Object.assign({}, country);
         return copy;
+    }
+
+    private convertIdArrayFromServer(res: HttpResponse<ICountry[]>): HttpResponse<number[]> {
+        const jsonResponse: ICountry[] = res.body;
+        const body: number[] = [];
+        jsonResponse.forEach(country => {
+            body.push(country.id);
+        });
+        return res.clone({ body });
     }
 }

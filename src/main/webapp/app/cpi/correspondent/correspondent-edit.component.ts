@@ -1,34 +1,26 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
-import { Correspondent } from './correspondent.model';
-import { CorrespondentService } from './correspondent.service';
-import { Port, PortService } from '../port';
-import { Location } from '@angular/common';
+import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import { JhiEventManager } from 'ng-jhipster';
+import { Correspondent, CorrespondentService } from './';
 
 @Component({
     selector: 'jhi-correspondent-edit',
     templateUrl: './correspondent-edit.component.html'
 })
 export class CorrespondentEditComponent implements OnInit, OnDestroy {
-    port: Port;
     correspondent: Correspondent;
     routeSubscription: Subscription;
     selectPortSubscription: Subscription;
 
     constructor(
-        private location: Location,
-        private jhiAlertService: JhiAlertService,
         private correspondentService: CorrespondentService,
         private route: ActivatedRoute,
-        private portService: PortService,
         private eventManager: JhiEventManager,
         private selectPortEventManager: JhiEventManager
     ) {
-        this.port = new Port();
         this.correspondent = new Correspondent();
     }
 
@@ -46,11 +38,6 @@ export class CorrespondentEditComponent implements OnInit, OnDestroy {
             if (params['id']) {
                 this.correspondentService.find(params['id']).subscribe(correspondent => {
                     this.correspondent = correspondent.body;
-                    if (this.correspondent && this.correspondent.portId) {
-                        this.portService.find(this.correspondent.portId).subscribe(port => {
-                            this.port = port.body;
-                        });
-                    }
                 });
             }
         });
@@ -59,20 +46,18 @@ export class CorrespondentEditComponent implements OnInit, OnDestroy {
 
     registerChangeInPort() {
         this.selectPortSubscription = this.selectPortEventManager.subscribe('selectPort', port => {
-            this.port = port.content;
-            this.correspondent.portId = this.port.id;
-            this.correspondent.portPortName = this.port.portName;
+            this.correspondent.portId = port.id;
+            this.correspondent.portPortName = port.portName;
         });
     }
 
     clearPort() {
-        this.port = new Port();
         this.correspondent.portId = null;
         this.correspondent.portPortName = null;
     }
 
     cancel() {
-        this.location.back();
+        window.history.back();
     }
 
     save() {
@@ -84,7 +69,7 @@ export class CorrespondentEditComponent implements OnInit, OnDestroy {
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<Correspondent>>) {
-        result.subscribe((res: HttpResponse<Correspondent>) => this.onSaveSuccess(res), (res: HttpErrorResponse) => this.onError(res));
+        result.subscribe((res: HttpResponse<Correspondent>) => this.onSaveSuccess(res));
     }
 
     private onSaveSuccess(res) {
@@ -92,10 +77,6 @@ export class CorrespondentEditComponent implements OnInit, OnDestroy {
             name: 'correspondentListModification',
             content: res.body
         });
-        this.location.back();
-    }
-
-    private onError(error: any) {
-        this.jhiAlertService.error(error.message, null, null);
+        window.history.back();
     }
 }

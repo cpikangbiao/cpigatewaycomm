@@ -124,6 +124,7 @@
             },
             "comm": {
                 "main": "Communication",
+                "admin": "Communication Admin",
                 "country": "Country",
                 "port": "Port",
                 "correspondent": "Correspondent",

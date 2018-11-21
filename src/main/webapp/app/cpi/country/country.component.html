@@ -71,12 +71,16 @@
                             <span jhiTranslate="cpigatewayApp.country.countryNameChinese">Country Name Chinese</span>
                             <span class="fa fa-sort"></span>
                         </th>
-                        <th jhiSortBy="countryNameAbbr" width="10%" class="hiddenXS">
+                        <th jhiSortBy="countryNameAbbr" width="10%">
                             <span jhiTranslate="cpigatewayApp.country.countryNameAbbr">Country Name Abbr</span>
                             <span class="fa fa-sort"></span>
                         </th>
-                        <th jhiSortBy="dialCode" width="10%" class="hiddenXS">
+                        <th jhiSortBy="dialCode" width="10%">
                             <span jhiTranslate="cpigatewayApp.country.dialCode">Dial Code</span>
+                            <span class="fa fa-sort"></span>
+                        </th>
+                        <th jhiSortBy="timeZone" width="10%">
+                            <span jhiTranslate="cpigatewayApp.country.timeZone">Time Zone</span>
                             <span class="fa fa-sort"></span>
                         </th>
                         <th width="5%"></th>
@@ -86,8 +90,9 @@
                     <tr *ngFor="let _country of countries ;trackBy: trackId">
                         <td>{{_country.countryName}}</td>
                         <td>{{_country.countryNameChinese}}</td>
-                        <td class="hiddenXS">{{_country.countryNameAbbr}}</td>
-                        <td class="hiddenXS">{{_country.dialCode}}</td>
+                        <td>{{_country.countryNameAbbr}}</td>
+                        <td>{{_country.dialCode}}</td>
+                        <td>{{_country.timeZone}}</td>
                         <td>
                             <div class="btn-group dropleft">
                                 <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

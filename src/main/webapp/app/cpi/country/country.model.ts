@@ -6,6 +6,7 @@ export interface ICountry {
     countryNameAbbr?: string;
     dialCode?: string;
     ports?: IPort[];
+    timeZone?: string;
 }
 export class Country implements IPort {
     constructor(
@@ -14,6 +15,7 @@ export class Country implements IPort {
         public countryNameChinese?: string,
         public countryNameAbbr?: string,
         public dialCode?: string,
-        public ports?: IPort[]
+        public ports?: IPort[],
+        public timeZone?: string
     ) {}
 }

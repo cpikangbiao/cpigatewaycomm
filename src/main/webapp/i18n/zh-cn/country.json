@@ -17,7 +17,8 @@
             "countryNameAbbr": "国家名称简写（英文）",
             "countryNameChinese": "国家名称（中文）",
             "dialCode": "拨号前缀",
-            "ports": "港口"
+            "ports": "港口",
+            "timeZone": "时区"
         }
     },
     "cpicommonApp": {

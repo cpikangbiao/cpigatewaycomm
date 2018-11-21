@@ -17,7 +17,8 @@
             "countryNameAbbr": "Country Name Abbr",
             "countryNameChinese": "Country Name Chinese",
             "dialCode": "Dial Code",
-            "ports": "Ports"
+            "ports": "Ports",
+            "timeZone": "Time Zone"
         }
     },
     "cpicommonApp": {

@@ -71,10 +71,6 @@ export class PortComponent implements OnInit, OnDestroy {
         this.portSubscription = this.portEventManager.subscribe('portListModification', (res: any) => this.searchPort());
     }
 
-    trackId(index: number, item: IPort) {
-        return item.id;
-    }
-
     modifyURL() {
         this.router.navigate([this.defaultURL], {
             queryParams: {

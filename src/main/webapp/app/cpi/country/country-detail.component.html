@@ -4,7 +4,8 @@
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
-                        <span jhiTranslate="cpigatewayApp.country.detail.title">Country</span> {{country.countryName}}
+                        <span jhiTranslate="cpigatewayApp.country.detail.title">Country</span>
+                        <span>{{country.countryName}}&nbsp;</span>
                     </h3>
                 </div>
             </div>
@@ -17,8 +18,7 @@
                         <span jhiTranslate="cpigatewayApp.country.countryName">Country Name</span>
                     </label>
                     <div class="alert m-alert--default col-sm-6">
-                        <span>&nbsp;</span>
-                        <span>{{country.countryName}}</span>
+                        <span>{{country.countryName}}&nbsp;</span>
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12 row">
@@ -26,8 +26,7 @@
                         <span jhiTranslate="cpigatewayApp.country.countryNameAbbr">Country Name Abbr</span>
                     </label>
                     <div class="alert m-alert--default col-sm-6">
-                        <span>&nbsp;</span>
-                        <span>{{country.countryNameAbbr}}</span>
+                        <span>{{country.countryNameAbbr}}&nbsp;</span>
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12 row">
@@ -35,8 +34,7 @@
                         <span jhiTranslate="cpigatewayApp.country.countryNameChinese">Country Name Chinese</span>
                     </label>
                     <div class="alert m-alert--default col-sm-6">
-                        <span>&nbsp;</span>
-                        <span>{{country.countryNameChinese}}</span>
+                        <span>{{country.countryNameChinese}}&nbsp;</span>
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12 row">
@@ -44,8 +42,15 @@
                         <span jhiTranslate="cpigatewayApp.country.dialCode">Dial Code</span>
                     </label>
                     <div class="alert m-alert--default col-sm-6">
-                        <span>&nbsp;</span>
-                        <span>{{country.dialCode}}</span>
+                        <span>{{country.dialCode}}&nbsp;</span>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12 row">
+                    <label class="col-form-label col-sm-5">
+                        <span jhiTranslate="cpigatewayApp.country.timeZone">Time Zone</span>
+                    </label>
+                    <div class="alert m-alert--default col-sm-6">
+                        <span>{{country.timeZone}}&nbsp;</span>
                     </div>
                 </div>
             </div>

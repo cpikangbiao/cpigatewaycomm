@@ -10,6 +10,6 @@ export class Correspondent {
         public contacts?: any,
         public portPortName?: string,
         public portId?: number,
-    ) {
-    }
+        public email?: string
+    ) {}
 }

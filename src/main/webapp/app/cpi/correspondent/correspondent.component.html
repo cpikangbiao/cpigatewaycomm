@@ -31,6 +31,30 @@
                 </div>
             </div>
             <div class="form-group m-form__group row">
+                <div class="col-lg-4 col-sm-12 row">
+                    <label class="col-form-label m--align-right col-sm-5" jhiTranslate="cpigatewayApp.correspondent.country">
+                        Country
+                    </label>
+                    <select class="form-control col-sm-6" name="countryId" [(ngModel)]="countryId" (change)="changePort()">
+                        <option [value]=""></option>
+                        <option *ngFor="let _country of countries" [value]="_country.id" [title]="_country.countryName">
+                            {{_country.countryName}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-lg-4 col-sm-12 row">
+                    <label class="col-form-label m--align-right col-sm-5" jhiTranslate="cpigatewayApp.correspondent.port">
+                        Port
+                    </label>
+                    <select class="form-control col-sm-6" name="portId" [(ngModel)]="portId">
+                        <option [value]=""></option>
+                        <option *ngFor="let _port of ports" [value]="_port.id" [title]="_port.portName">
+                            {{_port.portName}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group m-form__group row">
                 <div class="col-sm-12">
                     <span class="col-auto">&nbsp;</span>
                     <button class="btn btn-info float-right" (click)="resetPage();search();">
@@ -99,7 +123,7 @@
                             <span jhiTranslate="cpigatewayApp.correspondent.country">Country</span>
                         </th>
                         <th jhiSortBy="telephoneOffice" width="10%">
-                            <span jhiTranslate="cpigatewayApp.correspondent.telephoneOffice">Telephone Office</span>
+                            <span jhiTranslate="cpigatewayApp.correspondent.telephoneOffice">Mobile</span>
                             <span class="fa fa-sort"></span>
                         </th>
                         <th jhiSortBy="webSite" width="10%">

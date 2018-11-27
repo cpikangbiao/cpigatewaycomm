@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager } from 'ng-jhipster';
-import { ITEMS_PER_PAGE } from 'app/shared';
+import { ITEMS_PER_PAGE, ITEMS_PER_PAGE_MAX, KEY_CODE_ENTER, KEY_CODE_ESC } from 'app/shared';
 import { CorrespondentService } from './';
 import { PortService } from '../port';
 import { CountryService } from '../country';
@@ -14,8 +14,12 @@ import { CountryService } from '../country';
 export class CorrespondentComponent implements OnInit, OnDestroy {
     defaultURL: string;
     correspondentName: string;
-    portName: string;
-    countryName: string;
+    portId: any;
+    portName: any;
+    ports: any;
+    countryId: any;
+    countryName: any;
+    countries: any;
     correspondents: any;
     itemsPerPage: any;
     page: any;
@@ -37,8 +41,12 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
         private router: Router
     ) {
         this.correspondentName = null;
+        this.portId = null;
         this.portName = null;
+        this.ports = [];
+        this.countryId = null;
         this.countryName = null;
+        this.countries = [];
         this.correspondents = [];
         this.defaultURL = this.router.url;
         this.defaultURL = this.defaultURL.split('?')[0];
@@ -55,6 +63,9 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.countryService.query({ size: ITEMS_PER_PAGE_MAX, sort: ['countryName', 'asc'] }).subscribe(countries => {
+            this.countries = countries.body;
+        });
         this.search();
         this.registerChangeInCorrespondents();
     }
@@ -113,10 +124,24 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
     }
 
     searchCountry() {
-        if (this.countryName && this.countryName.length > 0) {
-            this.countryService.queryIdByName(this.countryName).subscribe(countryIds => {
-                if (countryIds.body && countryIds.body.length > 0) {
-                    this.searchPort(countryIds.body);
+        if ((this.countryId !== null && this.countryId !== '') || (this.countryName !== null && this.countryName !== '')) {
+            const result = {
+                size: ITEMS_PER_PAGE_MAX,
+                sort: ['countryName', 'asc']
+            };
+            if (this.countryId !== null && this.countryId !== '') {
+                result['id.equals'] = this.countryId;
+            }
+            if (this.countryName !== null && this.countryName !== '') {
+                result['countryName.contains'] = this.countryName;
+            }
+            this.countryService.query(result).subscribe(countries => {
+                if (countries.body && countries.body.length > 0) {
+                    const countryIds = [];
+                    countries.body.forEach(country => {
+                        countryIds.push(country.id);
+                    });
+                    this.searchPort(countryIds);
                 } else {
                     this.correspondents = [];
                 }
@@ -127,10 +152,31 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
     }
 
     searchPort(countryIds?: number[]) {
-        if ((countryIds && countryIds.length > 0) || (this.portName && this.portName.length > 0)) {
-            this.portService.queryIdByCodeOrName(null, this.portName, countryIds).subscribe(portIds => {
-                if (portIds.body && portIds.body.length > 0) {
-                    this.searchCorrespondent(portIds.body);
+        if (
+            (countryIds && countryIds.length > 0) ||
+            (this.portId !== null && this.portId !== '') ||
+            (this.portName !== null && this.portName !== '')
+        ) {
+            const result = {
+                size: ITEMS_PER_PAGE_MAX,
+                sort: ['portName', 'asc']
+            };
+            if (this.portId !== null && this.portId !== '') {
+                result['id.equals'] = this.portId;
+            }
+            if (this.portName !== null && this.portName !== '') {
+                result['portName.contains'] = this.portName;
+            }
+            if (countryIds && countryIds.length > 0) {
+                result['countryId.in'] = countryIds;
+            }
+            this.portService.query(result).subscribe(ports => {
+                if (ports.body && ports.body.length > 0) {
+                    const portIds = [];
+                    ports.body.forEach(port => {
+                        portIds.push(port.id);
+                    });
+                    this.searchCorrespondent(portIds);
                 } else {
                     this.correspondents = [];
                 }
@@ -180,7 +226,9 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
 
     clear() {
         this.correspondentName = null;
+        this.portId = null;
         this.portName = null;
+        this.countryId = null;
         this.countryName = null;
         this.page = 0;
         this.predicate = 'id';
@@ -188,11 +236,11 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
     }
 
     searchKeyup($event) {
-        if ($event.keyCode === 13) {
+        if ($event.keyCode === KEY_CODE_ENTER) {
             this.resetPage();
             this.search();
         }
-        if ($event.keyCode === 27) {
+        if ($event.keyCode === KEY_CODE_ESC) {
             this.clear();
         }
     }
@@ -207,5 +255,20 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
 
     createCorrespondentBookWord() {
         this.correspondentService.createCorrespondentBookWord();
+    }
+
+    changePort() {
+        if (this.countryId !== null && this.countryId !== '') {
+            const result = {
+                size: ITEMS_PER_PAGE_MAX,
+                sort: ['portName', 'asc']
+            };
+            if (this.countryId !== null && this.countryId !== '') {
+                result['countryId.equals'] = this.countryId;
+            }
+            this.portService.query(result).subscribe(ports => {
+                this.ports = ports.body;
+            });
+        }
     }
 }

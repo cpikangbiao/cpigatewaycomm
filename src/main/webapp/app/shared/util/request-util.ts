@@ -33,7 +33,14 @@ export const optionMax = (req?: any): HttpParams => {
     options = options.set('size', ITEMS_PER_PAGE_MAX.toString());
     if (req) {
         Object.keys(req).forEach(key => {
-            options = options.set(key, req[key]);
+            if (key !== 'sort') {
+                options = options.set(key, req[key]);
+            }
+        });
+    }
+    if (req.sort) {
+        req.sort.forEach(val => {
+            options = options.append('sort', val);
         });
     }
     return options;
@@ -42,10 +49,18 @@ export const optionMax = (req?: any): HttpParams => {
 export const optionMaxSortNum = (req?: any): HttpParams => {
     let options: HttpParams = new HttpParams();
     options = options.set('size', ITEMS_PER_PAGE_MAX.toString());
-    options = options.set('sort', 'sortNum,asc');
+    options = options.append('sort', 'sortNum');
+    options = options.append('sort', 'asc');
     if (req) {
         Object.keys(req).forEach(key => {
-            options = options.set(key, req[key]);
+            if (key !== 'sort') {
+                options = options.set(key, req[key]);
+            }
+        });
+    }
+    if (req.sort) {
+        req.sort.forEach(val => {
+            options = options.append('sort', val);
         });
     }
     return options;
@@ -54,10 +69,18 @@ export const optionMaxSortNum = (req?: any): HttpParams => {
 export const optionMaxSortNumber = (req?: any): HttpParams => {
     let options: HttpParams = new HttpParams();
     options = options.set('size', ITEMS_PER_PAGE_MAX.toString());
-    options = options.set('sort', 'sortNumber,asc');
+    options = options.append('sort', 'sortNumber');
+    options = options.append('sort', 'asc');
     if (req) {
         Object.keys(req).forEach(key => {
-            options = options.set(key, req[key]);
+            if (key !== 'sort') {
+                options = options.set(key, req[key]);
+            }
+        });
+    }
+    if (req.sort) {
+        req.sort.forEach(val => {
+            options = options.append('sort', val);
         });
     }
     return options;

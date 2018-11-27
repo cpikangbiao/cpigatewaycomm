@@ -14,11 +14,11 @@
         <div class="m-form m-form--fit m-form--label-align-right">
             <div class="m-portlet__body">
                 <div class="form-group m-form__group row">
-                    <div class="col-sm-12 row">
-                        <label class="col-form-label col-sm-3">
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
                             <span jhiTranslate="cpigatewayApp.correspondent.correspondentName">Correspondent Name</span>
                         </label>
-                        <div class="alert m-alert--default col-sm-7">
+                        <div class="alert m-alert--default col-sm-6">
                             <span>{{correspondent.correspondentName}}&nbsp;</span>
                         </div>
                     </div>
@@ -29,6 +29,16 @@
                         <div class="alert m-alert--default col-sm-6">
                             <a *ngIf="correspondent.portId" [routerLink]="['/port', correspondent.portId ]">
                                 <span>{{correspondent.portPortName}}&nbsp;</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 row">
+                        <label class="col-form-label col-sm-5">
+                            <span jhiTranslate="cpigatewayApp.correspondent.email">Email</span>
+                        </label>
+                        <div class="alert m-alert--default col-sm-6">
+                            <a *ngIf="correspondent.email" href="mailto:{{correspondent.email}}">
+                                <span>{{correspondent.email}}&nbsp;</span>
                             </a>
                         </div>
                     </div>
@@ -52,7 +62,7 @@
                     </div>
                     <div class="col-lg-6 col-sm-12 row">
                         <label class="col-form-label col-sm-5">
-                            <span jhiTranslate="cpigatewayApp.correspondent.telephoneOffice">Telephone Office</span>
+                            <span jhiTranslate="cpigatewayApp.correspondent.telephoneOffice">Mobile</span>
                         </label>
                         <div class="alert m-alert--default col-sm-6">
                             <span>{{correspondent.telephoneOffice}}&nbsp;</span>

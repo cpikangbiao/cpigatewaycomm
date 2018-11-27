@@ -46,8 +46,8 @@ export class CorrespondentEditComponent implements OnInit, OnDestroy {
 
     registerChangeInPort() {
         this.selectPortSubscription = this.selectPortEventManager.subscribe('selectPort', port => {
-            this.correspondent.portId = port.id;
-            this.correspondent.portPortName = port.portName;
+            this.correspondent.portId = port.content.id;
+            this.correspondent.portPortName = port.content.portName;
         });
     }
 

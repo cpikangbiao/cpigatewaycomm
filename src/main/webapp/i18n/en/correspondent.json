@@ -28,7 +28,7 @@
             "correspondentName": "Correspondent Name",
             "faxNumber": "Fax Number",
             "address": "Address",
-            "telephoneOffice": "Telephone Office",
+            "telephoneOffice": "Mobile",
             "telephoneAlternate": "Telephone Alternate",
             "webSite": "Web Site",
             "contacts": "Contacts",
@@ -36,7 +36,8 @@
             "statistics": {
                 "noParams": "Please provide report parameters"
             },
-            "country": "Country"
+            "country": "Country",
+            "email": "Email"
         }
     },
     "cpicorrespondentApp": {

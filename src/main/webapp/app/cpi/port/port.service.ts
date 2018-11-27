@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { SERVER_API_URL } from 'app/app.constants';
-import { IPort, Port } from './port.model';
-import { createRequestOption, ITEMS_PER_PAGE_MAX, optionMax } from 'app/shared';
+import { IPort } from './port.model';
+import { createRequestOption, optionMax } from 'app/shared';
 import { map } from 'rxjs/operators';
 
 export type EntityResponseType = HttpResponse<IPort>;
@@ -41,7 +41,7 @@ export class PortService {
             .pipe(map((res: HttpResponse<IPort[]>) => this.convertArrayResponse(res)));
     }
 
-    queryIdByCodeOrName(portCode?: string, portName?: string, countryIds?: number[]): Observable<HttpResponse<number[]>> {
+    queryIdByCodeOrName(portCode?: string, portName?: string, countryIds?: number[], sort?: any): Observable<HttpResponse<number[]>> {
         const _params = {};
         if (portCode && portCode.length > 0) {
             _params['portCode.contains'] = portCode;
@@ -51,6 +51,9 @@ export class PortService {
         }
         if (countryIds && countryIds.length > 0) {
             _params['countryId.in'] = countryIds;
+        }
+        if (sort && sort.length > 0) {
+            _params['sort'] = sort;
         }
         const options = optionMax(_params);
         return this.http

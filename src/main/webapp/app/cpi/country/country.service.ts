@@ -41,10 +41,13 @@ export class CountryService {
             .pipe(map((res: HttpResponse<ICountry[]>) => this.convertArrayResponse(res)));
     }
 
-    queryIdByName(countryName?: string): Observable<HttpResponse<number[]>> {
+    queryIdByName(countryName?: string, sort?: any): Observable<HttpResponse<number[]>> {
         const _params = {};
         if (countryName && countryName.length > 0) {
             _params['countryName.contains'] = countryName;
+        }
+        if (sort && sort.length > 0) {
+            _params['sort'] = sort;
         }
         const options = optionMax(_params);
         return this.http

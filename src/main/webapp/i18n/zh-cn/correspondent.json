@@ -28,7 +28,7 @@
             "correspondentName": "通代名称",
             "faxNumber": "传真号",
             "address": "地址",
-            "telephoneOffice": "办公电话",
+            "telephoneOffice": "手机",
             "telephoneAlternate": "备用电话",
             "webSite": "网站",
             "contacts": "联系人",
@@ -36,7 +36,8 @@
             "statistics": {
                 "noParams": "请提供报表参数"
             },
-            "country": "国家"
+            "country": "国家",
+            "email": "邮箱"
         }
     },
     "cpicorrespondentApp": {

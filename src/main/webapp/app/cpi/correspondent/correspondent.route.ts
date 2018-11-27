@@ -87,9 +87,6 @@ export const correspondentPopupRoute: Routes = [
     {
         path: 'correspondent-select',
         component: CorrespondentSelectPopupComponent,
-        resolve: {
-            selectCorrespondentPagingParams: CorrespondentResolvePagingParams
-        },
         data: {
             authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.correspondent.home.title'

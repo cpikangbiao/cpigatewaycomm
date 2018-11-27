@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Country, ICountry } from './country.model';
 import { CountryService } from './country.service';
-import { ITEMS_PER_PAGE_LIST } from 'app/shared';
+import { ITEMS_PER_PAGE_LIST, KEY_CODE_ENTER, KEY_CODE_ESC } from 'app/shared';
 import { CountrySelectPopupService } from './country-select.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -13,7 +13,6 @@ import { Subscription } from 'rxjs/Subscription';
     templateUrl: './country-select.component.html'
 })
 export class CountrySelectComponent implements OnInit, OnDestroy {
-    selectCountryPagingParams: any;
     country: ICountry;
     countries: ICountry[];
     itemsPerPage: any;
@@ -124,11 +123,11 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
     }
 
     searchKeyup($event) {
-        if ($event.keyCode === 13) {
+        if ($event.keyCode === KEY_CODE_ENTER) {
             this.resetPage();
             this.searchCountry();
         }
-        if ($event.keyCode === 27) {
+        if ($event.keyCode === KEY_CODE_ESC) {
             this.clear();
         }
     }
@@ -139,11 +138,11 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
     template: ''
 })
 export class CountrySelectPopupComponent implements OnInit {
-    routeSub: Subscription;
-
     constructor(private countrySelectPopupService: CountrySelectPopupService) {}
 
     ngOnInit() {
-        this.countrySelectPopupService.open();
+        setTimeout(() => {
+            this.countrySelectPopupService.open();
+        }, 0);
     }
 }

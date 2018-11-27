@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager } from 'ng-jhipster';
 import { IPort, Port } from './port.model';
 import { PortService } from './port.service';
-import { ITEMS_PER_PAGE_LIST } from 'app/shared';
+import { ITEMS_PER_PAGE_LIST, KEY_CODE_ENTER, KEY_CODE_ESC } from 'app/shared';
 import { PortSelectPopupService } from './port-select.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -24,12 +24,7 @@ export class PortSelectComponent implements OnInit, OnDestroy {
     queryCount: any;
     searchPortSubscription: Subscription;
 
-    constructor(
-        public activeModal: NgbActiveModal,
-        private eventManager: JhiEventManager,
-        private portService: PortService,
-        private jhiAlertService: JhiAlertService
-    ) {
+    constructor(public activeModal: NgbActiveModal, private eventManager: JhiEventManager, private portService: PortService) {
         this.port = new Port();
         this.ports = [];
         this.itemsPerPage = ITEMS_PER_PAGE_LIST;
@@ -95,17 +90,10 @@ export class PortSelectComponent implements OnInit, OnDestroy {
         this.ports = data;
     }
 
-    private onError(error: any) {
-        this.jhiAlertService.error(error.message, null, null);
-    }
-
     searchPort() {
         this.searchPortSubscription = this.portService
             .query(this.criteria())
-            .subscribe(
-                (res: HttpResponse<IPort[]>) => this.onSuccess(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res)
-            );
+            .subscribe((res: HttpResponse<IPort[]>) => this.onSuccess(res.body, res.headers));
     }
 
     resetPage() {
@@ -128,11 +116,11 @@ export class PortSelectComponent implements OnInit, OnDestroy {
     }
 
     searchKeyup($event) {
-        if ($event.keyCode === 13) {
+        if ($event.keyCode === KEY_CODE_ENTER) {
             this.resetPage();
             this.searchPort();
         }
-        if ($event.keyCode === 27) {
+        if ($event.keyCode === KEY_CODE_ESC) {
             this.clear();
         }
     }
@@ -145,6 +133,8 @@ export class PortSelectComponent implements OnInit, OnDestroy {
 export class PortSelectPopupComponent implements OnInit {
     constructor(private portSelectPopupService: PortSelectPopupService) {}
     ngOnInit() {
-        this.portSelectPopupService.open();
+        setTimeout(() => {
+            this.portSelectPopupService.open();
+        }, 0);
     }
 }

@@ -4,17 +4,16 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Correspondent } from './correspondent.model';
 import { CorrespondentService } from './correspondent.service';
-import { ITEMS_PER_PAGE_SMALL } from 'app/shared';
+import { ITEMS_PER_PAGE_LIST, KEY_CODE_ENTER, KEY_CODE_ESC } from 'app/shared';
 import { ActivatedRoute } from '@angular/router';
 import { CorrespondentSelectPopupService } from './correspondent-select.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'jhi-correspondent-select',
     templateUrl: './correspondent-select.component.html'
 })
 export class CorrespondentSelectComponent implements OnInit, OnDestroy {
-    selectCorrespondentPagingParams: any;
     correspondent: Correspondent;
     correspondents: Correspondent[];
     itemsPerPage: any;
@@ -24,6 +23,7 @@ export class CorrespondentSelectComponent implements OnInit, OnDestroy {
     predicate: any;
     totalItems: any;
     queryCount: any;
+    searchCorrespondentSubscription: Subscription;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -33,23 +33,21 @@ export class CorrespondentSelectComponent implements OnInit, OnDestroy {
     ) {
         this.correspondent = new Correspondent();
         this.correspondents = [];
+        this.itemsPerPage = ITEMS_PER_PAGE_LIST;
+        this.page = 1;
+        this.previousPage = 1;
+        this.reverse = 'asc';
+        this.predicate = 'id';
     }
 
-    ngOnDestroy() {}
+    ngOnDestroy() {
+        if (this.searchCorrespondentSubscription) {
+            this.searchCorrespondentSubscription.unsubscribe();
+        }
+    }
 
     ngOnInit() {
-        this.itemsPerPage = ITEMS_PER_PAGE_SMALL;
-        this.page = this.selectCorrespondentPagingParams.page;
-        this.previousPage = this.selectCorrespondentPagingParams.page;
-        this.reverse = this.selectCorrespondentPagingParams.ascending;
-        this.predicate = this.selectCorrespondentPagingParams.predicate;
-        this.correspondent.correspondentName = this.selectCorrespondentPagingParams.correspondentName;
-        this.correspondent.portPortName = this.selectCorrespondentPagingParams.portPortName;
         this.searchCorrespondent();
-    }
-
-    trackId(index: number, item: Correspondent) {
-        return item.id;
     }
 
     transition() {
@@ -97,7 +95,7 @@ export class CorrespondentSelectComponent implements OnInit, OnDestroy {
     }
 
     searchCorrespondent() {
-        this.correspondentService
+        this.searchCorrespondentSubscription = this.correspondentService
             .query(this.criteria())
             .subscribe(
                 (res: HttpResponse<Correspondent[]>) => this.onSuccess(res.body, res.headers),
@@ -125,11 +123,11 @@ export class CorrespondentSelectComponent implements OnInit, OnDestroy {
     }
 
     searchKeyup($event) {
-        if ($event.keyCode === 13) {
+        if ($event.keyCode === KEY_CODE_ENTER) {
             this.resetPage();
             this.searchCorrespondent();
         }
-        if ($event.keyCode === 27) {
+        if ($event.keyCode === KEY_CODE_ESC) {
             this.clear();
         }
     }
@@ -139,20 +137,14 @@ export class CorrespondentSelectComponent implements OnInit, OnDestroy {
     selector: 'jhi-correspondent-select-popup',
     template: ''
 })
-export class CorrespondentSelectPopupComponent implements OnInit, OnDestroy {
+export class CorrespondentSelectPopupComponent implements OnInit {
     routeSub: Subscription;
 
     constructor(private route: ActivatedRoute, private correspondentSelectPopupService: CorrespondentSelectPopupService) {}
 
     ngOnInit() {
-        this.routeSub = this.route.data.subscribe(data => {
-            this.correspondentSelectPopupService.open(data.selectCorrespondentPagingParams);
-        });
-    }
-
-    ngOnDestroy() {
-        if (this.routeSub) {
-            this.routeSub.unsubscribe();
-        }
+        setTimeout(() => {
+            this.correspondentSelectPopupService.open();
+        }, 0);
     }
 }

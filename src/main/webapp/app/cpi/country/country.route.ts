@@ -109,9 +109,6 @@ export const countryPopupRoute: Routes = [
     {
         path: 'country-select',
         component: CountrySelectPopupComponent,
-        resolve: {
-            selectCountryPagingParams: CountryResolvePagingParams
-        },
         data: {
             authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.country.home.title'

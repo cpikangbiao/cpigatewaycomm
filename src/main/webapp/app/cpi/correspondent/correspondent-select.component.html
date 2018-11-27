@@ -64,7 +64,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let _correspondent of correspondents ;trackBy: trackId"
+                    <tr *ngFor="let _correspondent of correspondents"
                         (click)="selectCorrespondent(_correspondent)">
                         <td>{{_correspondent.correspondentName}}</td>
                         <td>{{_correspondent.webSite}}</td>

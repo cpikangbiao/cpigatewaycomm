@@ -228,6 +228,7 @@ export class CorrespondentComponent implements OnInit, OnDestroy {
         this.correspondentName = null;
         this.portId = null;
         this.portName = null;
+        this.ports = [];
         this.countryId = null;
         this.countryName = null;
         this.page = 0;

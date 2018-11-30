@@ -40,11 +40,11 @@ export class CountryPopupService {
         const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static' });
         modalRef.componentInstance.country = country;
         modalRef.result.then(
-            (result: any) => {
+            () => {
                 this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
                 this.ngbModalRef = null;
             },
-            (reason: any) => {
+            () => {
                 this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
                 this.ngbModalRef = null;
             }

@@ -7,8 +7,6 @@ import {
     CountryDetailComponent,
     CountryDeletePopupComponent,
     CountryDeleteDialogComponent,
-    CountrySearchComponent,
-    CountrySearchPopupComponent,
     CountryEditComponent,
     CountrySelectComponent,
     CountrySelectPopupComponent
@@ -24,8 +22,6 @@ const ENTITY_STATES = [...countryRoute, ...countryPopupRoute];
         CountryDetailComponent,
         CountryDeleteDialogComponent,
         CountryDeletePopupComponent,
-        CountrySearchComponent,
-        CountrySearchPopupComponent,
         CountryEditComponent,
         CountrySelectComponent,
         CountrySelectPopupComponent
@@ -35,8 +31,6 @@ const ENTITY_STATES = [...countryRoute, ...countryPopupRoute];
         CountryDetailComponent,
         CountryDeleteDialogComponent,
         CountryDeletePopupComponent,
-        CountrySearchComponent,
-        CountrySearchPopupComponent,
         CountryEditComponent,
         CountrySelectComponent,
         CountrySelectPopupComponent

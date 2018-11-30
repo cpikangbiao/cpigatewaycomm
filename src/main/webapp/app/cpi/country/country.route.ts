@@ -7,7 +7,6 @@ import {
     CountryDetailComponent,
     CountryEditComponent,
     CountryDeletePopupComponent,
-    CountrySearchPopupComponent,
     CountrySelectPopupComponent
 } from './';
 
@@ -86,19 +85,6 @@ export const countryPopupRoute: Routes = [
     {
         path: 'country/:id/delete',
         component: CountryDeletePopupComponent,
-        data: {
-            authorities: ['ROLE_COMMUNICATION'],
-            pageTitle: 'cpigatewayApp.country.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
-    },
-    {
-        path: 'country-search',
-        component: CountrySearchPopupComponent,
-        resolve: {
-            pagingParams: CountryResolvePagingParams
-        },
         data: {
             authorities: ['ROLE_COMMUNICATION'],
             pageTitle: 'cpigatewayApp.country.home.title'

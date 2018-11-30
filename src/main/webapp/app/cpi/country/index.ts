@@ -4,7 +4,6 @@ export * from './country.service';
 export * from './country-delete-dialog.component';
 export * from './country-detail.component';
 export * from './country.component';
-export * from './country-search.component';
 export * from './country-edit.component';
 export * from './country-select.component';
 export * from './country-select.service';

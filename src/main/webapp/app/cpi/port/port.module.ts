@@ -2,17 +2,14 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DropdownModule } from 'primeng/components/dropdown/dropdown';
 import { CpigatewaycommSharedModule } from 'app/shared';
-import { portRoute, portPopupRoute, PortResolvePagingParams } from './port.route';
+import { portRoute, portPopupRoute } from './port.route';
 import {
-    PortService,
-    PortPopupService,
     PortComponent,
     PortDetailComponent,
     PortDeletePopupComponent,
     PortDeleteDialogComponent,
     PortSelectComponent,
     PortSelectPopupComponent,
-    PortSelectPopupService,
     PortEditComponent,
     PortListComponent
 } from './';
@@ -41,7 +38,7 @@ const ENTITY_STATES = [...portRoute, ...portPopupRoute];
         PortEditComponent,
         PortListComponent
     ],
-    providers: [PortService, PortPopupService, PortResolvePagingParams, PortSelectPopupService],
+    providers: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [PortListComponent]
 })

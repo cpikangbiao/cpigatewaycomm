@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { PortSelectComponent } from './port-select.component';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PortSelectPopupService {
     private ngbModalRef: NgbModalRef;
 

@@ -5,7 +5,7 @@ import { HttpResponse } from '@angular/common/http';
 import { IPort, Port } from './port.model';
 import { PortService } from './port.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PortPopupService {
     private ngbModalRef: NgbModalRef;
 

@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 
 export type EntityResponseType = HttpResponse<IPort>;
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PortService {
     private resourceUrl = SERVER_API_URL + 'cpicommunication/api/ports';
 

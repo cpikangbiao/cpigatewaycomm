@@ -4,7 +4,7 @@ import { JhiPaginationUtil } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
 import { PortComponent, PortDetailComponent, PortEditComponent, PortDeletePopupComponent, PortSelectPopupComponent } from './';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PortResolvePagingParams implements Resolve<any> {
     constructor(private paginationUtil: JhiPaginationUtil) {}
 

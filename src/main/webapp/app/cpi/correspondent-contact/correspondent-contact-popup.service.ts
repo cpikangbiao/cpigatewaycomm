@@ -5,16 +5,11 @@ import { HttpResponse } from '@angular/common/http';
 import { CorrespondentContact } from './correspondent-contact.model';
 import { CorrespondentContactService } from './correspondent-contact.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CorrespondentContactPopupService {
     private ngbModalRef: NgbModalRef;
 
-    constructor(
-        private modalService: NgbModal,
-        private router: Router,
-        private correspondentContactService: CorrespondentContactService
-
-    ) {
+    constructor(private modalService: NgbModal, private router: Router, private correspondentContactService: CorrespondentContactService) {
         this.ngbModalRef = null;
     }
 
@@ -26,12 +21,11 @@ export class CorrespondentContactPopupService {
             }
 
             if (id) {
-                this.correspondentContactService.find(id)
-                    .subscribe((correspondentContactResponse: HttpResponse<CorrespondentContact>) => {
-                        const correspondentContact: CorrespondentContact = correspondentContactResponse.body;
-                        this.ngbModalRef = this.correspondentContactModalRef(component, correspondentContact);
-                        resolve(this.ngbModalRef);
-                    });
+                this.correspondentContactService.find(id).subscribe((correspondentContactResponse: HttpResponse<CorrespondentContact>) => {
+                    const correspondentContact: CorrespondentContact = correspondentContactResponse.body;
+                    this.ngbModalRef = this.correspondentContactModalRef(component, correspondentContact);
+                    resolve(this.ngbModalRef);
+                });
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                 setTimeout(() => {
@@ -43,15 +37,18 @@ export class CorrespondentContactPopupService {
     }
 
     correspondentContactModalRef(component: Component, correspondentContact: CorrespondentContact): NgbModalRef {
-        const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static'});
+        const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static' });
         modalRef.componentInstance.correspondentContact = correspondentContact;
-        modalRef.result.then(result => {
-            this.router.navigate([{ outlets: { popup: null }}], { replaceUrl: true, queryParamsHandling: 'merge' });
-            this.ngbModalRef = null;
-        }, reason => {
-            this.router.navigate([{ outlets: { popup: null }}], { replaceUrl: true, queryParamsHandling: 'merge' });
-            this.ngbModalRef = null;
-        });
+        modalRef.result.then(
+            result => {
+                this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
+                this.ngbModalRef = null;
+            },
+            reason => {
+                this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
+                this.ngbModalRef = null;
+            }
+        );
         return modalRef;
     }
 }

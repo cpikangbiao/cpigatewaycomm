@@ -3,7 +3,7 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 import { CorrespondentContact } from './correspondent-contact.model';
 import { CorrespondentContactService } from './correspondent-contact.service';
-import { ITEMS_PER_PAGE } from 'app/shared';
+import { ITEMS_PER_PAGE, KEY_CODE_ENTER, KEY_CODE_ESC } from 'app/shared';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -149,11 +149,11 @@ export class CorrespondentContactComponent implements OnInit, OnDestroy {
     }
 
     searchKeyup($event) {
-        if ($event.keyCode === 13) {
+        if ($event.keyCode === KEY_CODE_ENTER) {
             this.resetPage();
             this.searchCorrespondentContact();
         }
-        if ($event.keyCode === 27) {
+        if ($event.keyCode === KEY_CODE_ESC) {
             this.clear();
         }
     }

@@ -9,7 +9,7 @@ import { map } from 'rxjs/internal/operators';
 
 export type EntityResponseType = HttpResponse<Correspondent>;
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CorrespondentService {
     private resourceUrl = SERVER_API_URL + 'cpicommunication/api/correspondents';
 

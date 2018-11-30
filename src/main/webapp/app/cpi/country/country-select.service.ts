@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { CountrySelectComponent } from './country-select.component';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CountrySelectPopupService {
     private ngbModalRef: NgbModalRef;
 

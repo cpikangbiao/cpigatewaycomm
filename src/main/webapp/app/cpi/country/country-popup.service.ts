@@ -5,7 +5,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Country, ICountry } from './country.model';
 import { CountryService } from './country.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CountryPopupService {
     private ngbModalRef: NgbModalRef;
 

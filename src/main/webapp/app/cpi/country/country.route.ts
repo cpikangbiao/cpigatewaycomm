@@ -11,7 +11,7 @@ import {
     CountrySelectPopupComponent
 } from './';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CountryResolvePagingParams implements Resolve<any> {
     constructor(private paginationUtil: JhiPaginationUtil) {}
 

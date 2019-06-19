@@ -4,7 +4,9 @@ import io.github.jhipster.security.PersistentTokenCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.web.client.HttpClientErrorException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -53,7 +55,7 @@ public class OAuth2AuthenticationService {
      * @param request  the request coming from the client.
      * @param response the response going back to the server.
      * @param params   the params holding the username, password and rememberMe.
-     * @return the OAuth2AccessToken as a ResponseEntity. Will return OK (200), if successful.
+     * @return the {@link OAuth2AccessToken} as a {@link ResponseEntity}. Will return {@code OK (200)}, if successful.
      * If the UAA cannot authenticate the user, the status code returned by UAA will be returned.
      */
     public ResponseEntity<OAuth2AccessToken> authenticate(HttpServletRequest request, HttpServletResponse response,
@@ -70,9 +72,9 @@ public class OAuth2AuthenticationService {
                 log.debug("successfully authenticated user {}", params.get("username"));
             }
             return ResponseEntity.ok(accessToken);
-        } catch (Exception ex) {
+        } catch (HttpClientErrorException ex) {
             log.error("failed to get OAuth2 tokens from UAA", ex);
-            throw ex;
+            throw new BadCredentialsException("Invalid credentials");
         }
     }
 
@@ -123,8 +125,7 @@ public class OAuth2AuthenticationService {
      *
      * @param refreshTokenValue the refresh token for which we want the results.
      * @return a RefreshGrantResult for that token. This will either be empty, if we are the first one to do the
-     * request,
-     * or contain some results already, if another thread already handled the grant for us.
+     * request, or contain some results already, if another thread already handled the grant for us.
      */
     private OAuth2Cookies getCachedCookies(String refreshTokenValue) {
         synchronized (recentlyRefreshed) {

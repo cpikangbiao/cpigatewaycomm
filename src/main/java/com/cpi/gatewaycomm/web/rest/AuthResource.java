@@ -1,6 +1,5 @@
 package com.cpi.gatewaycomm.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.gatewaycomm.security.oauth2.OAuth2AuthenticationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,14 +37,13 @@ public class AuthResource {
     /**
      * Authenticates a user setting the access and refresh token cookies.
      *
-     * @param request  the HttpServletRequest holding - among others - the headers passed from the client.
-     * @param response the HttpServletResponse getting the cookies set upon successful authentication.
+     * @param request  the {@link HttpServletRequest} holding - among others - the headers passed from the client.
+     * @param response the {@link HttpServletResponse} getting the cookies set upon successful authentication.
      * @param params   the login params (username, password, rememberMe).
      * @return the access token of the authenticated user. Will return an error code if it fails to authenticate the user.
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType
         .APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
     public ResponseEntity<OAuth2AccessToken> authenticate(HttpServletRequest request, HttpServletResponse response, @RequestBody
         Map<String, String> params) {
         return authenticationService.authenticate(request, response, params);
@@ -54,12 +52,11 @@ public class AuthResource {
     /**
      * Logout current user deleting his cookies.
      *
-     * @param request  the HttpServletRequest holding - among others - the headers passed from the client.
-     * @param response the HttpServletResponse getting the cookies set upon successful authentication.
+     * @param request  the {@link HttpServletRequest} holding - among others - the headers passed from the client.
+     * @param response the {@link HttpServletResponse} getting the cookies set upon successful authentication.
      * @return an empty response entity.
      */
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    @Timed
     public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
         log.info("logging out user {}", SecurityContextHolder.getContext().getAuthentication().getName());
         authenticationService.logout(request, response);

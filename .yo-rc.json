@@ -4,7 +4,7 @@
       "packageName": "com.cpi.gatewaycomm",
       "nativeLanguage": "en"
     },
-    "jhipsterVersion": "5.2.1",
+    "jhipsterVersion": "6.1.0",
     "applicationType": "gateway",
     "baseName": "cpigatewaycomm",
     "packageName": "com.cpi.gatewaycomm",
@@ -30,9 +30,10 @@
     "jhiPrefix": "jhi",
     "enableTranslation": true,
     "nativeLanguage": "en",
-    "languages": [
-      "en",
-      "zh-cn"
-    ]
+    "languages": ["en", "zh-cn"],
+    "clientTheme": "none",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": []
   }
 }

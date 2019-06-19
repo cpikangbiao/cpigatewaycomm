@@ -4,9 +4,10 @@ import { JhiLoginModalComponent } from 'app/shared/login/login.component';
 
 @Injectable({ providedIn: 'root' })
 export class LoginModalService {
-    private isOpen = false;
-    constructor(private modalService: NgbModal) {}
+  private isOpen = false;
+  constructor(private modalService: NgbModal) {}
 
+<<<<<<< HEAD
     open(): NgbModalRef {
         if (this.isOpen) {
             return;
@@ -28,5 +29,22 @@ export class LoginModalService {
             }
         );
         return modalRef;
+=======
+  open(): NgbModalRef {
+    if (this.isOpen) {
+      return;
+>>>>>>> jhipster_upgrade
     }
+    this.isOpen = true;
+    const modalRef = this.modalService.open(JhiLoginModalComponent);
+    modalRef.result.then(
+      result => {
+        this.isOpen = false;
+      },
+      reason => {
+        this.isOpen = false;
+      }
+    );
+    return modalRef;
+  }
 }

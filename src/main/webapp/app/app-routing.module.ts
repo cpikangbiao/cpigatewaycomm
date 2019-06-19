@@ -6,18 +6,18 @@ import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 const LAYOUT_ROUTES = [...errorRoute];
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot(
-            [
-                ...LAYOUT_ROUTES,
-                {
-                    path: 'admin',
-                    loadChildren: './admin/admin.module#CpigatewaycommAdminModule'
-                }
-            ],
-            { useHash: true, enableTracing: DEBUG_INFO_ENABLED }
-        )
-    ],
-    exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(
+      [
+        {
+          path: 'admin',
+          loadChildren: './admin/admin.module#CpigatewaycommAdminModule'
+        },
+        ...LAYOUT_ROUTES
+      ],
+      { enableTracing: DEBUG_INFO_ENABLED }
+    )
+  ],
+  exports: [RouterModule]
 })
 export class CpigatewaycommAppRoutingModule {}

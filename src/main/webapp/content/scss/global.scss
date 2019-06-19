@@ -1,4 +1,6 @@
 @import 'bootstrap-variables';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
 
 /* ==============================================================
 Bootstrap tweaks
@@ -9,27 +11,33 @@ h1,
 h2,
 h3,
 h4 {
-    font-weight: 300;
+  font-weight: 300;
 }
 
 a {
-    color: #533f03;
-    font-weight: bold;
+  color: #533f03;
+  font-weight: bold;
 }
 
 a:hover {
-    color: #533f03;
-    font-weight: bold;
+  color: #533f03;
+  font-weight: bold;
+  /* make sure browsers use the pointer cursor for anchors, even with no href */
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  color: $dropdown-link-hover-color;
 }
 
 /* ==========================================================================
 Browser Upgrade Prompt
 ========================================================================== */
 .browserupgrade {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
 }
 
 /* ==========================================================================
@@ -39,166 +47,119 @@ Generic styles
 /* Error highlight on input fields */
 .ng-valid[required],
 .ng-valid.required {
-    border-left: 5px solid green;
+  border-left: 5px solid green;
 }
 
 .ng-invalid:not(form) {
-    border-left: 5px solid red;
+  border-left: 5px solid red;
 }
 
 /* other generic styles */
 
 .jh-card {
-    padding: 1.5%;
-    margin-top: 20px;
-    border: none;
+  padding: 1.5%;
+  margin-top: 20px;
+  border: none;
 }
 
 .error {
-    color: white;
-    background-color: red;
+  color: white;
+  background-color: red;
 }
 
 .pad {
-    padding: 10px;
+  padding: 10px;
 }
 
 .w-40 {
-    width: 40% !important;
+  width: 40% !important;
 }
 
 .w-60 {
-    width: 60% !important;
+  width: 60% !important;
 }
 
 .break {
-    white-space: normal;
-    word-break: break-all;
+  white-space: normal;
+  word-break: break-all;
 }
 
 .readonly {
-    background-color: #eee;
-    opacity: 1;
+  background-color: #eee;
+  opacity: 1;
 }
 
 .footer {
-    border-top: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-/* ==========================================================================
-make sure browsers use the pointer cursor for anchors, even with no href
-========================================================================== */
-a:hover {
-    cursor: pointer;
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .hand,
 [jhisortby] {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* ==========================================================================
 Custom alerts for notification
 ========================================================================== */
 .alerts {
-    .alert {
-        text-overflow: ellipsis;
-        pre {
-            background: none;
-            border: none;
-            font: inherit;
-            color: inherit;
-            padding: 0;
-            margin: 0;
-        }
-        .popover pre {
-            font-size: 10px;
-        }
+  .alert {
+    text-overflow: ellipsis;
+    pre {
+      background: none;
+      border: none;
+      font: inherit;
+      color: inherit;
+      padding: 0;
+      margin: 0;
     }
-    .toast {
-        position: fixed;
-        width: 100%;
-        &.left {
-            left: 5px;
-        }
-        &.right {
-            right: 5px;
-        }
-        &.top {
-            top: 55px;
-        }
-        &.bottom {
-            bottom: 55px;
-        }
+    .popover pre {
+      font-size: 10px;
     }
+  }
+  .jhi-toast {
+    position: fixed;
+    width: 100%;
+    &.left {
+      left: 5px;
+    }
+    &.right {
+      right: 5px;
+    }
+    &.top {
+      top: 55px;
+    }
+    &.bottom {
+      bottom: 55px;
+    }
+  }
 }
 
 @media screen and (min-width: 480px) {
-    .alerts .toast {
-        width: 50%;
-    }
-}
-
-/* ==========================================================================
-entity tables helpers
-========================================================================== */
-
-/* Remove Bootstrap padding from the element
-http://stackoverflow.com/questions/19562903/remove-padding-from-columns-in-bootstrap-3 */
-@mixin no-padding($side) {
-    @if $side == 'all' {
-        .no-padding {
-            padding: 0 !important;
-        }
-    } @else {
-        .no-padding-#{$side} {
-            padding-#{$side}: 0 !important;
-        }
-    }
-}
-@include no-padding('left');
-@include no-padding('right');
-@include no-padding('top');
-@include no-padding('bottom');
-@include no-padding('all');
-
-/* bootstrap 3 input-group 100% width
-http://stackoverflow.com/questions/23436430/bootstrap-3-input-group-100-width */
-.width-min {
-    width: 1% !important;
-}
-
-/* Makes toolbar not wrap on smaller screens
-http://www.sketchingwithcss.com/samplechapter/cheatsheet.html#right */
-.flex-btn-group-container {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-    -webkit-justify-content: flex-end;
-    justify-content: flex-end;
+  .alerts .jhi-toast {
+    width: 50%;
+  }
 }
 
 /* ==========================================================================
 entity detail page css
 ========================================================================== */
 .row.jh-entity-details > {
-    dd {
-        margin-bottom: 15px;
-    }
+  dd {
+    margin-bottom: 15px;
+  }
 }
 
 @media screen and (min-width: 768px) {
-    .row.jh-entity-details > {
-        dt {
-            margin-bottom: 15px;
-        }
-        dd {
-            border-bottom: 1px solid #eee;
-            padding-left: 180px;
-            margin-left: 0;
-        }
+  .row.jh-entity-details > {
+    dt {
+      margin-bottom: 15px;
     }
+    dd {
+      border-bottom: 1px solid #eee;
+      padding-left: 180px;
+      margin-left: 0;
+    }
+  }
 }
 
 /* ==========================================================================
@@ -208,142 +169,132 @@ ui bootstrap tweaks
 .pagination,
 .carousel,
 .panel-title a {
-    cursor: pointer;
-}
-
-.datetime-picker-dropdown > li.date-picker-menu div > table .btn-default,
-.uib-datepicker-popup > li > div.uib-datepicker > table .btn-default {
-    border: 0;
-}
-
-.datetime-picker-dropdown > li.date-picker-menu div > table:focus,
-.uib-datepicker-popup > li > div.uib-datepicker > table:focus {
-    outline: none;
+  cursor: pointer;
 }
 
 .thread-dump-modal-lock {
-    max-width: 450px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  max-width: 450px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
 
 .login-window {
-    background: rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 1);
 }
 
 .login-window > div,
 .login-window > div > div,
 .login-window > div > div > jhi-login-modal,
 .login-window > div > div > jhi-login-modal > div {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    max-width: none;
-    max-height: none;
-    width: 100%;
-    height: 100%;
-    overflow-x: auto;
-    overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  max-width: none;
+  max-height: none;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 .select-arrow-hide {
-    -ms-appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    -o-appearance: none;
-    appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -o-appearance: none;
+  appearance: none;
 }
 
 .spanBlock {
-    display: block;
-    float: left;
+  display: block;
+  float: left;
 }
 
 .pCalendar {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .pCalendar input {
-    width: 100%;
-    height: 36px;
+  width: 100%;
+  height: 36px;
 }
 
 table {
-    table-layout: fixed !important;
+  table-layout: fixed !important;
 }
 
 table thead tr th {
-    horiz-align: center !important;
-    vertical-align: middle !important;
+  horiz-align: center !important;
+  vertical-align: middle !important;
 }
 
 table tbody tr td {
-    horiz-align: center !important;
-    vertical-align: middle !important;
+  horiz-align: center !important;
+  vertical-align: middle !important;
 }
 
 pre {
-    white-space: pre-wrap;
-    word-wrap: break-word;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .singleLine {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .preHeightMD {
-    min-height: 50px;
-    max-height: 180px;
-    overflow-y: auto;
+  min-height: 50px;
+  max-height: 180px;
+  overflow-y: auto;
 }
 
 .buttonMD {
-    width: 36px;
-    height: 36px;
-    margin: -10px;
+  width: 36px;
+  height: 36px;
+  margin: -10px;
 }
 
 .inputHeightMD {
-    height: 36px;
+  height: 36px;
 }
 
 input {
-    height: 36px;
+  height: 36px;
 }
 
 .noMargin {
-    margin: 0px !important;
+  margin: 0px !important;
 }
 
 .m-timeline-3-time-fit .m-timeline-3__item .m-timeline-3__item-time {
-    width: 8rem !important;
-    font-size: 0.92rem !important;
+  width: 8rem !important;
+  font-size: 0.92rem !important;
 }
 
 .m-timeline-3-time-fit .m-timeline-3__item:before {
-    left: 10rem !important;
+  left: 10rem !important;
 }
 
 .m-timeline-3-time-fit .m-timeline-3__item .m-timeline-3__item-desc {
-    padding-left: 12rem !important;
+  padding-left: 12rem !important;
 }
 
 .m-timeline-2-fit:before {
-    left: 12rem !important;
+  left: 12rem !important;
 }
 .m-timeline-2-fit .m-timeline-2__items .m-timeline-2__item .m-timeline-2__item-cricle {
-    left: 11.2rem !important;
+  left: 11.2rem !important;
 }
 .m-timeline-2-fit .m-timeline-2__items .m-timeline-2__item .m-timeline-2__item-text {
-    padding-left: 11.4rem !important;
+  padding-left: 11.4rem !important;
 }
 
 .newLine {
-    clear: both;
+  clear: both;
 }

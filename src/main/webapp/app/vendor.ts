@@ -6,40 +6,40 @@ import '../content/scss/vendor.scss';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faUser,
-    faSort,
-    faSortUp,
-    faSortDown,
-    faSync,
-    faEye,
-    faBan,
-    faTimes,
-    faArrowLeft,
-    faSave,
-    faPlus,
-    faPencilAlt,
-    faBars,
-    faThList,
-    faUserPlus,
-    faRoad,
-    faTachometerAlt,
-    faHeart,
-    faList,
-    faBell,
-    faBook,
-    faHdd,
-    faFlag,
-    faWrench,
-    faClock,
-    faCloud,
-    faSignOutAlt,
-    faSignInAlt,
-    faCalendarAlt,
-    faSearch,
-    faTrashAlt,
-    faAsterisk,
-    faTasks,
-    faHome
+  faUser,
+  faSort,
+  faSortUp,
+  faSortDown,
+  faSync,
+  faEye,
+  faBan,
+  faTimes,
+  faArrowLeft,
+  faSave,
+  faPlus,
+  faPencilAlt,
+  faBars,
+  faThList,
+  faUserPlus,
+  faRoad,
+  faTachometerAlt,
+  faHeart,
+  faList,
+  faBell,
+  faBook,
+  faHdd,
+  faFlag,
+  faWrench,
+  faLock,
+  faCloud,
+  faSignOutAlt,
+  faSignInAlt,
+  faCalendarAlt,
+  faSearch,
+  faTrashAlt,
+  faAsterisk,
+  faTasks,
+  faHome
 } from '@fortawesome/free-solid-svg-icons';
 
 // Adds the SVG icon to the library so you can use it in your page
@@ -69,7 +69,7 @@ library.add(faBook);
 library.add(faHdd);
 library.add(faFlag);
 library.add(faWrench);
-library.add(faClock);
+library.add(faLock);
 library.add(faCloud);
 library.add(faSignOutAlt);
 library.add(faSignInAlt);
@@ -79,6 +79,6 @@ library.add(faTrashAlt);
 library.add(faAsterisk);
 
 import 'quill/dist/quill.js';
- import '../../../../node_modules/fullcalendar/dist/fullcalendar.js';
+import '../../../../node_modules/fullcalendar/dist/fullcalendar.js';
 import 'chart.js/src/chart.js';
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

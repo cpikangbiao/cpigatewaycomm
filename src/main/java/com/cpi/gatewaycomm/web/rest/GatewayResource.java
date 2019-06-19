@@ -13,8 +13,6 @@ import org.springframework.security.access.annotation.Secured;
 import com.cpi.gatewaycomm.security.AuthoritiesConstants;
 import org.springframework.web.bind.annotation.*;
 
-import com.codahale.metrics.annotation.Timed;
-
 /**
  * REST controller for managing Gateway configuration.
  */
@@ -32,12 +30,11 @@ public class GatewayResource {
     }
 
     /**
-     * GET  /routes : get the active routes.
+     * {@code GET  /routes} : get the active routes.
      *
-     * @return the ResponseEntity with status 200 (OK) and with body the list of routes
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of routes.
      */
     @GetMapping("/routes")
-    @Timed
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<RouteVM>> activeRoutes() {
         List<Route> routes = routeLocator.getRoutes();
@@ -49,6 +46,6 @@ public class GatewayResource {
             routeVM.setServiceInstances(discoveryClient.getInstances(route.getLocation()));
             routeVMs.add(routeVM);
         });
-        return new ResponseEntity<>(routeVMs, HttpStatus.OK);
+        return ResponseEntity.ok(routeVMs);
     }
 }

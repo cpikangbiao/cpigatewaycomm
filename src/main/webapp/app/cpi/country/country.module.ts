@@ -1,20 +1,15 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CpigatewaycommSharedModule } from 'app/shared';
-import { countryRoute, countryPopupRoute, CountryResolvePagingParams } from './country.route';
+import { countryRoute, countryPopupRoute } from './country.route';
 import {
-    CountryService,
-    CountryPopupService,
     CountryComponent,
     CountryDetailComponent,
     CountryDeletePopupComponent,
     CountryDeleteDialogComponent,
-    CountrySearchComponent,
-    CountrySearchPopupComponent,
     CountryEditComponent,
     CountrySelectComponent,
-    CountrySelectPopupComponent,
-    CountrySelectPopupService
+    CountrySelectPopupComponent
 } from './';
 import { CpigatewayPortModule } from '../port/port.module';
 
@@ -27,8 +22,6 @@ const ENTITY_STATES = [...countryRoute, ...countryPopupRoute];
         CountryDetailComponent,
         CountryDeleteDialogComponent,
         CountryDeletePopupComponent,
-        CountrySearchComponent,
-        CountrySearchPopupComponent,
         CountryEditComponent,
         CountrySelectComponent,
         CountrySelectPopupComponent
@@ -38,13 +31,11 @@ const ENTITY_STATES = [...countryRoute, ...countryPopupRoute];
         CountryDetailComponent,
         CountryDeleteDialogComponent,
         CountryDeletePopupComponent,
-        CountrySearchComponent,
-        CountrySearchPopupComponent,
         CountryEditComponent,
         CountrySelectComponent,
         CountrySelectPopupComponent
     ],
-    providers: [CountryService, CountryPopupService, CountryResolvePagingParams, CountrySelectPopupService],
+    providers: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CpigatewayCountryModule {}

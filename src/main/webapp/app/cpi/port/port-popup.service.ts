@@ -5,7 +5,7 @@ import { HttpResponse } from '@angular/common/http';
 import { IPort, Port } from './port.model';
 import { PortService } from './port.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PortPopupService {
     private ngbModalRef: NgbModalRef;
 
@@ -40,11 +40,11 @@ export class PortPopupService {
         const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static' });
         modalRef.componentInstance.port = port;
         modalRef.result.then(
-            (result: any) => {
+            () => {
                 this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
                 this.ngbModalRef = null;
             },
-            (reason: any) => {
+            () => {
                 this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
                 this.ngbModalRef = null;
             }

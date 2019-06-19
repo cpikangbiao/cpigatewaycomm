@@ -1,14 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CpigatewaycommSharedModule } from 'app/shared';
+import { correspondentContactRoute, correspondentContactPopupRoute } from './correspondent-contact.route';
 import {
-    correspondentContactRoute,
-    correspondentContactPopupRoute,
-    CorrespondentContactResolvePagingParams
-} from './correspondent-contact.route';
-import {
-    CorrespondentContactService,
-    CorrespondentContactPopupService,
     CorrespondentContactComponent,
     CorrespondentContactDetailComponent,
     CorrespondentContactDeletePopupComponent,
@@ -37,7 +31,7 @@ const ENTITY_STATES = [...correspondentContactRoute, ...correspondentContactPopu
         CorrespondentContactEditComponent,
         CorrespondentContactListComponent
     ],
-    providers: [CorrespondentContactService, CorrespondentContactPopupService, CorrespondentContactResolvePagingParams],
+    providers: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [CorrespondentContactListComponent]
 })

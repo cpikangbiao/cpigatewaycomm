@@ -10,7 +10,7 @@ import {
     CorrespondentSelectPopupComponent
 } from './';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CorrespondentResolvePagingParams implements Resolve<any> {
     constructor(private paginationUtil: JhiPaginationUtil) {}
 

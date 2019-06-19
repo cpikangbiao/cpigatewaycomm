@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { CorrespondentSelectComponent } from './correspondent-select.component';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CorrespondentSelectPopupService {
     private ngbModalRef: NgbModalRef;
 

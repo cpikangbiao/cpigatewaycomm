@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 
 export type EntityResponseType = HttpResponse<ICountry>;
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CountryService {
     private resourceUrl = SERVER_API_URL + 'cpicommunication/api/countries';
 

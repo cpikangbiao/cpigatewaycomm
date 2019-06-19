@@ -9,7 +9,7 @@ import {
     CorrespondentContactDeletePopupComponent
 } from './';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CorrespondentContactResolvePagingParams implements Resolve<any> {
     constructor(private paginationUtil: JhiPaginationUtil) {}
 

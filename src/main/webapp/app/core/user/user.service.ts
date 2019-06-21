@@ -24,21 +24,14 @@ export class UserService {
     return this.http.get<IUser>(`${this.resourceUrl}/${login}`, { observe: 'response' });
   }
 
-<<<<<<< HEAD
-    findById(id: number): Observable<HttpResponse<IUser>> {
-        return this.http.get<IUser>(`${this.resourceUrl}/id/${id}`, { observe: 'response' });
-    }
+  findById(id: number): Observable<HttpResponse<IUser>> {
+    return this.http.get<IUser>(`${this.resourceUrl}/id/${id}`, { observe: 'response' });
+  }
 
-    query(req?: any): Observable<HttpResponse<IUser[]>> {
-        const options = createRequestOption(req);
-        return this.http.get<IUser[]>(this.resourceUrl, { params: options, observe: 'response' });
-    }
-=======
   query(req?: any): Observable<HttpResponse<IUser[]>> {
     const options = createRequestOption(req);
     return this.http.get<IUser[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
->>>>>>> jhipster_upgrade
 
   delete(login: string): Observable<HttpResponse<any>> {
     return this.http.delete(`${this.resourceUrl}/${login}`, { observe: 'response' });

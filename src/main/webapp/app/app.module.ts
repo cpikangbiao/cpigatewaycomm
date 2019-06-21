@@ -15,65 +15,11 @@ import { CpigatewaycommCoreModule } from 'app/core';
 import { CpigatewaycommAppRoutingModule } from './app-routing.module';
 import { CpigatewaycommHomeModule } from 'app/home';
 import { CpigatewaycommAccountModule } from './account/account.module';
-<<<<<<< HEAD
-import { CpigatewaycommEntityModule } from 'app/cpi/cpi.module';
-import {
-    JhiMainComponent,
-    FooterComponent,
-    PageRibbonComponent,
-    ActiveMenuDirective,
-    ErrorComponent,
-    HeaderNavComponent,
-    AsideNavComponent,
-    ScrollTopComponent
-} from './layouts';
 
-@NgModule({
-    imports: [
-        BrowserModule,
-        CpigatewaycommAppRoutingModule,
-        Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
-        CpigatewaycommSharedModule,
-        CpigatewaycommCoreModule,
-        CpigatewaycommHomeModule,
-        CpigatewaycommAccountModule,
-        CpigatewaycommEntityModule
-    ],
-    declarations: [
-        JhiMainComponent,
-        ErrorComponent,
-        PageRibbonComponent,
-        ActiveMenuDirective,
-        FooterComponent,
-        HeaderNavComponent,
-        AsideNavComponent,
-        ScrollTopComponent
-    ],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: AuthExpiredInterceptor,
-            multi: true,
-            deps: [Injector]
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: ErrorHandlerInterceptor,
-            multi: true,
-            deps: [JhiEventManager]
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: NotificationInterceptor,
-            multi: true,
-            deps: [Injector]
-        }
-    ],
-    bootstrap: [JhiMainComponent]
-=======
-import { CpigatewaycommEntityModule } from './entities/entity.module';
+import { CpigatewaycommCpiModule } from './cpi/cpi.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
+
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
 @NgModule({
@@ -92,7 +38,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
     CpigatewaycommHomeModule,
     CpigatewaycommAccountModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
-    CpigatewaycommEntityModule,
+    CpigatewaycommCpiModule,
     CpigatewaycommAppRoutingModule
   ],
   declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
@@ -114,7 +60,6 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
     }
   ],
   bootstrap: [JhiMainComponent]
->>>>>>> jhipster_upgrade
 })
 export class CpigatewaycommAppModule {
   constructor(private dpConfig: NgbDatepickerConfig) {

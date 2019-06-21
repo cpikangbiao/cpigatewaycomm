@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 import { Component, AfterViewInit, Renderer, ElementRef, ViewEncapsulation } from '@angular/core';
-=======
-import { Component, AfterViewInit, Renderer, ElementRef } from '@angular/core';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
->>>>>>> jhipster_upgrade
+
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { JhiEventManager } from 'ng-jhipster';
@@ -13,14 +11,9 @@ import { StateStorageService } from 'app/core/auth/state-storage.service';
 import {} from '@angular/core';
 
 @Component({
-<<<<<<< HEAD
-    selector: 'jhi-login-modal',
-    templateUrl: './login.component.html',
-    encapsulation: ViewEncapsulation.None,
-=======
   selector: 'jhi-login-modal',
   templateUrl: './login.component.html'
->>>>>>> jhipster_upgrade
+  // encapsulation: ViewEncapsulation.None,
 })
 export class JhiLoginModalComponent implements AfterViewInit {
   authenticationError: boolean;
@@ -31,11 +24,6 @@ export class JhiLoginModalComponent implements AfterViewInit {
     rememberMe: [true]
   });
 
-<<<<<<< HEAD
-    ngAfterViewInit() {
-        this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#username'), 'focus', []);
-    }
-=======
   constructor(
     private eventManager: JhiEventManager,
     private loginService: LoginService,
@@ -46,7 +34,6 @@ export class JhiLoginModalComponent implements AfterViewInit {
     public activeModal: NgbActiveModal,
     private fb: FormBuilder
   ) {}
->>>>>>> jhipster_upgrade
 
   ngAfterViewInit() {
     setTimeout(() => this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#username'), 'focus', []), 0);
@@ -98,28 +85,21 @@ export class JhiLoginModalComponent implements AfterViewInit {
     this.router.navigate(['/register']);
   }
 
-<<<<<<< HEAD
-    requestResetPassword() {
-        this.activeModal.dismiss('to state requestReset');
-        this.router.navigate(['/reset', 'request']);
-    }
-
-    usernameKeyup($event) {
-        if ($event.keyCode === 13) {
-            // document.getElementById('password').focus();
-            this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#password'), 'focus', []);
-        }
-    }
-
-    passwordKeyup($event) {
-        if ($event.keyCode === 13) {
-            this.login();
-        }
-    }
-=======
   requestResetPassword() {
     this.activeModal.dismiss('to state requestReset');
     this.router.navigate(['/reset', 'request']);
   }
->>>>>>> jhipster_upgrade
+
+  usernameKeyup($event) {
+    if ($event.keyCode === 13) {
+      // document.getElementById('password').focus();
+      this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#password'), 'focus', []);
+    }
+  }
+
+  passwordKeyup($event) {
+    if ($event.keyCode === 13) {
+      this.login();
+    }
+  }
 }

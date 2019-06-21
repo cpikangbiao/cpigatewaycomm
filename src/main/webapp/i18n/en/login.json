@@ -1,24 +1,6 @@
 {
-<<<<<<< HEAD
-    "login": {
-        "title": "Communication",
-        "form": {
-            "password": "Password",
-            "password.placeholder": "Your password",
-            "rememberme": "Remember me",
-            "button": "Sign in"
-        },
-        "messages": {
-            "error": {
-                "authentication": "<strong>Failed to sign in!</strong> Please check your credentials and try again."
-            }
-        },
-        "password" : {
-            "forgot": "Did you forget your password?"
-        }
-=======
   "login": {
-    "title": "Sign in",
+    "title": "Communication",
     "form": {
       "password": "Password",
       "password.placeholder": "Your password",
@@ -32,7 +14,6 @@
     },
     "password": {
       "forgot": "Did you forget your password?"
->>>>>>> jhipster_upgrade
     }
   }
 }

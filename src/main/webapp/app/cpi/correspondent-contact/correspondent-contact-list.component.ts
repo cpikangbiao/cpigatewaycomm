@@ -3,121 +3,121 @@ import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 import { CorrespondentContact } from './correspondent-contact.model';
 import { CorrespondentContactService } from './correspondent-contact.service';
 import { ITEMS_PER_PAGE_LIST } from 'app/shared';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'jhi-correspondent-contact-list',
-    templateUrl: './correspondent-contact-list.component.html'
+  selector: 'jhi-correspondent-contact-list',
+  templateUrl: './correspondent-contact-list.component.html'
 })
 export class CorrespondentContactListComponent implements OnInit, OnDestroy {
-    correspondentId: number;
-    correspondentContacts: CorrespondentContact[];
-    itemsPerPage: any;
-    page: any;
-    previousPage: any;
-    reverse: any;
-    predicate: any;
-    totalItems: any;
-    queryCount: any;
-    routeSub: Subscription;
-    correspondentContactInitSubscription: Subscription;
-    searchCorrespondentContactSubscription: Subscription;
-    correspondentContactSubscription: Subscription;
+  correspondentId: number;
+  correspondentContacts: CorrespondentContact[];
+  itemsPerPage: any;
+  page: any;
+  previousPage: any;
+  reverse: any;
+  predicate: any;
+  totalItems: any;
+  queryCount: any;
+  routeSub: Subscription;
+  correspondentContactInitSubscription: Subscription;
+  searchCorrespondentContactSubscription: Subscription;
+  correspondentContactSubscription: Subscription;
 
-    constructor(
-        private correspondentContactService: CorrespondentContactService,
-        private jhiAlertService: JhiAlertService,
-        private correspondentContactEventManager: JhiEventManager,
-        private correspondentContactInitEventManager: JhiEventManager
-    ) {
-        this.correspondentId = null;
-        this.correspondentContacts = [];
-        this.itemsPerPage = ITEMS_PER_PAGE_LIST;
-        this.page = 1;
-        this.previousPage = 1;
-        this.reverse = 'asc';
-        this.predicate = 'id';
+  constructor(
+    private correspondentContactService: CorrespondentContactService,
+    private jhiAlertService: JhiAlertService,
+    private correspondentContactEventManager: JhiEventManager,
+    private correspondentContactInitEventManager: JhiEventManager
+  ) {
+    this.correspondentId = null;
+    this.correspondentContacts = [];
+    this.itemsPerPage = ITEMS_PER_PAGE_LIST;
+    this.page = 1;
+    this.previousPage = 1;
+    this.reverse = 'asc';
+    this.predicate = 'id';
+  }
+
+  ngOnInit() {
+    this.correspondentContactListInit();
+    this.registerChangeInCorrespondentContact();
+  }
+
+  ngOnDestroy() {
+    if (this.routeSub) {
+      this.routeSub.unsubscribe();
     }
-
-    ngOnInit() {
-        this.correspondentContactListInit();
-        this.registerChangeInCorrespondentContact();
+    if (this.searchCorrespondentContactSubscription) {
+      this.searchCorrespondentContactSubscription.unsubscribe();
     }
-
-    ngOnDestroy() {
-        if (this.routeSub) {
-            this.routeSub.unsubscribe();
-        }
-        if (this.searchCorrespondentContactSubscription) {
-            this.searchCorrespondentContactSubscription.unsubscribe();
-        }
-        if (this.correspondentContactSubscription) {
-            this.correspondentContactEventManager.destroy(this.correspondentContactSubscription);
-        }
+    if (this.correspondentContactSubscription) {
+      this.correspondentContactEventManager.destroy(this.correspondentContactSubscription);
     }
+  }
 
-    registerChangeInCorrespondentContact() {
-        this.correspondentContactSubscription = this.correspondentContactEventManager.subscribe(
-            'correspondentContactListModification',
-            correspondentContact => this.searchCorrespondentContact()
-        );
-    }
+  registerChangeInCorrespondentContact() {
+    this.correspondentContactSubscription = this.correspondentContactEventManager.subscribe(
+      'correspondentContactListModification',
+      correspondentContact => this.searchCorrespondentContact()
+    );
+  }
 
-    correspondentContactListInit() {
-        this.correspondentContactInitSubscription = this.correspondentContactInitEventManager.subscribe(
-            'correspondentContactListInit',
-            correspondent => {
-                this.correspondentId = correspondent.content.id;
-                this.searchCorrespondentContact();
-                if (this.correspondentContactInitSubscription) {
-                    this.correspondentContactInitEventManager.destroy(this.correspondentContactInitSubscription);
-                }
-            }
-        );
-    }
-
-    transition() {
+  correspondentContactListInit() {
+    this.correspondentContactInitSubscription = this.correspondentContactInitEventManager.subscribe(
+      'correspondentContactListInit',
+      correspondent => {
+        this.correspondentId = correspondent.content.id;
         this.searchCorrespondentContact();
-    }
-
-    loadPage(page: number) {
-        if (page !== this.previousPage) {
-            this.previousPage = page;
-            this.transition();
+        if (this.correspondentContactInitSubscription) {
+          this.correspondentContactInitEventManager.destroy(this.correspondentContactInitSubscription);
         }
-    }
+      }
+    );
+  }
 
-    criteria() {
-        const result = {
-            page: this.page - 1,
-            size: this.itemsPerPage,
-            sort: this.sort(),
-            'correspondentId.equals': this.correspondentId
-        };
-        return result;
-    }
+  transition() {
+    this.searchCorrespondentContact();
+  }
 
-    sort() {
-        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-        if (this.predicate !== 'id') {
-            result.push('id');
-        }
-        return result;
+  loadPage(page: number) {
+    if (page !== this.previousPage) {
+      this.previousPage = page;
+      this.transition();
     }
+  }
 
-    private onSuccess(data, headers) {
-        this.totalItems = headers.get('X-Total-Count');
-        this.queryCount = this.totalItems;
-        this.correspondentContacts = data;
-    }
+  criteria() {
+    const result = {
+      page: this.page - 1,
+      size: this.itemsPerPage,
+      sort: this.sort(),
+      'correspondentId.equals': this.correspondentId
+    };
+    return result;
+  }
 
-    private onError(error) {
-        this.jhiAlertService.error(error.message, null, null);
+  sort() {
+    const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
+    if (this.predicate !== 'id') {
+      result.push('id');
     }
+    return result;
+  }
 
-    searchCorrespondentContact() {
-        this.searchCorrespondentContactSubscription = this.correspondentContactService
-            .query(this.criteria())
-            .subscribe(correspondentContacts => this.onSuccess(correspondentContacts.body, correspondentContacts.headers));
-    }
+  private onSuccess(data, headers) {
+    this.totalItems = headers.get('X-Total-Count');
+    this.queryCount = this.totalItems;
+    this.correspondentContacts = data;
+  }
+
+  private onError(error) {
+    this.jhiAlertService.error(error.message, null, null);
+  }
+
+  searchCorrespondentContact() {
+    this.searchCorrespondentContactSubscription = this.correspondentContactService
+      .query(this.criteria())
+      .subscribe(correspondentContacts => this.onSuccess(correspondentContacts.body, correspondentContacts.headers));
+  }
 }

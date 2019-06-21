@@ -1,27 +1,23 @@
 import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
-import { Principal } from 'app/core';
+import { AccountService } from 'app/core';
 
 declare let mLayout: any;
 @Component({
-    selector: 'jhi-aside-nav',
-    templateUrl: './aside-nav.component.html',
-    // styles: ['#m_aside_left{overflow-x:visible;overflow-y:scroll;}'],
-    encapsulation: ViewEncapsulation.None,
+  selector: 'jhi-aside-nav',
+  templateUrl: './aside-nav.component.html',
+  // styles: ['#m_aside_left{overflow-x:visible;overflow-y:scroll;}'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AsideNavComponent implements OnInit, AfterViewInit {
-    constructor(
-        private principal: Principal,
-    ) {}
+  constructor(private accountService: AccountService) {}
 
-    ngOnInit() {
-    }
+  ngOnInit() {}
 
-    ngAfterViewInit() {
-        mLayout.initAside();
-    }
+  ngAfterViewInit() {
+    mLayout.initAside();
+  }
 
-    isAuthenticated() {
-        return this.principal.isAuthenticated();
-    }
-
+  isAuthenticated() {
+    return this.accountService.isAuthenticated();
+  }
 }

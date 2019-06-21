@@ -20,7 +20,16 @@ import { CpigatewaycommCpiModule } from './cpi/cpi.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 
-import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
+import {
+  JhiMainComponent,
+  HeaderNavComponent,
+  FooterComponent,
+  PageRibbonComponent,
+  ActiveMenuDirective,
+  ErrorComponent,
+  AsideNavComponent,
+  NavbarComponent
+} from './layouts';
 
 @NgModule({
   imports: [
@@ -41,7 +50,16 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
     CpigatewaycommCpiModule,
     CpigatewaycommAppRoutingModule
   ],
-  declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  declarations: [
+    JhiMainComponent,
+    HeaderNavComponent,
+    NavbarComponent,
+    AsideNavComponent,
+    ErrorComponent,
+    PageRibbonComponent,
+    ActiveMenuDirective,
+    FooterComponent
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

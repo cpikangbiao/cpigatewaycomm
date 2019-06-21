@@ -10,8 +10,8 @@ declare let mLayout: any;
 
 @Component({
   selector: 'jhi-header-nav',
-  templateUrl: './header-nav.component.html',
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './header-nav.component.html'
+  // encapsulation: ViewEncapsulation.None
 })
 export class HeaderNavComponent implements OnInit, AfterViewInit {
   account: Account;

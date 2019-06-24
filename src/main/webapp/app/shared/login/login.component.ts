@@ -8,7 +8,6 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { LoginService } from 'app/core/login/login.service';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
-import {} from '@angular/core';
 
 @Component({
   selector: 'jhi-login-modal',
@@ -17,6 +16,9 @@ import {} from '@angular/core';
 })
 export class JhiLoginModalComponent implements AfterViewInit {
   authenticationError: boolean;
+  username: string;
+  password: string;
+  rememberMe: boolean;
 
   loginForm = this.fb.group({
     username: [''],
@@ -67,6 +69,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
           content: 'Sending Authentication Success'
         });
 
+        this.activeModal.dismiss('successful');
         // previousState was set in the authExpiredInterceptor before being redirected to login modal.
         // since login is successful, go to stored previousState and clear previousState
         const redirect = this.stateStorageService.getUrl();

@@ -12,8 +12,8 @@ import {} from '@angular/core';
 
 @Component({
   selector: 'jhi-login-modal',
-  templateUrl: './login.component.html'
-  // encapsulation: ViewEncapsulation.None,
+  templateUrl: './login.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class JhiLoginModalComponent implements AfterViewInit {
   authenticationError: boolean;

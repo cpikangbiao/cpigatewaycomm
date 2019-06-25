@@ -28,7 +28,8 @@ import {
   ActiveMenuDirective,
   ErrorComponent,
   AsideNavComponent,
-  NavbarComponent
+  NavbarComponent,
+  ScrollTopComponent
 } from './layouts';
 
 @NgModule({
@@ -58,7 +59,8 @@ import {
     ErrorComponent,
     PageRibbonComponent,
     ActiveMenuDirective,
-    FooterComponent
+    FooterComponent,
+    ScrollTopComponent
   ],
   providers: [
     {

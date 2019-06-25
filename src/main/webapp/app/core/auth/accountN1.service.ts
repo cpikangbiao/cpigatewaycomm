@@ -8,7 +8,7 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { Account } from 'app/core/user/account.model';
 
 @Injectable({ providedIn: 'root' })
-export class AccountService {
+export class AccountN1Service {
   private userIdentity: any;
   private authenticated = false;
   private authenticationState = new Subject<any>();

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AccountService } from 'app/core/auth/account.service';
+import { AccountN1Service } from 'app/core/auth/accountN1.service';
 import { AuthServerProvider } from 'app/core/auth/auth-jwt.service';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
-  constructor(private accountService: AccountService, private authServerProvider: AuthServerProvider) {}
+  constructor(private accountService: AccountN1Service, private authServerProvider: AuthServerProvider) {}
 
   login(credentials, callback?) {
     const cb = callback || function() {};

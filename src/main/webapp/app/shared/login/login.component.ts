@@ -69,7 +69,6 @@ export class JhiLoginModalComponent implements AfterViewInit {
           content: 'Sending Authentication Success'
         });
 
-        this.activeModal.dismiss('successful');
         // previousState was set in the authExpiredInterceptor before being redirected to login modal.
         // since login is successful, go to stored previousState and clear previousState
         const redirect = this.stateStorageService.getUrl();

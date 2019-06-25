@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
+import { AccountN1Service } from 'app/core/auth/accountN1.service';
 
 import { LoginModalService, AccountService, Account } from 'app/core';
 
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
+    private accountN1Service: AccountN1Service,
     private loginModalService: LoginModalService,
     private eventManager: JhiEventManager
   ) {}
